@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VDO Aigency — Leopardo Efficiency Content Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#e8b84b;
+    --black:#0b0b0b;
+    --cream:#ede9e3;
+    --muted:#7a7570;
+    --surface:#141414;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--black);color:var(--cream);}
+  body{
+    font-family:'DM Sans',sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    padding:0 0 120px;
+  }
+  h1,h2,.serif{font-family:Georgia,serif;}
+  .mono{font-family:'Courier New',Courier,monospace;letter-spacing:0.04em;}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 32px;}
+
+  header{
+    padding:64px 32px 56px;
+    border-bottom:1px solid #232323;
+  }
+  .wordmark{display:flex;align-items:center;gap:14px;margin-bottom:56px;}
+  .vmark{
+    width:34px;height:34px;background:var(--black);border:1px solid var(--gold);
+    border-radius:6px;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;color:var(--gold);font-size:19px;
+  }
+  .wordmark .name{font-family:Georgia,serif;font-size:17px;color:var(--cream);}
+  .wordmark .name em{font-style:italic;color:var(--cream);}
+
+  .doctag{
+    font-family:'Courier New',Courier,monospace;
+    font-size:11px;letter-spacing:0.12em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  h1{font-size:34px;font-weight:400;color:var(--cream);max-width:600px;line-height:1.25;}
+  .sub{color:var(--muted);font-size:15px;margin-top:16px;max-width:560px;}
+
+  /* diagram */
+  .diagram{padding:72px 32px 40px;}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+  .stage-label{fill:var(--cream);font-family:Georgia,serif;font-size:15px;}
+  .stage-sub{fill:var(--muted);font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.03em;}
+  .stage-tag{fill:var(--gold);font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.08em;}
+
+  /* stage descriptions */
+  section.stages{padding:8px 32px 0;}
+  .stage-row{
+    display:grid;grid-template-columns:88px 1fr;gap:28px;
+    padding:40px 0;border-top:1px solid #232323;
+  }
+  .stage-row:first-child{border-top:none;}
+  .stage-num{font-family:'Courier New',monospace;color:var(--gold);font-size:12px;letter-spacing:0.06em;padding-top:4px;}
+  .stage-body h2{font-size:20px;font-weight:400;color:var(--cream);margin-bottom:10px;}
+  .stage-body p{color:var(--cream);opacity:0.88;font-size:15px;max-width:600px;}
+  .stage-body p.meta{
+    font-family:'Courier New',monospace;font-size:12px;color:var(--muted);
+    margin-top:12px;letter-spacing:0.02em;
+  }
+
+  .rule{height:1px;background:#232323;margin:0;}
+
+  footer{padding:56px 32px 0;}
+  .footnote{
+    border:1px solid #232323;border-radius:4px;padding:24px 26px;
+    background:var(--surface);
+  }
+  .footnote .doctag{margin-bottom:10px;}
+  .footnote p{color:var(--cream);opacity:0.85;font-size:14px;max-width:600px;}
+
+  @media (max-width:640px){
+    .stage-row{grid-template-columns:1fr;gap:8px;}
+    h1{font-size:27px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="wordmark">
+      <div class="vmark">V</div>
+      <div class="name">VDO <em>Aigency</em></div>
+    </div>
+    <div class="doctag">Internal — Leopardo Efficiency</div>
+    <h1>Footage ingest through library serving. The full content pipeline.</h1>
+    <p class="sub">One shoot's path from LucidLink to a reusable, request-ready library asset. Five stages. Nothing skipped, nothing tracked that doesn't need to be.</p>
+  </div>
+</header>
+
+<div class="diagram">
+  <svg viewBox="0 0 640 736" width="640">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M1 1L6 5L1 9" fill="none" stroke="#7a7570" stroke-width="1.4"/>
+      </marker>
+    </defs>
+
+    <!-- connectors -->
+    <line x1="320" y1="136" x2="320" y2="172" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="272" x2="320" y2="308" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="408" x2="320" y2="444" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="544" x2="320" y2="580" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+
+    <!-- stage 1 -->
+    <rect x="80" y="40" width="480" height="96" rx="3" fill="#f6ecd1"/>
+    <text x="104" y="72" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.55">01 — INGEST</text>
+    <text x="104" y="98" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">LucidLink project folder created</text>
+    <text x="104" y="119" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.55">YYMMDD_COMPANY_PROJECT</text>
+
+    <!-- stage 2 -->
+    <rect x="80" y="176" width="480" height="96" rx="3" fill="#e9d69c"/>
+    <text x="104" y="208" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.55">02 — PROJECT</text>
+    <text x="104" y="234" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Marketing deliverables cut</text>
+    <text x="104" y="255" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.55">00_PROJECTS → 06_EXPORTS</text>
+
+    <!-- stage 3 -->
+    <rect x="80" y="312" width="480" height="96" rx="3" fill="#e8b84b"/>
+    <text x="104" y="344" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.6">03 — LIBRARY PROJECT</text>
+    <text x="104" y="370" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Text/music stripped, interviews trimmed</text>
+    <text x="104" y="391" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.6">MASTERS + XML/JSON PAIRS</text>
+
+    <!-- stage 4 -->
+    <rect x="80" y="448" width="480" height="96" rx="3" fill="#b3822f"/>
+    <text x="104" y="480" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.6">04 — ARCHIVE</text>
+    <text x="104" y="506" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Shoot folder moves off LucidLink</text>
+    <text x="104" y="527" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.6">BACKBLAZE B2 · COLD</text>
+
+    <!-- stage 5 -->
+    <rect x="80" y="584" width="480" height="96" rx="3" fill="#7c5a22"/>
+    <text x="104" y="616" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#ede9e3" opacity="0.75">05 — SERVE</text>
+    <text x="104" y="642" font-family="Georgia,serif" font-size="17" fill="#ede9e3">R2 · Monday · local bridge · GX10</text>
+    <text x="104" y="663" font-family="'Courier New',monospace" font-size="11" fill="#ede9e3" opacity="0.75">REQUEST-READY LIBRARY</text>
+  </svg>
+</div>
+
+<div class="rule"></div>
+
+<section class="stages">
+  <div class="wrap">
+
+    <div class="stage-row">
+      <div class="stage-num">01</div>
+      <div class="stage-body">
+        <h2>Ingest</h2>
+        <p>Footage lands on LucidLink inside a new project folder, named <span class="mono">YYMMDD_COMPANY_PROJECT</span> — for example <span class="mono">260630_LEOPARDO_EFFICIENCY_CHICAGO</span>. The full twelve-part template is created day one: projects, field media, GFX, SFX, music, exports, documents, tools, VO, AI gen, code, acquired media. Nothing in this folder is indexed. It doesn't need to be found by a system — it needs to be found by whoever's editing it, and the naming convention already does that job.</p>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-num">02</div>
+      <div class="stage-body">
+        <h2>Project — marketing deliverables</h2>
+        <p>Editors work the shoot's Premiere project inside <span class="mono">00_PROJECTS</span>. This is where the actual client work gets cut — case studies, social pieces, client-facing edits. Finished output lands in <span class="mono">06_EXPORTS</span>. This tier is working output: versioned, sometimes messy, v1 through v10. It stays that way. It is never tracked, because tracking a folder that's mid-process just teaches people not to trust the index.</p>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-num">03</div>
+      <div class="stage-body">
+        <h2>Library project</h2>
+        <p>Once a piece has actually shipped — posted as a finished deliverable on Monday — it gets rebuilt into a separate, clean Premiere project: <span class="mono">260713_Leopardo Efficiency_LIBRARY</span>. Sequences are duplicated in, text and music stripped, and exported as clean masters. Full interviews get their own sequence, trimmed to the subject's answers only — no off-camera questions, no dead air. Every export produces an XML/JSON pair alongside it.</p>
+        <p class="meta">STAGING: DELIVERABLES/ · INTERVIEWS/ · XML_JSON_PAIRS/</p>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-num">04</div>
+      <div class="stage-body">
+        <h2>Archive</h2>
+        <p>Once a project's finished assets are promoted, the original shoot folder — raw field media, the working Premiere project, everything — comes off LucidLink and moves to Backblaze B2. This tier is cold by design: cheap at rest, rarely opened, and only pulled back down if a project needs to be revisited. Wipes are triggered by LucidLink storage pressure, not by a calendar.</p>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-num">05</div>
+      <div class="stage-body">
+        <h2>R2 · Monday · local bridge · GX10</h2>
+        <p>Promoted masters move from local staging into Cloudflare R2 — the library's permanent, request-ready home. Monday logs one row per asset: project, type, R2 key. A request comes in through Leopardo Efficiency's local bridge interface, sitting behind Cloudflare Access — getting through that gate is the authorization, nothing further is checked per-asset. GX10 holds a scoped, read-only R2 credential limited to Leopardo Efficiency's prefix, pulls the asset directly, caches it just long enough to render, and discards the copy.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footnote">
+      <div class="doctag">Phase 2</div>
+      <p>This pipeline is built once, for Leopardo Efficiency, by hand. Once proven, it repeats — its own local bridge interface, its own Cloudflare Access gate and allow list, its own Monday board, its own R2 prefix and scoped GX10 credential — for each of the remaining six portfolio companies. Same shape, six more lanes.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
