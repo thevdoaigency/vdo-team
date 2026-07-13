@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VDO Aigency — The Librarian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#e8b84b;
+    --black:#0b0b0b;
+    --cream:#ede9e3;
+    --muted:#7a7570;
+    --surface:#141414;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--black);color:var(--cream);}
+  body{
+    font-family:'DM Sans',sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    padding:0 0 120px;
+  }
+  a{color:var(--gold);}
+  h1,h2,.serif{font-family:Georgia,serif;}
+  .mono{font-family:'Courier New',Courier,monospace;letter-spacing:0.04em;}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 32px;}
+
+  header{padding:64px 32px 56px;border-bottom:1px solid #232323;}
+  .back{
+    display:inline-block;font-family:'Courier New',monospace;font-size:11px;
+    letter-spacing:0.08em;color:var(--muted);margin-bottom:40px;text-decoration:none;
+  }
+  .back:hover{color:var(--gold);}
+  .wordmark{display:flex;align-items:center;gap:14px;margin-bottom:56px;}
+  .vmark{
+    width:34px;height:34px;background:var(--black);border:1px solid var(--gold);
+    border-radius:6px;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;color:var(--gold);font-size:19px;
+  }
+  .wordmark .name{font-family:Georgia,serif;font-size:17px;color:var(--cream);}
+  .wordmark .name em{font-style:italic;color:var(--cream);}
+
+  .doctag{
+    font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:0.12em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:18px;
+  }
+  h1{font-size:34px;font-weight:400;color:var(--cream);max-width:620px;line-height:1.25;}
+  .sub{color:var(--muted);font-size:15px;margin-top:16px;max-width:560px;}
+
+  .diagram{padding:72px 32px 40px;}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  section.stages{padding:8px 32px 0;}
+  .section-label{
+    font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.1em;
+    color:var(--gold);text-transform:uppercase;margin:56px 0 4px;
+  }
+  .stage-row{
+    display:grid;grid-template-columns:88px 1fr;gap:28px;
+    padding:36px 0;border-top:1px solid #232323;
+  }
+  .stage-row:first-child{border-top:none;}
+  .stage-num{font-family:'Courier New',monospace;color:var(--gold);font-size:12px;letter-spacing:0.06em;padding-top:4px;}
+  .stage-body h2{font-size:19px;font-weight:400;color:var(--cream);margin-bottom:10px;}
+  .stage-body p{color:var(--cream);opacity:0.88;font-size:15px;max-width:600px;}
+  .stage-body p.meta{
+    font-family:'Courier New',monospace;font-size:12px;color:var(--muted);
+    margin-top:12px;letter-spacing:0.02em;
+  }
+
+  .no-list{list-style:none;padding:0;margin:0;}
+  .no-list li{
+    font-size:15px;color:var(--cream);opacity:0.85;
+    padding:10px 0 10px 22px;position:relative;
+  }
+  .no-list li::before{
+    content:"—";position:absolute;left:0;color:var(--muted);
+  }
+
+  table{width:100%;border-collapse:collapse;margin-top:8px;}
+  th,td{
+    text-align:left;padding:12px 14px;border-top:1px solid #232323;
+    font-size:13.5px;vertical-align:top;
+  }
+  th{
+    font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.06em;
+    color:var(--muted);text-transform:uppercase;font-weight:400;
+  }
+  td.cmd,td.field{font-family:'Courier New',monospace;color:var(--gold);font-size:12.5px;white-space:nowrap;}
+  td{color:var(--cream);opacity:0.9;}
+
+  .rule{height:1px;background:#232323;margin:0;}
+
+  footer{padding:56px 32px 0;}
+  .footnote{
+    border:1px solid #232323;border-radius:4px;padding:24px 26px;background:var(--surface);
+  }
+  .footnote .doctag{margin-bottom:10px;}
+  .footnote p{color:var(--cream);opacity:0.85;font-size:14px;max-width:600px;}
+
+  @media (max-width:640px){
+    .stage-row{grid-template-columns:1fr;gap:8px;}
+    h1{font-size:27px;}
+    table{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back" href="./index.html">← INDEX</a>
+    <div class="wordmark">
+      <div class="vmark">V</div>
+      <div class="name">VDO <em>Aigency</em></div>
+    </div>
+    <div class="doctag">Internal — Leopardo Efficiency</div>
+    <h1>The Librarian. An isolated agent that turns staged assets into Monday rows.</h1>
+    <p class="sub">Nothing more. It doesn't touch raw footage, doesn't touch working projects, and doesn't decide what's finished — Raj and Brando do that by staging a file in the first place.</p>
+  </div>
+</header>
+
+<div class="diagram">
+  <svg viewBox="0 0 640 736" width="640">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M1 1L6 5L1 9" fill="none" stroke="#7a7570" stroke-width="1.4"/>
+      </marker>
+    </defs>
+
+    <line x1="320" y1="136" x2="320" y2="172" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="272" x2="320" y2="308" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="408" x2="320" y2="444" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+    <line x1="320" y1="544" x2="320" y2="580" stroke="#7a7570" stroke-width="1" marker-end="url(#arr)"/>
+
+    <rect x="80" y="40" width="480" height="96" rx="3" fill="#f6ecd1"/>
+    <text x="104" y="72" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.55">01 — STAGE</text>
+    <text x="104" y="98" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Raj or Brando stages a finished asset</text>
+    <text x="104" y="119" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.55">DELIVERABLES / INTERVIEWS / XML_JSON_PAIRS</text>
+
+    <rect x="80" y="176" width="480" height="96" rx="3" fill="#e9d69c"/>
+    <text x="104" y="208" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.55">02 — SCAN</text>
+    <text x="104" y="234" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Librarian lists what's not yet logged</text>
+    <text x="104" y="255" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.55">/librarian scan — READ ONLY</text>
+
+    <rect x="80" y="312" width="480" height="96" rx="3" fill="#e8b84b"/>
+    <text x="104" y="344" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.6">03 — PROPOSE</text>
+    <text x="104" y="370" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Filenames parsed into draft Monday rows</text>
+    <text x="104" y="391" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.6">/librarian propose — DRY RUN</text>
+
+    <rect x="80" y="448" width="480" height="96" rx="3" fill="#b3822f"/>
+    <text x="104" y="480" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#0b0b0b" opacity="0.6">04 — CONFIRM</text>
+    <text x="104" y="506" font-family="Georgia,serif" font-size="17" fill="#0b0b0b">Human reviews and approves in Telegram</text>
+    <text x="104" y="527" font-family="'Courier New',monospace" font-size="11" fill="#0b0b0b" opacity="0.6">/librarian confirm [ids] — NOTHING WRITES WITHOUT THIS</text>
+
+    <rect x="80" y="584" width="480" height="96" rx="3" fill="#7c5a22"/>
+    <text x="104" y="616" font-family="'Courier New',monospace" font-size="11" letter-spacing="0.08em" fill="#ede9e3" opacity="0.75">05 — LOG</text>
+    <text x="104" y="642" font-family="Georgia,serif" font-size="17" fill="#ede9e3">Row written to Monday</text>
+    <text x="104" y="663" font-family="'Courier New',monospace" font-size="11" fill="#ede9e3" opacity="0.75">LEOPARDO EFFICIENCY BOARD</text>
+  </svg>
+</div>
+
+<div class="rule"></div>
+
+<section class="stages">
+  <div class="wrap">
+
+    <div class="section-label">Architecture</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body">
+        <h2>Its own agent, not a skill bolted onto VDO</h2>
+        <p>The Librarian is a separate, isolated <span class="mono">agents.list</span> entry — its own workspace, its own memory, its own skill allowlist — sibling to VDO and Higgins, not nested inside either. Skills are cheap to add; shared memory isn't. One agent handling several jobs builds up enough accumulated context to bloat token usage and feed the same retry-loop failure mode GX10 already guards against. Isolation keeps the Librarian's context clean and its blast radius contained if something goes wrong.</p>
+        <p class="meta">SHARED: GX10 HARDWARE · OLLAMA MODEL · TELEGRAM BOT FRONT END<br>ISOLATED: WORKSPACE · MEMORY · SKILL VISIBILITY</p>
+      </div>
+    </div>
+
+    <div class="section-label">What it does not do</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body">
+        <ul class="no-list">
+          <li>No file watching or auto-triggering on folder changes</li>
+          <li>No auto-promotion from LucidLink to staging</li>
+          <li>No auto-upload to R2</li>
+          <li>No auto-wipe of anything, in this phase</li>
+          <li>No writing to Monday without a human confirming first</li>
+          <li>No scope beyond Leopardo Efficiency's board and prefix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Filename convention it reads</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body">
+        <p><span class="mono">[project]_[type]_[description].[ext]</span> — parsed straight out of the filename, no content analysis, no guessing. A file that doesn't match the convention gets flagged for a human to rename, not silently logged wrong.</p>
+        <p class="meta">E.G. CLEVELAND_DELIVERABLE_CASE-STUDY-V2.MP4 · CHICAGO_INTERVIEW_CURTIS-FULL.MP4</p>
+      </div>
+    </div>
+
+    <div class="section-label">Commands</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body" style="width:100%;">
+        <table>
+          <tr><th>Command</th><th>What it does</th></tr>
+          <tr><td class="cmd">/librarian scan</td><td>Lists staged files not yet logged in Monday</td></tr>
+          <tr><td class="cmd">/librarian propose</td><td>Drafts Monday rows from filenames, posts for review</td></tr>
+          <tr><td class="cmd">/librarian confirm [ids]</td><td>Writes confirmed rows to Monday</td></tr>
+          <tr><td class="cmd">/librarian status</td><td>Reports staged vs. logged counts</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-label">Monday row schema</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body" style="width:100%;">
+        <table>
+          <tr><th>Field</th><th>Source</th></tr>
+          <tr><td class="field">Project</td><td>Parsed from filename</td></tr>
+          <tr><td class="field">Type</td><td>Parsed from filename — deliverable / interview</td></tr>
+          <tr><td class="field">Description</td><td>Parsed from filename</td></tr>
+          <tr><td class="field">Staged file path</td><td>Scan result</td></tr>
+          <tr><td class="field">Date logged</td><td>Timestamp at confirm</td></tr>
+          <tr><td class="field">R2 key</td><td>Blank in phase 1 — filled in manually once R2 upload exists</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-label">Definition of done — v1</div>
+    <div class="stage-row" style="border-top:none;padding-top:24px;">
+      <div class="stage-num">—</div>
+      <div class="stage-body">
+        <ul class="no-list">
+          <li>Raj can stage a batch, run scan, get an accurate list back</li>
+          <li>Propose correctly parses well-named files and flags badly-named ones instead of guessing</li>
+          <li>Nothing lands in Monday without an explicit confirm</li>
+          <li>The agent has run against a real batch of Chicago material without a manual fix to its parsing logic</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footnote">
+      <div class="doctag">Phase 2</div>
+      <p>Once v1 is solid and lived-in for a few weeks: R2 upload folded into the confirm step, folder-watching instead of manual scan, and the same isolated-agent pattern repeated — new name, new scope, new credentials — across the other six portfolio companies.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
