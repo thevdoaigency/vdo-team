@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thursday Shoot — Interview Plan — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --leopardo-graphite:#3A3A40;
+    --efficiency-teal:#2C7A7B;
+    --gator-green:#2E6B58;
+    --kahn-copper:#B8854A;
+    --enlyt-cyan:#2E5F6B;
+    --dfh-indigo:#3B4C7A;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+  }
+  .header-inner{max-width:1000px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;}
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+
+  .hero{padding:4rem 0 2.75rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--kahn-copper); margin-bottom:1.1rem;
+  }
+  .hero h1{font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue); font-size:clamp(1.9rem, 4.2vw, 2.8rem); line-height:1.1; max-width:760px;}
+  .hero .sub{margin-top:1.2rem; max-width:660px; font-size:1.02rem; color:var(--slate);}
+  .hero .meta-row{display:flex; gap:2.5rem; flex-wrap:wrap; margin-top:1.75rem;}
+  .hero .meta-row div{font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--slate);}
+  .hero .meta-row b{display:block; font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.15rem;}
+
+  section{padding:3.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.5rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--kahn-copper); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.85rem); max-width:680px; margin-bottom:1.1rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:680px; color:var(--slate); font-size:0.96rem; margin-bottom:1rem;}
+
+  /* PRIORITY TIERS */
+  .tier{margin-bottom:1.75rem; border:1px solid var(--line);}
+  .tier-head{
+    display:flex; align-items:center; gap:12px; padding:12px 18px; background:var(--leopardo-blue); color:var(--white);
+  }
+  .tier-head .badge{
+    font-family:'Jost',sans-serif; font-weight:700; font-size:0.78rem; background:var(--leopardo-yellow);
+    color:var(--leopardo-blue-dark); padding:2px 9px; border-radius:2px;
+  }
+  .tier-head .tname{font-family:'Jost',sans-serif; font-weight:600; font-size:1rem;}
+  .tier-head .tnote{margin-left:auto; font-size:0.74rem; color:rgba(255,255,255,0.7); font-family:'Libre Franklin',sans-serif;}
+  .person-row{
+    display:grid; grid-template-columns:210px 1fr; gap:1.25rem; padding:14px 18px; border-bottom:1px solid var(--line);
+  }
+  .person-row:last-child{border-bottom:none;}
+  @media (max-width:640px){.person-row{grid-template-columns:1fr;}}
+  .person-name{font-family:'Jost',sans-serif; font-weight:700; font-size:0.95rem; color:var(--ink);}
+  .person-co{font-size:0.76rem; color:var(--accent); font-weight:600; margin-top:2px;}
+  .person-why{font-size:0.85rem; color:var(--slate); line-height:1.5;}
+
+  /* SCHEDULE */
+  .schedule{margin-top:1.5rem;}
+  .sched-row{display:grid; grid-template-columns:140px 1fr; gap:1.25rem; padding:11px 0; border-bottom:1px solid var(--line);}
+  .sched-row:last-child{border-bottom:none;}
+  .sched-time{font-family:'DM Mono',monospace; font-size:0.78rem; color:var(--leopardo-blue); font-weight:500;}
+  .sched-what{font-size:0.88rem; color:var(--slate);}
+  .sched-what strong{color:var(--ink);}
+  .assumption-note{
+    margin-top:1.25rem; background:#FBF3E7; border-left:3px solid var(--kahn-copper); padding:1rem 1.25rem;
+    font-size:0.85rem; color:var(--ink);
+  }
+  .assumption-note strong{color:var(--kahn-copper);}
+
+  /* QUESTION CARDS */
+  .qcard{border:1px solid var(--line); margin-bottom:1.25rem;}
+  .qcard-head{
+    display:flex; align-items:center; gap:10px; padding:12px 18px; color:var(--white);
+  }
+  .qcard-head .swatch{width:10px; height:10px; border-radius:50%; background:var(--white);}
+  .qcard-head .qname{font-family:'Jost',sans-serif; font-weight:700; font-size:0.95rem;}
+  .qcard-head .qrole{font-size:0.76rem; color:rgba(255,255,255,0.75); margin-left:4px;}
+  .qcard-head .time{margin-left:auto; font-family:'DM Mono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.85);}
+  .qcard-body{padding:14px 18px;}
+  .qgroup{margin-bottom:10px;}
+  .qgroup:last-child{margin-bottom:0;}
+  .qgroup .glabel{
+    font-family:'Libre Franklin',sans-serif; font-size:0.66rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); margin-bottom:6px;
+  }
+  .qgroup ol{margin-left:18px; font-size:0.87rem; color:var(--ink);}
+  .qgroup li{margin-bottom:5px;}
+
+  /* LOGISTICS */
+  .logi-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem;}
+  @media (max-width:700px){.logi-grid{grid-template-columns:1fr;}}
+  .logi-card{border:1px solid var(--line); padding:1.5rem;}
+  .logi-card h4{font-size:0.98rem; color:var(--leopardo-blue); margin-bottom:.75rem;}
+  .logi-card ul{margin-left:18px; font-size:0.87rem; color:var(--slate);}
+  .logi-card li{margin-bottom:6px;}
+
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:3.5rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:800px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.2rem,2.4vw,1.6rem); line-height:1.4;}
+
+  footer{padding:2.5rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:1000px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-label">Production Plan · Internal — Crew Use</div>
+    <h1>Thursday, July 16. One room. Eight people, confirmed.</h1>
+    <p class="sub">
+      The AWC Presidents meeting is the single most efficient shoot opportunity this quarter — every
+      company lead in one place, one time, instead of seven separate site visits. This is the plan for
+      turning that meeting into interview footage without derailing the meeting itself.
+    </p>
+    <div class="meta-row">
+      <div><b>8</b>Confirmed for Thursday</div>
+      <div><b>15–18 min</b>Per Interview Slot</div>
+      <div><b>12:00 PM CT</b>Meeting Start, Thursday July 16</div>
+    </div>
+  </div>
+</section>
+
+<section id="priority">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">Who, and Why</span></div>
+    <h2>Not everyone in the room is equally urgent.</h2>
+    <p class="lead">
+      Three of the seven companies already have president-level footage from June 30. The priority order
+      below is built around real gaps in what's already on camera, not just "get everyone."
+    </p>
+
+    <div class="tier">
+      <div class="tier-head"><span class="badge">Tier 1</span><span class="tname">Confirmed — Thursday</span><span class="tnote">Get these first, no matter what else slips</span></div>
+      <div class="person-row" style="--accent:var(--dfh-indigo);">
+        <div><div class="person-name">Michael Bodner</div><div class="person-co">DFH Connect · CIO</div></div>
+        <div class="person-why">The Founder Credibility Piece in DFH Connect's plan doesn't exist without him. His Thomson Reuters / ProQuest background is currently just a paragraph on an About page — this interview is what turns it into something usable.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--enlyt-cyan);">
+        <div><div class="person-name">Mike Radel</div><div class="person-co">Enlyt Building Technologies · President</div></div>
+        <div class="person-why">Enlyt currently has zero on-camera executive presence — its whole content plan leans on AI narration for lack of an interview. Mike is confirmed for Thursday, which adds a real human voice to a plan that was otherwise narrator-only.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--leopardo-blue);">
+        <div><div class="person-name">Giancarlo Pacini</div><div class="person-co">Leopardo Construction · President &amp; CEO</div></div>
+        <div class="person-why">Sean Scott (Senior PM) was filmed June 30, but he's not the anchor voice — the "trust, scale, family ownership" positioning for the flagship brand needs the President and CEO on camera.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--efficiency-teal);">
+        <div><div class="person-name">Rob Vollrath</div><div class="person-co">Leopardo Efficiency · President — covering Leopardo Efficiency &amp; GATOR</div></div>
+        <div class="person-why">Rob can speak to both companies in one sitting. No footage exists yet for GATOR — this interview means future content starts with real material instead of a cold open, and reinforces Leopardo Efficiency alongside Heather and Drake's existing footage.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--gator-green);">
+        <div><div class="person-name">Curtis Leopardo</div><div class="person-co">Leopardo Family Leadership — covering Leopardo Efficiency &amp; GATOR</div></div>
+        <div class="person-why">The vision and direction layer alongside Rob's operational answers — where he wants both companies to go, and why the market's ready for what they're building.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--leopardo-graphite);">
+        <div><div class="person-name">Chuck Thomas</div><div class="person-co">Laystrom Hardware</div></div>
+        <div class="person-why">Treat this as the real interview, not a follow-up — the June 30 conversation didn't get what was needed. Full slot, full question set, starting fresh.</div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-head" style="background:var(--leopardo-graphite);"><span class="badge">Tier 2</span><span class="tname">Portfolio Synergy</span><span class="tnote">Speaking to the people financing this</span></div>
+      <div class="person-row" style="--accent:var(--leopardo-yellow-dark, #A88900);">
+        <div><div class="person-name">AJ Leopardo</div><div class="person-co">Alexander West Capital · CEO</div></div>
+        <div class="person-why">The case for owning seven companies instead of one lands harder coming from AJ than from a deck — why the synergy is real, and why letting each company find its own third-party customers strengthens the whole portfolio rather than diluting it.</div>
+      </div>
+      <div class="person-row" style="--accent:var(--leopardo-graphite);">
+        <div><div class="person-name">Alan Aldworth</div><div class="person-co">Alexander West Capital · CFO</div></div>
+        <div class="person-why">The financial case for owning this portfolio, from the person whose job is to be skeptical of it — useful for anyone evaluating AWC as a financing partner, not just as marketing copy.</div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-head" style="background:var(--slate);"><span class="badge">Tier 3</span><span class="tname">Optional / Supplemental</span><span class="tnote">Only if time allows</span></div>
+      <div class="person-row" style="--accent:var(--kahn-copper);">
+        <div><div class="person-name">Mike Casto (follow-up)</div><div class="person-co">Grand Kahn Electric · President</div></div>
+        <div class="person-why">A short, specific follow-up on certification status once it's scoped — not a full re-interview, just a 3–4 minute update clip to slot into the certification announcement piece later.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">The Day</span></div>
+    <h2>Built around the meeting, not competing with it.</h2>
+    <p class="lead">
+      Nine interviews at 15–18 minutes each is roughly 2.5 hours of camera time — not something to
+      squeeze in before a 12:00 PM meeting starts. The plan is to shoot candid B-roll while people
+      arrive, let the meeting run uninterrupted, then hold the room afterward.
+    </p>
+    <div class="schedule">
+      <div class="sched-row">
+        <div class="sched-time">10:00 AM CT</div>
+        <div class="sched-what"><strong>Crew arrival &amp; setup.</strong> One interview station in a side room or quiet corner — single backdrop, two-camera setup (wide + close), lav mics, consistent lighting for every subject so the footage cuts together.</div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">11:00–11:55 AM</div>
+        <div class="sched-what"><strong>Candid B-roll as people arrive.</strong> Handshakes, coffee, informal conversation — this is where the documentary-feel footage comes from, not the formal interviews. Ask permission but keep it unobtrusive.</div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">12:00–1:30 PM</div>
+        <div class="sched-what"><strong>Meeting runs, uninterrupted.</strong> No interviews during this window. If the room allows, one static camera can capture the meeting itself for potential cutaway footage — confirm with AJ first.</div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">1:30–3:50 PM</div>
+        <div class="sched-what"><strong>Interview block — Tier 1 first, then Tier 2, then Tier 3 as time allows.</strong> Slot lengths vary by person (12–18 min) plus a 3 min reset between subjects, roughly 2 hrs 25 min for all 8 confirmed. Comfortable room for the Tier 3 Casto follow-up and a buffer for anyone running long.</div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">3:50–4:05 PM</div>
+        <div class="sched-what"><strong>Wrap.</strong> Confirm releases signed, back up footage on-site before anyone leaves the building.</div>
+      </div>
+    </div>
+    <div class="assumption-note">
+      <strong>Assumption:</strong> this schedule assumes the meeting runs roughly 90 minutes (12:00–1:30 PM)
+      and that the room stays available afterward. If the actual meeting length or venue availability is
+      different, the interview block shifts accordingly — confirm the real agenda with AJ's office and
+      I'll adjust the run of show.
+    </div>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">Question Banks</span></div>
+    <h2>Two universal questions for everyone, then it gets specific.</h2>
+    <p class="lead">
+      Every interview opens with the same two questions — that's what makes the footage cut together into
+      one portfolio piece later, not nine disconnected clips. Everything after that is built from what's
+      actually already known about each company, so the answers are usable the same day.
+    </p>
+
+    <div class="qcard" style="background:var(--leopardo-graphite);">
+      <div class="qcard-head" style="background:var(--leopardo-graphite);">
+        <div class="qname">Universal Opener</div><div class="qrole">Ask every single person, identical wording</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <ol style="color:var(--white);">
+            <li>What does your company do, in one sentence a stranger would actually understand?</li>
+            <li>What's one thing about your company most people get wrong, or don't know at all?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--dfh-indigo);">
+        <div class="swatch"></div><div class="qname">Michael Bodner</div><div class="qrole">DFH Connect</div><div class="time">15 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">Founder Credibility &amp; Product</div>
+          <ol>
+            <li>You came from Thomson Reuters and ProQuest — why build a two-person integration tool after that?</li>
+            <li>Walk me through what a customer's day actually looks like before and after DFH Connect.</li>
+            <li>Why does "2–4 hours down to 5 minutes" matter more than it sounds like it should?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--enlyt-cyan);">
+        <div class="swatch"></div><div class="qname">Mike Radel</div><div class="qrole">Enlyt Building Technologies · President</div><div class="time">15 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">Making the Invisible Visible</div>
+          <ol>
+            <li>Your product disappears behind the walls the day the job is done — how do you sell something nobody can see?</li>
+            <li>Tell me about the Sonder Hotel project — what changed for the guest, even if they never knew Enlyt was there?</li>
+            <li>What's the one system or capability you wish more property owners understood before they call you?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--leopardo-blue);">
+        <div class="swatch"></div><div class="qname">Giancarlo Pacini</div><div class="qrole">Leopardo Construction · President &amp; CEO</div><div class="time">15 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">The Anchor Brand</div>
+          <ol>
+            <li>What does "family owned" actually mean day to day, not as a tagline but as how decisions get made?</li>
+            <li>What's a project you're proudest of that most people outside the company never hear about?</li>
+            <li>What do you want someone deciding whether to build a career here to actually know?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--efficiency-teal);">
+        <div class="swatch"></div><div class="qname">Rob Vollrath</div><div class="qrole">Leopardo Efficiency · President — covering LE &amp; GATOR</div><div class="time">18 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">Leopardo Efficiency — Trust &amp; Track Record</div>
+          <ol>
+            <li>What does a city or municipality actually worry about before they'll trust a new efficiency program?</li>
+            <li>Walk me through one specific city where the savings numbers actually played out as promised.</li>
+          </ol>
+        </div>
+        <div class="qgroup">
+          <div class="glabel">GATOR — Procurement &amp; Government Buyers</div>
+          <ol>
+            <li>Walk me through one real example of a city saving money or time because of GATOR.</li>
+            <li>What's the biggest myth about government procurement technology you'd like to correct on camera?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--gator-green);">
+        <div class="swatch"></div><div class="qname">Curtis Leopardo</div><div class="qrole">Leopardo Family Leadership — covering LE &amp; GATOR</div><div class="time">15 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">Vision, Direction &amp; Product-Market Fit</div>
+          <ol>
+            <li>Where do you see Leopardo Efficiency and GATOR in three years that they aren't today?</li>
+            <li>What tells you the market is actually ready for what each company is building right now?</li>
+            <li>What do Leopardo Efficiency and GATOR both get right that most people outside the family wouldn't guess?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--leopardo-graphite);">
+        <div class="swatch"></div><div class="qname">Chuck Thomas</div><div class="qrole">Laystrom Hardware</div><div class="time">15 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">The Real Interview — Start Fresh</div>
+          <ol>
+            <li>What does Laystrom actually do, described the way you'd want an architect or GC to understand it?</li>
+            <li>You've talked about the shift from old-school manufacturer to technically savvy distributor since the 2023 acquisition — what does that actually look like day to day?</li>
+            <li>A national company already has a branch here in Chicago — what makes Laystrom the better call for someone who has both options?</li>
+            <li>What's a project or customer relationship you're proud of that most people never hear about?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:#8A7000;">
+        <div class="swatch"></div><div class="qname">AJ Leopardo</div><div class="qrole">Alexander West Capital · CEO</div><div class="time">18 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">Portfolio Synergy &amp; Leaving the Nest</div>
+          <ol>
+            <li>What's the actual synergy of owning seven companies instead of running them as seven unrelated businesses?</li>
+            <li>These companies grew up inside or around Leopardo Construction — what does it mean for them to go find their own third-party customers now?</li>
+            <li>If you were explaining this portfolio to someone deciding whether to finance it, what would you want them to understand first?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head" style="background:var(--leopardo-graphite);">
+        <div class="swatch"></div><div class="qname">Alan Aldworth</div><div class="qrole">Alexander West Capital · CFO</div><div class="time">12 min</div>
+      </div>
+      <div class="qcard-body">
+        <div class="qgroup">
+          <div class="glabel">The Case for Financial Stakeholders</div>
+          <ol>
+            <li>From a purely financial standpoint, what does owning seven companies get you that owning one wouldn't?</li>
+            <li>As these companies win their own third-party customers instead of leaning on Leopardo Construction, how does that change the portfolio's risk profile?</li>
+            <li>What would you tell a financing partner evaluating this portfolio that a pitch deck wouldn't fully capture?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="logistics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">Logistics</span></div>
+    <h2>What has to be true for nine interviews to actually happen.</h2>
+    <div class="logi-grid">
+      <div class="logi-card">
+        <h4>Crew &amp; Gear</h4>
+        <ul>
+          <li>DP + 1st AD minimum — a two-person crew keeps resets under 3 minutes</li>
+          <li>One consistent backdrop and lighting setup for the whole day — every subject should visually match</li>
+          <li>Two cameras per interview (wide + close) to give editors cutaway options without a second take</li>
+          <li>Backup audio recorder in addition to camera audio — no re-shoots possible if a lav fails mid-conversation</li>
+        </ul>
+      </div>
+      <div class="logi-card">
+        <h4>Before the Day</h4>
+        <ul>
+          <li>Confirm the real meeting agenda and end time with AJ's office — this schedule is a placeholder until that's confirmed</li>
+          <li>Send each Tier 1 and Tier 2 subject a heads-up with the two universal questions in advance, so nobody's caught flat-footed on camera</li>
+          <li>Pre-fill release forms where possible to save time on the day</li>
+          <li>Confirm room availability post-meeting — a locked-down quiet space, not a hallway</li>
+        </ul>
+      </div>
+      <div class="logi-card">
+        <h4>Running the Room</h4>
+        <ul>
+          <li>Keep Tier 1 subjects first in the order — if the day runs long, Tier 3 is what gets cut, never Tier 1</li>
+          <li>Have a runner managing who's next so the interview chair is never empty</li>
+          <li>Flag AJ and Alan's slots to run adjacent to each other — natural continuity between the CEO and CFO answers</li>
+        </ul>
+      </div>
+      <div class="logi-card">
+        <h4>Same-Day Wrap</h4>
+        <ul>
+          <li>Back up all footage on-site before anyone leaves — two drives minimum</li>
+          <li>Log which questions actually got strong answers per subject, so editors know where to start</li>
+          <li>Flag any subject who needs a follow-up shoot instead of trying to force it into this one day</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">Why This Day Matters</div>
+    <div class="thesis-text">Several companies in the portfolio have real content plans already waiting on footage that doesn't exist yet. Thursday closes most of those gaps at once — Michael Bodner, Mike Radel, and Giancarlo Pacini all become real voices instead of placeholders, and Chuck Thomas gets a proper interview to replace one that didn't land the first time.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
