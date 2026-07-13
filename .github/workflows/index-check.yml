@@ -1,0 +1,40 @@
+name: Index Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Scan for unlinked pages
+        id: scan
+        run: node scripts/scan-index.mjs
+
+      - name: Open PR with stub entries
+        if: steps.scan.outputs.summary != ''
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "index: add stub entries for new pages"
+          title: "Index: new page(s) detected"
+          body: |
+            New HTML page(s) were pushed but aren't linked from index.html yet.
+            Stub entries were added under "Needs description" — edit the title,
+            description, and category grouping before merging.
+
+            ${{ steps.scan.outputs.summary }}
+          branch: index-auto-update
+          add-paths: index.html
