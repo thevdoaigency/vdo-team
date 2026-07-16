@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leopardo Construction — Market Strategy — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --field-rust:#C0561E;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+  a{color:inherit;}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+    position:sticky; top:0; z-index:50;
+  }
+  .header-inner{
+    max-width:980px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+  .header-back{
+    font-family:'Libre Franklin',sans-serif; font-size:0.75rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.75); text-decoration:none;
+  }
+  .header-back:hover{color:var(--leopardo-yellow);}
+
+  .hero{padding:4.5rem 0 3rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .series-tag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--white); background:var(--field-rust);
+    padding:5px 10px; margin-bottom:1.5rem;
+  }
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--field-rust); margin-bottom:1.1rem;
+  }
+  .hero h1{
+    font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue);
+    font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; max-width:780px;
+  }
+  .hero .sub{margin-top:1.3rem; max-width:660px; font-size:1.05rem; color:var(--slate);}
+  .hero .source-line{margin-top:1.5rem; font-size:0.8rem; color:var(--silver);}
+  .hero .source-line a{color:var(--leopardo-blue); text-decoration:underline;}
+
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line); background:var(--white);
+  }
+  @media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat-strip .cell{padding:2rem 1.75rem; border-right:1px solid var(--line);}
+  .stat-strip .cell:last-child{border-right:none;}
+  .stat-strip .num{font-family:'Jost',sans-serif; font-weight:700; font-size:2rem; color:var(--leopardo-blue); line-height:1;}
+  .stat-strip .lbl{font-size:0.78rem; color:var(--slate); margin-top:.5rem;}
+
+  section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.75rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--field-rust); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:700px; margin-bottom:1.3rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:700px; color:var(--slate); font-size:1rem; margin-bottom:1rem;}
+
+  .flag{
+    background:#FBEEE5; border-left:3px solid var(--field-rust); padding:1.1rem 1.4rem;
+    margin-top:1.5rem; font-size:0.9rem; color:var(--ink); max-width:700px;
+  }
+  .flag strong{color:var(--field-rust);}
+
+  .matrix-wrap{margin-top:2.5rem; display:grid; grid-template-columns:auto 1fr; gap:0;}
+  .matrix-yaxis{
+    writing-mode:vertical-rl; transform:rotate(180deg); display:flex; align-items:center; justify-content:space-between;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); padding-right:.75rem;
+  }
+  .matrix{
+    position:relative; border:1px solid var(--line); aspect-ratio:1.5/1; background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:50% 50%; background-position:center; background-repeat:no-repeat;
+  }
+  .matrix::before, .matrix::after{content:''; position:absolute; background:var(--line);}
+  .matrix::before{top:0; bottom:0; left:50%; width:1px;}
+  .matrix::after{left:0; right:0; top:50%; height:1px;}
+  .matrix-xaxis{
+    display:flex; justify-content:space-between; margin-top:.6rem;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); grid-column:2;
+  }
+  .plot{position:absolute; transform:translate(-50%,-50%); text-align:center;}
+  .plot .dot{width:14px; height:14px; border-radius:50%; margin:0 auto 6px; border:2px solid var(--white); box-shadow:0 0 0 1px var(--ink);}
+  .plot .name{font-family:'Jost',sans-serif; font-weight:600; font-size:0.78rem; color:var(--ink); white-space:nowrap; background:rgba(255,255,255,0.9); padding:1px 4px;}
+  .plot.lc .dot{background:var(--leopardo-yellow); width:20px; height:20px; box-shadow:0 0 0 2px var(--leopardo-blue);}
+  .plot.lc .name{font-weight:700; color:var(--leopardo-blue);}
+  .plot .sub{font-size:0.65rem; color:var(--slate); background:rgba(255,255,255,0.9); padding:0 4px;}
+  .plot .arrow{font-family:'Jost',sans-serif; font-weight:700; font-size:0.68rem; color:var(--field-rust); background:rgba(255,255,255,0.92); padding:0 4px; white-space:nowrap;}
+
+  .swot-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.swot-grid{grid-template-columns:1fr;}}
+  .swot-cell{background:var(--white); padding:1.75rem;}
+  .swot-cell h4{font-size:1rem; margin-bottom:1rem; display:flex; align-items:center; gap:8px;}
+  .swot-cell h4 .sw-dot{width:8px; height:8px; border-radius:50%;}
+  .swot-cell.strength h4 .sw-dot{background:#2C7A7B;}
+  .swot-cell.weakness h4 .sw-dot{background:var(--field-rust);}
+  .swot-cell.opportunity h4 .sw-dot{background:var(--leopardo-blue);}
+  .swot-cell.threat h4 .sw-dot{background:#A33B3B;}
+  .swot-cell ul{margin-left:18px; font-size:0.88rem; color:var(--slate);}
+  .swot-cell li{margin-bottom:8px;}
+
+  .ansoff-table{width:100%; border-collapse:collapse; margin-top:2rem; font-size:0.88rem;}
+  .ansoff-table th{
+    text-align:left; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--white); background:var(--leopardo-blue);
+    padding:10px 14px;
+  }
+  .ansoff-table td{padding:12px 14px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top;}
+  .ansoff-table td.opt{color:var(--ink); font-weight:600; font-family:'Jost',sans-serif; font-size:0.92rem;}
+  .ansoff-table tr.rec td{background:rgba(255,230,0,0.08);}
+  .ansoff-table td.verdict{font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;}
+  .verdict.go{color:#2C7A7B;}
+  .verdict.hold{color:var(--slate);}
+  .verdict.no{color:#A33B3B;}
+
+  .insight{background:var(--leopardo-blue); color:var(--white); padding:3rem 2.5rem; position:relative; margin-top:2rem;}
+  .insight::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .insight-inner{max-width:900px; margin:0 auto;}
+  .insight .label{font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow); text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;}
+  .insight .text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.4;}
+
+  .deliv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.deliv-grid{grid-template-columns:1fr;}}
+  .deliv-card{background:var(--white); padding:1.75rem;}
+  .deliv-card .dtag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--field-rust); border:1px solid var(--field-rust);
+    padding:3px 8px; margin-bottom:.9rem;
+  }
+  .deliv-card h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.6rem;}
+  .deliv-card p{font-size:0.87rem; color:var(--slate); margin-bottom:.7rem;}
+  .deliv-card .tool-used{font-size:0.75rem; color:var(--field-rust); font-weight:600;}
+
+  .tool-row{display:grid; grid-template-columns:180px 1fr; gap:1.75rem; padding:1.6rem 0; border-bottom:1px solid var(--line);}
+  @media (max-width:700px){.tool-row{grid-template-columns:1fr;}}
+  .tool-row:last-child{border-bottom:none;}
+  .tool-name{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.05rem;}
+  .tool-name .tsub{display:block; font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--slate); font-weight:400; margin-top:4px;}
+  .tool-desc{font-size:0.9rem; color:var(--slate);}
+  .tool-desc strong{color:var(--ink);}
+
+  .roadmap{margin-top:2rem;}
+  .rm-row{display:grid; grid-template-columns:140px 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid var(--line);}
+  .rm-row:last-child{border-bottom:none;}
+  .rm-phase{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .rm-phase .days{display:block; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--slate); font-weight:400; margin-top:2px;}
+  .rm-items{font-size:0.9rem; color:var(--slate);}
+  .rm-items ul{margin-left:18px;}
+  .rm-items li{margin-bottom:6px;}
+
+  .metric-row{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.metric-row{grid-template-columns:repeat(2,1fr);}}
+  .metric{background:var(--white); padding:1.5rem;}
+  .metric .m-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:var(--slate); margin-bottom:.5rem;}
+  .metric .m-target{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.15rem;}
+
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:4rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:820px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.4;}
+
+  footer{padding:3rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:980px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+    <a class="header-back" href="presentation.html">← Back to Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="series-tag">Market Strategy Series · 1 of 7</div>
+    <div class="hero-label">Leopardo Construction</div>
+    <h1>We see buildings. We don't see evidence of building the buildings.</h1>
+    <p class="sub">
+      Leopardo is the anchor brand of the AWC portfolio — a nearly 50-year, family-founded
+      contractor with the scale, safety record, and project roster to prove it. But its public
+      channels show two stories: polished finished spaces and internal culture. The third and most
+      commercially valuable one — the expertise that actually gets hard buildings built — is almost
+      entirely missing.
+    </p>
+    <p class="source-line">Sources: <a href="https://leopardo.com" target="_blank">leopardo.com</a>, company LinkedIn — reviewed July 2026</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="cell"><div class="num">1977</div><div class="lbl">Founded by James A. Leopardo — the anchor brand of the AWC portfolio</div></div>
+  <div class="cell"><div class="num">400+</div><div class="lbl">Projects delivered annually across healthcare, municipal, aviation, and interiors</div></div>
+  <div class="cell"><div class="num">$560.5B</div><div class="lbl">2024 US commercial building construction market, projected to $843.9B by 2032</div></div>
+  <div class="cell"><div class="num">4×</div><div class="lbl">Leopardo's lost-time incident rate vs. the national average — a proof point currently invisible</div></div>
+</div>
+
+<section id="market">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">The Market</span></div>
+    <h2>A large, fragmented market where expertise — not scale alone — is the differentiator.</h2>
+    <p class="lead">
+      The US commercial building construction market is large and recovering — roughly $560.5B in
+      2024, projected to reach $843.9B by 2032 — but it is deeply fragmented: the top 50 firms account
+      for less than 10% of total revenue. The category is being reshaped by a persistent skilled-labor
+      shortage, material-cost volatility, and private-equity roll-ups targeting specialized trades. In
+      a market this crowded, the contractors pulling ahead are the ones who can visibly prove they
+      control complex work — because rework and schedule slippage, not price, are what actually sink projects.
+    </p>
+    <p class="lead">
+      The fastest-growing backlogs are exactly Leopardo's sweet spots: mission-critical and data-center
+      work, healthcare, and education. Turner alone reported a $12.6B data-center backlog heading into
+      2025. Leopardo is already the trusted builder for dozens of hospitals and has a deep municipal,
+      aviation, and interiors portfolio — but a buyer scanning its public channels today would struggle
+      to see any of that operational depth. The demand is concentrating around proof of expertise, and
+      Leopardo's proof is sitting off-camera.
+    </p>
+  </div>
+</section>
+
+<section id="finding">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">A Finding Worth Fixing First</span></div>
+    <h2>Two channels, one blind spot: the work itself is missing.</h2>
+    <p class="lead">
+      This isn't a credibility problem — Leopardo has the history, people, and projects. It's a content-mix
+      problem with real commercial weight, visible in two places. <strong>On LinkedIn</strong>, the feed
+      is monopolized by HR and recruiting content — employee celebrations, team outings, culture posts.
+      Legitimate, but it has become the company's entire public voice by default. There's no visible project
+      proof, no executive POV, no field expertise competing for space. <strong>On the website</strong>, the
+      imagery is almost entirely completed-project photography — architectural and interior beauty shots.
+      There's very little of the actual work: no rebar, no crews mid-pour, no trades on site, no process. For
+      a company whose positioning is trust, scale, and execution, the site reads more like an interior-design
+      portfolio than a builder's proof of capability.
+    </p>
+    <div class="flag">
+      <strong>The fix:</strong> don't cut the HR content — build the missing lane and let it compete for
+      space. On LinkedIn that means renegotiating who owns the calendar and carving out a defined share for
+      project proof and executive POV (see the recommended content mix in Section 05). On the website it means
+      adding the missing middle — process, method, and the difficult decisions — to every project story. The
+      raw material starts getting captured this week: President & CEO Giancarlo Pacini sits for an on-camera
+      interview July 16, alongside live process footage from an active Chicago jobsite.
+    </div>
+  </div>
+</section>
+
+<section id="competitive">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">The Competitive Landscape</span></div>
+    <h2>Leopardo has the scale. What it isn't claiming is the authority.</h2>
+    <p class="lead">
+      Chicago is one of the most competitive contractor markets in the country — Walsh, Pepper, Power,
+      Clune, JE Dunn and dozens more compete on relationships and reputation. Two family-and-management-owned
+      Chicago peers, Pepper and Power, have made construction expertise a central, visible part of their public
+      identity. Leopardo operates at comparable scale and depth — but sits low on the axis that increasingly
+      decides work: how visibly a contractor proves it controls complex construction.
+    </p>
+    <div class="matrix-wrap">
+      <div class="matrix-yaxis">Construction Expertise Made Visible ↑</div>
+      <div>
+        <div class="matrix">
+          <div class="plot" style="top:16%; left:72%;">
+            <div class="dot" style="background:#2C7A7B;"></div>
+            <div class="name">Pepper Construction</div>
+            <div class="sub">Editorial model — process &amp; field expertise, family-owned since 1927</div>
+          </div>
+          <div class="plot" style="top:30%; left:48%;">
+            <div class="dot" style="background:#2C7A7B;"></div>
+            <div class="name">Power Construction</div>
+            <div class="sub">Regional peer — method &amp; schedule stories, owned since 1926</div>
+          </div>
+          <div class="plot" style="top:56%; left:84%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">National Mega-GCs</div>
+            <div class="sub">Turner, Walsh — huge scale, largely generic public story</div>
+          </div>
+          <div class="plot" style="top:80%; left:26%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Small / Regional GCs</div>
+            <div class="sub">Local scale, little visible technical authority</div>
+          </div>
+          <div class="plot lc" style="top:64%; left:64%;">
+            <div class="dot"></div>
+            <div class="name">Leopardo Construction</div>
+            <div class="sub">National scale &amp; depth — expertise not yet visible</div>
+            <div class="arrow">↑ the strategy lifts it here</div>
+          </div>
+        </div>
+        <div class="matrix-xaxis"><span>Regional Scale</span><span>National Scale →</span></div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      The open move is vertical, not horizontal. Leopardo doesn't need to get bigger — it's already
+      operating in the top-right neighborhood on scale. It needs to climb the expertise-visibility axis
+      into the quadrant Pepper already occupies: a relationship-driven, family-founded builder whose
+      public channels prove, week after week, that it knows how to control the hardest work in the room.
+      Everything Leopardo needs to make that climb already exists on its jobsites. None of it is on camera yet.
+    </p>
+  </div>
+</section>
+
+<section id="swot">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">Where Leopardo Stands</span></div>
+    <h2>SWOT, grounded in what's actually true today.</h2>
+    <div class="swot-grid">
+      <div class="swot-cell strength">
+        <h4><span class="sw-dot"></span>Strengths</h4>
+        <ul>
+          <li>Nearly 50-year family-founded legacy (est. 1977) — the anchor brand of the AWC portfolio</li>
+          <li>Real scale: 400+ professionals, 400+ projects a year, offices in IL, OH, FL, and Washington DC</li>
+          <li>Deep sector authority — trusted builder for dozens of hospitals, plus municipal, aviation, interiors, and industrial</li>
+          <li>Marquee client roster: Apple, Honda, Harley-Davidson, CVS, Trader Joe's, Radio Flyer, and the Aurora Police HQ</li>
+          <li>Genuine operational proof points — lost-time incident rate 4× better than the national average, and a real self-perform capability</li>
+        </ul>
+      </div>
+      <div class="swot-cell weakness">
+        <h4><span class="sw-dot"></span>Weaknesses</h4>
+        <ul>
+          <li>LinkedIn is monopolized by HR/recruiting content — no visible project proof or executive POV</li>
+          <li>Website shows finished spaces almost exclusively — little to no active-construction imagery</li>
+          <li>Landmark projects and hard-won expertise aren't presented as case studies anywhere public</li>
+          <li>Field leaders appear (if at all) as culture participants, not as market authorities</li>
+          <li>Thin existing archive of process footage — the gap has to be filled going forward, not mined from the past</li>
+        </ul>
+      </div>
+      <div class="swot-cell opportunity">
+        <h4><span class="sw-dot"></span>Opportunities</h4>
+        <ul>
+          <li>Mission-critical, data-center, healthcare, and education backlogs are the market's fastest-growing lanes — Leopardo already plays in them</li>
+          <li>"Built While Open" occupied-environment expertise (40+ hospitals) is a differentiated, ownable authority area</li>
+          <li>The July 16 Giancarlo Pacini interview + live Chicago process footage seeds an entire content system in one shoot</li>
+          <li>AWC portfolio cross-sell: shared executive proof content across Grand Kahn, Enlyt, DFH, and the wider portfolio</li>
+          <li>A defined LinkedIn content mix converts recruiting reach into client-facing credibility on the same channel</li>
+        </ul>
+      </div>
+      <div class="swot-cell threat">
+        <h4><span class="sw-dot"></span>Threats</h4>
+        <ul>
+          <li>Persistent skilled-labor shortage and wage inflation compressing margins industry-wide</li>
+          <li>Pepper, Power, and other Chicago peers already own the "visible expertise" position Leopardo is ceding</li>
+          <li>PE-backed roll-ups and mega-GCs out-resourcing on the largest mission-critical pursuits</li>
+          <li>Every quarter the process work goes undocumented is a quarter of proof lost — active jobsites don't wait</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="options">
+  <div class="wrap">
+    <div class="section-label"><span class="num">05</span><span class="tag">Strategic Options</span></div>
+    <h2>Four ways to grow. Two are worth prioritizing.</h2>
+    <table class="ansoff-table">
+      <tr><th>Option</th><th>What It Means Here</th><th>Verdict</th></tr>
+      <tr class="rec">
+        <td class="opt">Market Penetration</td>
+        <td>Win more share in existing sectors (healthcare, municipal, interiors, aviation) by finally showing the expertise that already exists — active jobsites, field leadership, and the hard problems solved. This is the core play: make invisible authority visible on the channels buyers already watch.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr class="rec">
+        <td class="opt">Product / Service Development</td>
+        <td>Package "Built While Open" — construction inside occupied, mission-critical environments — as a named, marketed area of authority. Leopardo's healthcare depth (40+ hospitals) makes this a credential competitors can't easily claim, not just a capability buried on a page.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr>
+        <td class="opt">Market Development</td>
+        <td>Extend the content system across the OH, FL, and DC offices as the pilot proves out, using regional jobsites to feed the same franchises. Real, but sequence it after the Chicago model works — don't dilute the pilot.</td>
+        <td class="verdict go">Go — Later</td>
+      </tr>
+      <tr>
+        <td class="opt">Diversification</td>
+        <td>Self-perform, VDC, and preconstruction are already existing capabilities. This is "make visible," not "diversify into" — closer to Market Penetration than a new strategic bet.</td>
+        <td class="verdict hold">Already Underway</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="rolemodels">
+  <div class="wrap">
+    <div class="section-label"><span class="num">06</span><span class="tag">The Growth Trajectory</span></div>
+    <h2>What Leopardo grows into, once the expertise becomes visible.</h2>
+    <p class="lead">
+      The move isn't "more projects." It's the move from respected regional builder to a nationally
+      legible authority — a contractor whose expertise wins work before the bid, because the market can
+      see how it thinks, solves, and controls the hardest jobs. Three Chicago peers and one national
+      giant have already run versions of this arc, and none of them stopped being relationship-driven to do it.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Growth Line</div>
+        <div class="text">Leopardo grows from "polished Chicago contractor with great finished projects" into the visibly authoritative builder for complex, mission-critical, and occupied environments — the one whose field expertise is its most public asset, not its most hidden one.</div>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Primary Editorial Model</div>
+        <h4>Pepper Construction</h4>
+        <p>The single best model for Leopardo. Founded 1927 in Chicago, family-and-employee owned, now in its third-plus generation — and roughly $1B+ in revenue, ranked #6 largest contractor in the Midwest by ENR. Pepper stays polished and relationship-driven while framing every project story around the difficult condition, the expert approach, and the people doing the work. The lesson isn't visual design — it's editorial structure: Pepper explains <em>why</em> the work was hard and <em>how</em> the team made it possible.</p>
+        <div class="tool-used">Founded 1927, Chicago · Family-owned · ~$1B+ revenue · Healthcare ≈ 50% of work</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Regional Peer</div>
+        <h4>Power Construction</h4>
+        <p>The closest cultural and regional comp. Founded 1926 in Chicago, family-and-senior-management owned, ranked #1 in Chicago on Crain's list of largest GCs. Power connects execution decisions to schedule outcomes and shows work-in-progress alongside finished architecture — with specialized groups (Aviation, Workplace, Luxury Residence, advanced technologies) that read as areas of authority, not just service lines.</p>
+        <div class="tool-used">Founded 1926, Chicago · Family &amp; management-owned · ~$1B revenue</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">The Scale Ceiling</div>
+        <h4>The Walsh Group</h4>
+        <p>Proof the ceiling is high. A fourth-generation family-owned Chicago contractor founded in 1898, Walsh grew into one of the largest builders in the country — $7B+ in regional revenue — without ever leaving its Chicago headquarters or its family-ownership story. A regional legacy is a foundation, not a limit.</p>
+        <div class="tool-used">Founded 1898, Chicago · 4th-generation family-owned · National scale</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Advanced Aspiration</div>
+        <h4>Turner — Outcome Language</h4>
+        <p>The national reference for where mission-critical positioning leads. Turner reported ~$20.2B in 2024 revenue and a $12.6B data-center backlog by describing itself through the outcomes it delivers — powered, operational, mission-critical facilities — rather than through trade. This is the vocabulary Leopardo's occupied-environment and healthcare expertise can eventually adopt.</p>
+        <div class="tool-used">~$20.2B 2024 revenue · $12.6B data-center backlog · Outcome-led positioning</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      Pepper and Power prove the same thing from the same city: a family-founded, relationship-driven
+      contractor can make its field expertise the most visible part of its brand without losing an ounce
+      of polish. Walsh proves the scale ceiling is national. Leopardo already has the foundation all three
+      built on — 48 years of it. What it hasn't done yet is put the work on camera.
+    </p>
+  </div>
+</section>
+
+<section id="insight">
+  <div class="wrap">
+    <div class="section-label"><span class="num">07</span><span class="tag">The Recommended Strategy</span></div>
+    <h2>Show the work behind the work — starting with footage captured this week.</h2>
+    <p class="lead">
+      Leopardo doesn't need a new story, and it doesn't need to invent footage. It needs to document the
+      story already happening every day on its jobsites, and give its field leaders a public voice as
+      experts — not just as culture participants. The pilot starts with the July 16 Chicago shoot:
+      Giancarlo Pacini's executive interview, paired with live in-progress capture, and cut against the
+      existing footage of Senior PM Sean Scott on-site at The Ave. Here's what VDO Aigency builds from it,
+      how it's distributed, and which AI tools do the work.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Core Insight</div>
+        <div class="text">Leopardo currently displays the product of construction but rarely dramatizes the act of it. The finished building is visible; the judgment, coordination, and problem-solving that created it are not. The strategy isn't to write a new brand — it's to build the production and distribution system that turns invisible field knowledge into visible market authority.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video-content">
+  <div class="wrap">
+    <div class="section-label"><span class="num">08</span><span class="tag">Video Content</span></div>
+    <h2>Five recurring franchises, seeded from one shoot.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Format 01</div>
+        <h4>Executive POV — The Giancarlo Interview</h4>
+        <p>The anchor asset. President &amp; CEO Giancarlo Pacini on camera July 16, speaking to scale, standards, and how Leopardo runs complex jobs. Cut against Sean Scott's existing "it's family owned, it's got that family feel" line from The Ave, this becomes a two-voice (President + PM) piece with no reshoot — and the top of every other franchise below.</p>
+        <div class="tool-used">Built with: July 16 interview + Cutdown tool</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 02</div>
+        <h4>The Leopardo Field Report</h4>
+        <p>30–90-second recurring updates from active jobsites — a superintendent or PM on one real milestone, decision, or coordination challenge, shot in the real environment. Not generic progress reporting: the point is to show judgment and control. The lowest-lift, fastest-proof franchise, and it cuts directly from the Chicago process footage.</p>
+        <div class="tool-used">Built with: On-site field footage + Cutdown tool</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 03</div>
+        <h4>One Problem, One Solution</h4>
+        <p>Case-based short-form: the problem → why it mattered → what the team decided → how it was executed → what risk, delay, or cost it avoided. This is the franchise that converts construction knowledge into market authority — turning a restricted-access site or a phasing challenge into visible proof of expertise.</p>
+        <div class="tool-used">Built with: Semantic Bridge (interview transcript → case study script)</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 04</div>
+        <h4>Built While Open</h4>
+        <p>The ownable authority series: construction inside operating environments — infection control, phasing, occupant safety, business continuity. Leopardo's healthcare depth (40+ hospitals) makes this a differentiated lane competitors can't easily claim. Positions Leopardo as the builder you trust when the building can't close.</p>
+        <div class="tool-used">Built with: Semantic Bridge + Voiceover Studio</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 05</div>
+        <h4>The Superintendent's View</h4>
+        <p>Direct-to-camera expertise prompts — "What's the earliest sign a schedule is in trouble?" "What do you check before approving a milestone?" This is what converts experienced field leaders from culture-post subjects into visible market experts, and doubles as recruiting content that speaks to the labor shortage head-on.</p>
+        <div class="tool-used">Built with: On-camera field footage + Cutdown tool</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="wrap">
+    <div class="section-label"><span class="num">09</span><span class="tag">Outreach &amp; Distribution</span></div>
+    <h2>Getting the work in front of owners, developers, and recruits.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Channel 01</div>
+        <h4>The Renegotiated LinkedIn Calendar</h4>
+        <p>The core distribution fix. Identify who owns the calendar today, then carve out a defined share for project proof and executive POV against a recommended mix — roughly 40% work-in-progress, 25% finished outcomes, 20% expertise, 15% culture. The HR content stays; it just stops being the whole channel.</p>
+        <div class="tool-used">Recommended mix: 40 / 25 / 20 / 15 across the four content lanes</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Channel 02</div>
+        <h4>Project-Page Rebuild</h4>
+        <p>Every case study restructured around the missing middle: finished hero → the challenge → the constraint → active-construction imagery → the team member who solved it → the method → the measurable outcome. Turns the website from an interiors portfolio into a builder's proof of capability.</p>
+        <div class="tool-used">Distribution: leopardo.com project pages, proposals, and BD decks</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Channel 03</div>
+        <h4>AWC Portfolio Cross-Sell</h4>
+        <p>As the anchor brand, Leopardo's executive and process content sets the visual and editorial standard for the rest of the portfolio — and shared shoots (Grand Kahn, Enlyt, DFH) amortize production across companies. Internal distribution no outbound campaign can replicate.</p>
+        <div class="tool-used">Channel: shared AWC portfolio production + BD relationships</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Channel 04</div>
+        <h4>Recruiting &amp; Trade Channels</h4>
+        <p>The Superintendent's View and Field Report cuts distributed as recruiting content through trade and apprenticeship channels — addressing the labor shortage as a distribution opportunity, not just an HR problem, using the same expertise story that attracts clients.</p>
+        <div class="tool-used">Channel: trade associations, apprenticeship programs, careers page</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label"><span class="num">10</span><span class="tag">The AI Production Stack</span></div>
+    <h2>Which tool does what, specifically for Leopardo.</h2>
+    <div class="tool-row">
+      <div class="tool-name">Semantic Bridge<span class="tsub">Railway · /board-export</span></div>
+      <div class="tool-desc"><strong>Converts the Giancarlo and field-leader interview transcripts directly into case study and "One Problem, One Solution" scripts.</strong> The healthcare, municipal, and occupied-environment stories are already in Leopardo's people's heads — Semantic Bridge turns the recorded transcripts into structured, publishable copy without a rewrite from scratch.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Shot Builder<span class="tsub">Runway Gen-4.5</span></div>
+      <div class="tool-desc"><strong>Generates process and phasing diagrams for the "Before the Pour" and "Built While Open" content</strong> — sequencing, occupied-site logistics, and enclosure steps visualized cleanly — plus establishing visuals where a fresh shoot isn't practical, keeping the field footage as the primary asset.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Voiceover Studio<span class="tsub">Railway · 5 voice IDs, ElevenLabs v3</span></div>
+      <div class="tool-desc"><strong>Carries narration for the explainer and occupied-environment series,</strong> while the Executive POV and Superintendent's View franchises lean on the real recorded voices of Giancarlo, Sean Scott, and Leopardo's field leaders as the primary asset.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Cutdown Tool<span class="tsub">Railway</span></div>
+      <div class="tool-desc"><strong>Breaks the July 16 executive interview and jobsite footage into LinkedIn-, recruiting-, and case-study-length cuts</strong> — one shoot feeding a Field Report, a two-voice President + PM piece, a recruiting ad, and a project-page intro from the same master.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">OpenClaw Agent<span class="tsub">Proposed · modeled on VDO/Higgins agents</span></div>
+      <div class="tool-desc"><strong>Runs the editorial pipeline itself</strong> — tracking which active jobsites still need documentation, flagging when a project's process window is closing, and routing captured footage into the franchise queue so the content mix stays balanced without manual chasing.</div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-label"><span class="num">11</span><span class="tag">First 90 Days</span></div>
+    <h2>What this looks like in motion.</h2>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-phase">Diagnose<span class="days">Days 1–15</span></div>
+        <div class="rm-items"><ul>
+          <li>Capture the July 16 Giancarlo Pacini executive interview + live Chicago process footage</li>
+          <li>Confirm the current LinkedIn calendar owner and propose the 40/25/20/15 content-mix split</li>
+          <li>Confirm access/schedule at The Ave — or identify a new active jobsite for ongoing process capture</li>
+          <li>Run the interview transcripts through Semantic Bridge for first-draft case study and franchise scripts</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Build<span class="days">Days 16–60</span></div>
+        <div class="rm-items"><ul>
+          <li>Launch the first two franchises — Field Report and The Superintendent's View — both cut from the Chicago shoot</li>
+          <li>Publish the two-voice Executive POV piece (Giancarlo + Sean Scott) as the anchor asset</li>
+          <li>Rebuild two flagship project pages around the missing-middle structure as the new template</li>
+          <li>Stand up the renegotiated LinkedIn cadence with project proof and executive POV in the mix</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Prove<span class="days">Days 61–90</span></div>
+        <div class="rm-items"><ul>
+          <li>Ship the first "Built While Open" occupied-environment piece from a healthcare or municipal site</li>
+          <li>Track content-mix shift, engagement quality, and BD/recruiting reuse of the new assets</li>
+          <li>Document the repeatable field-capture process so it scales to the OH, FL, and DC offices</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">12</span><span class="tag">Success Metrics</span></div>
+    <h2>What "working" looks like at day 90.</h2>
+    <div class="metric-row">
+      <div class="metric"><div class="m-label">Public Content Showing Real Work</div><div class="m-target">40%+ of the mix</div></div>
+      <div class="metric"><div class="m-label">Recurring Franchises Live</div><div class="m-target">3+</div></div>
+      <div class="metric"><div class="m-label">Project Pages Rebuilt</div><div class="m-target">2 (new template)</div></div>
+      <div class="metric"><div class="m-label">Field Experts Activated On-Camera</div><div class="m-target">4+</div></div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      The key structural metric isn't likes or impressions. It's this: by the end of the pilot, Leopardo's
+      public channels should no longer be dominated by HR content and finished-space photography — the
+      expertise that wins and delivers the work should finally be visible on the same channels the market
+      is already watching.
+    </p>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">The Point</div>
+    <div class="thesis-text">Leopardo has a strong company, strong people, strong projects, and a strong finished-product portfolio. Its most valuable asset — its construction intelligence — is the one thing its marketing hides. The pilot doesn't invent a differentiator. It puts the one already happening every day on Leopardo's jobsites on camera.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
