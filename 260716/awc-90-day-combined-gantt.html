@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio 90-Day Plans — Grand Kahn, Laystrom, Enlyt, DFH Connect — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --leopardo-graphite:#3A3A40;
+    --kahn-copper:#B8854A;
+    --enlyt-cyan:#2E5F6B;
+    --dfh-indigo:#3B4C7A;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+  }
+  .header-inner{max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;}
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+
+  .hero{padding:3.5rem 0 2.5rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--kahn-copper); margin-bottom:1rem;
+  }
+  .hero h1{font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue); font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.1; max-width:800px;}
+  .hero .sub{margin-top:1.1rem; max-width:680px; font-size:1rem; color:var(--slate);}
+
+  .gantt-section{padding:3.5rem 0 4.5rem;}
+
+  .gantt{border:1px solid var(--line);}
+  .gantt-header{
+    display:grid; grid-template-columns:300px 1fr;
+    border-bottom:2px solid var(--leopardo-blue); background:var(--leopardo-blue);
+  }
+  .gantt-header .label-col{padding:10px 16px; color:var(--white); font-family:'Jost',sans-serif; font-weight:600; font-size:0.82rem;}
+  .gantt-header .axis{position:relative; height:36px;}
+  .axis-tick{
+    position:absolute; top:0; bottom:0; display:flex; align-items:center;
+    font-family:'DM Mono',monospace; font-size:0.66rem; color:rgba(255,255,255,0.85);
+    transform:translateX(-50%);
+  }
+
+  .company-group{border-bottom:2px solid var(--leopardo-blue);}
+  .company-group:last-child{border-bottom:none;}
+  .company-title{
+    display:flex; align-items:center; gap:10px; padding:10px 16px;
+    background:var(--ink); color:var(--white);
+  }
+  .company-title .swatch{width:12px; height:12px; border-radius:50%;}
+  .company-title .name{font-family:'Jost',sans-serif; font-weight:700; font-size:0.9rem;}
+  .company-title .link{
+    margin-left:auto; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.7); text-decoration:none;
+  }
+  .company-title .link:hover{color:var(--leopardo-yellow);}
+
+  .row{display:grid; grid-template-columns:300px 1fr; align-items:stretch; border-bottom:1px solid var(--line);}
+  .row:last-child{border-bottom:none;}
+  .row-label{padding:10px 16px; display:flex; flex-direction:column; justify-content:center;}
+  .phase-name{font-family:'Jost',sans-serif; font-weight:700; font-size:0.86rem; color:var(--leopardo-blue);}
+  .phase-days{font-family:'DM Mono',monospace; font-size:0.65rem; color:var(--slate); margin-top:1px; margin-bottom:5px;}
+  .task-mini{list-style:none; font-size:0.72rem; color:var(--slate); line-height:1.5;}
+  .task-mini li{padding-left:10px; position:relative;}
+  .task-mini li::before{content:'—'; position:absolute; left:0; color:var(--silver);}
+
+  .track{position:relative; min-height:100%;}
+  .grid-line{position:absolute; top:0; bottom:0; width:1px; background:var(--line); z-index:0;}
+
+  .bar{
+    position:absolute; top:14px; height:22px; border-radius:3px;
+    display:flex; align-items:center; padding:0 8px; overflow:hidden; white-space:nowrap; z-index:1;
+  }
+  .bar-label{font-family:'DM Mono',monospace; font-size:0.62rem; color:var(--white); font-weight:500;}
+
+  .legend{display:flex; gap:24px; flex-wrap:wrap; margin-top:1.75rem;}
+  .legend-item{display:flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--slate);}
+  .legend-swatch{width:14px; height:14px; border-radius:3px;}
+  .legend-note{margin-top:.75rem; font-size:0.78rem; color:var(--silver); font-style:italic; max-width:700px;}
+
+  /* MILESTONE MARKER */
+  .gantt-wrap{position:relative;}
+  .milestone-line{
+    position:absolute; top:0; bottom:0; width:2px; background:var(--leopardo-yellow);
+    z-index:5; pointer-events:none;
+  }
+  .milestone-flag{
+    position:absolute; top:-2px; transform:translateX(-50%);
+    background:var(--leopardo-yellow); color:var(--leopardo-blue-dark);
+    font-family:'Jost',sans-serif; font-weight:700; font-size:0.68rem;
+    padding:4px 9px; white-space:nowrap; border-radius:2px 2px 2px 0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.18);
+  }
+  .milestone-flag::after{
+    content:''; position:absolute; top:100%; left:0; width:0; height:0;
+    border-top:5px solid var(--leopardo-yellow); border-right:5px solid transparent;
+  }
+
+  /* TIMELINE IMPACT CALLOUT */
+  .impact{
+    margin-top:2.5rem; background:var(--leopardo-blue); color:var(--white);
+    padding:2rem 2.25rem; position:relative;
+  }
+  .impact::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .impact-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.18em; margin-bottom:.9rem;
+  }
+  .impact h3{font-family:'Jost',sans-serif; font-weight:600; font-size:1.2rem; margin-bottom:1rem; line-height:1.4;}
+  .impact ul{margin-left:18px; font-size:0.88rem; line-height:1.6; color:rgba(255,255,255,0.9);}
+  .impact li{margin-bottom:8px;}
+  .impact li strong{color:var(--leopardo-yellow);}
+  .impact-assumption{
+    margin-top:1.25rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.2);
+    font-size:0.76rem; color:rgba(255,255,255,0.65); font-style:italic;
+  }
+
+  footer{padding:2.5rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-label">Market Strategy Series · First 90 Days, All Four</div>
+    <h1>Four companies. One timeline.</h1>
+    <p class="sub">
+      Grand Kahn Electric, Laystrom Hardware, Enlyt Building Technologies, and DFH Connect — each plan
+      runs on its own logic, but they all move through the same three-beat shape: get the facts straight,
+      build and publish, then prove it worked. Laid out together, the pattern is obvious — and Thursday's
+      AWC Presidents meeting lands right at the start of it.
+    </p>
+  </div>
+</section>
+
+<section class="gantt-section">
+  <div class="wrap">
+    <div class="gantt-wrap" id="ganttWrap">
+    <div class="gantt" id="gantt">
+
+      <div class="gantt-header">
+        <div class="label-col">Company / Phase</div>
+        <div class="axis" id="axis"></div>
+      </div>
+
+      <div class="gantt-body">
+
+        <!-- GRAND KAHN -->
+        <div class="company-group">
+          <div class="company-title">
+            <div class="swatch" style="background:var(--kahn-copper);"></div>
+            <div class="name">Grand Kahn Electric</div>
+            <a class="link" href="grand-kahn-market-strategy.html">Read the Strategy →</a>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Diagnose</div>
+              <div class="phase-days">Days 1–15</div>
+              <ul class="task-mini">
+                <li>Confirm the correct founding year, one number everywhere</li>
+                <li>Scope WBENC / City of Chicago MBE-WBE certification timeline</li>
+                <li>Run Casto transcript through Semantic Bridge for scripts</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:0%; width:16.7%; background:rgba(184,133,74,0.55);"><span class="bar-label">1–15</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Build</div>
+              <div class="phase-days">Days 16–60</div>
+              <ul class="task-mini">
+                <li>Finish legacy film; publish Tesla, Rush, Radio Flyer, City Hope case studies</li>
+                <li>Produce EV charging explainer series; relaunch News section</li>
+                <li>Launch certified-diverse bid targeting once certification confirmed</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:16.7%; width:50%; background:rgba(184,133,74,0.8);"><span class="bar-label">16–60</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Prove</div>
+              <div class="phase-days">Days 61–90</div>
+              <ul class="task-mini">
+                <li>Track bid inquiries citing certification or EV charging</li>
+                <li>Report on legacy consistency and case study reach</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:66.7%; width:33.3%; background:var(--kahn-copper);"><span class="bar-label">61–90</span></div></div>
+          </div>
+        </div>
+
+        <!-- LAYSTROM -->
+        <div class="company-group">
+          <div class="company-title">
+            <div class="swatch" style="background:var(--leopardo-graphite);"></div>
+            <div class="name">Laystrom Hardware</div>
+            <a class="link" href="laystrom-market-strategy.html">Read the Strategy →</a>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Build the Pipeline</div>
+              <div class="phase-days">Days 1–20</div>
+              <ul class="task-mini">
+                <li>Run top 3 categories through Semantic Bridge for scripts</li>
+                <li>Lock a Voiceover Studio narrator for the spec series</li>
+                <li>Set up architect/spec-writer outreach board</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:0%; width:22.2%; background:rgba(58,58,64,0.55);"><span class="bar-label">1–20</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Produce &amp; Launch</div>
+              <div class="phase-days">Days 21–65</div>
+              <ul class="task-mini">
+                <li>Publish top 3 spec-explainer videos, first line card spotlights</li>
+                <li>Produce the "Modern Distributor" brand film</li>
+                <li>Begin outreach cadence and quote-request follow-ups</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:22.2%; width:50%; background:rgba(58,58,64,0.8);"><span class="bar-label">21–65</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Prove</div>
+              <div class="phase-days">Days 66–90</div>
+              <ul class="task-mini">
+                <li>Track inbound spec and quote requests from new content</li>
+                <li>Package results into the case for full-range expansion</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:72.2%; width:27.8%; background:var(--leopardo-graphite);"><span class="bar-label">66–90</span></div></div>
+          </div>
+        </div>
+
+        <!-- ENLYT -->
+        <div class="company-group">
+          <div class="company-title">
+            <div class="swatch" style="background:var(--enlyt-cyan);"></div>
+            <div class="name">Enlyt Building Technologies</div>
+            <a class="link" href="enlyt-market-strategy.html">Read the Strategy →</a>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Build the Pipeline</div>
+              <div class="phase-days">Days 1–20</div>
+              <ul class="task-mini">
+                <li>Run 5 case studies through Semantic Bridge for scripts</li>
+                <li>Lock a single Voiceover Studio narrator as brand voice</li>
+                <li>Prototype one "invisible infrastructure" explainer</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:0%; width:22.2%; background:rgba(46,95,107,0.55);"><span class="bar-label">1–20</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Produce</div>
+              <div class="phase-days">Days 21–65</div>
+              <ul class="task-mini">
+                <li>Finish 5 case study videos and 4 persona explainers</li>
+                <li>Produce 2 "What You Can't See" episodes, starting Sonder Hotel</li>
+                <li>Cut masters into industry-vertical shorts</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:22.2%; width:50%; background:rgba(46,95,107,0.8);"><span class="bar-label">21–65</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Prove</div>
+              <div class="phase-days">Days 66–90</div>
+              <ul class="task-mini">
+                <li>Publish alongside existing case studies and industry pages</li>
+                <li>Track estimator submissions against content publish dates</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:72.2%; width:27.8%; background:var(--enlyt-cyan);"><span class="bar-label">66–90</span></div></div>
+          </div>
+        </div>
+
+        <!-- DFH CONNECT -->
+        <div class="company-group">
+          <div class="company-title">
+            <div class="swatch" style="background:var(--dfh-indigo);"></div>
+            <div class="name">DFH Connect</div>
+            <a class="link" href="dfh-connect-market-strategy.html">Read the Strategy →</a>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Confirm &amp; Build</div>
+              <div class="phase-days">Days 1–20</div>
+              <ul class="task-mini">
+                <li>Confirm Laystrom's eMullion + QuickBooks setup, scope a pilot</li>
+                <li>Produce the "5 Minutes" screen-capture demo</li>
+                <li>Replace stock photography with real data-flow visuals</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:0%; width:22.2%; background:rgba(59,76,122,0.55);"><span class="bar-label">1–20</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Produce &amp; Reach</div>
+              <div class="phase-days">Days 21–65</div>
+              <ul class="task-mini">
+                <li>Publish 3 persona explainers and the founder piece</li>
+                <li>Complete the Laystrom pilot; produce case study if it supports one</li>
+                <li>Begin eMullion outreach; pursue QuickBooks/Intuit listing</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:22.2%; width:50%; background:rgba(59,76,122,0.8);"><span class="bar-label">21–65</span></div></div>
+          </div>
+          <div class="row">
+            <div class="row-label">
+              <div class="phase-name">Prove</div>
+              <div class="phase-days">Days 66–90</div>
+              <ul class="task-mini">
+                <li>Track demo views, listing traffic, outreach response rate</li>
+                <li>Package the Laystrom result as the primary sales asset</li>
+              </ul>
+            </div>
+            <div class="track"><div class="bar" style="left:72.2%; width:27.8%; background:var(--dfh-indigo);"><span class="bar-label">66–90</span></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--kahn-copper);"></div>Grand Kahn Electric</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--leopardo-graphite);"></div>Laystrom Hardware</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--enlyt-cyan);"></div>Enlyt Building Technologies</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--dfh-indigo);"></div>DFH Connect</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--leopardo-yellow);"></div>AWC Presidents Meeting — Shoot Day</div>
+    </div>
+    <p class="legend-note">
+      Bar shade deepens by phase within each company — lightest for the opening diagnostic stage, solid
+      by the proof stage. Grand Kahn's diagnostic phase runs 5 days shorter than the other three (15 days
+      vs. 20), which is why its Build phase starts and ends earlier on the shared axis. Milestone marker
+      assumes Day 1 falls on Monday, July 13, 2026, making Thursday, July 16 = Day 4 — let me know if the
+      actual start date differs and I'll recalibrate.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var axis = document.getElementById('axis');
+    var ticks = [0, 15, 30, 45, 60, 75, 90];
+    ticks.forEach(function(day){
+      var pct = (day / 90) * 100;
+      var el = document.createElement('div');
+      el.className = 'axis-tick';
+      el.style.left = pct + '%';
+      el.textContent = 'Day ' + day;
+      axis.appendChild(el);
+    });
+    document.querySelectorAll('.track').forEach(function(track){
+      ticks.forEach(function(day){
+        var pct = (day / 90) * 100;
+        var line = document.createElement('div');
+        line.className = 'grid-line';
+        line.style.left = pct + '%';
+        track.appendChild(line);
+      });
+    });
+
+    // Milestone: AWC Presidents Meeting, Thursday July 16 2026 = Day 4
+    // (assumes Day 1 = Monday, July 13, 2026 — see note below the chart)
+    function placeMilestone(){
+      var ganttWrap = document.getElementById('ganttWrap');
+      var gantt = document.getElementById('gantt');
+      var existing = document.getElementById('milestoneLine');
+      if (existing) existing.remove();
+
+      var milestoneDay = 4;
+      var pct = milestoneDay / 90;
+      var axisRect = axis.getBoundingClientRect();
+      var wrapRect = ganttWrap.getBoundingClientRect();
+      var leftPx = (axisRect.left - wrapRect.left) + (axisRect.width * pct);
+
+      var line = document.createElement('div');
+      line.className = 'milestone-line';
+      line.id = 'milestoneLine';
+      line.style.left = leftPx + 'px';
+      line.style.height = gantt.offsetHeight + 'px';
+
+      var flag = document.createElement('div');
+      flag.className = 'milestone-flag';
+      flag.textContent = 'Day 4 · Presidents Meeting, Jul 16';
+      line.appendChild(flag);
+
+      ganttWrap.appendChild(line);
+    }
+    placeMilestone();
+    window.addEventListener('resize', placeMilestone);
+  })();
+</script>
+
+</body>
+</html>

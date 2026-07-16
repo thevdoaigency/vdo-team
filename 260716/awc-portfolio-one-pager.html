@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWC Portfolio Brand Function — One-Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --leopardo-graphite:#3A3A40;
+    --efficiency-teal:#2C7A7B;
+    --gator-green:#2E6B58;
+    --kahn-copper:#B8854A;
+    --enlyt-cyan:#2E5F6B;
+    --dfh-indigo:#3B4C7A;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E2E0DA;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  body{
+    background:#DDDDDD; color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Jost', sans-serif;}
+
+  .page{
+    width:8.5in; min-height:11in; margin:24px auto; background:var(--white);
+    padding:0.42in 0.55in; box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    display:flex; flex-direction:column;
+  }
+
+  /* HEADER */
+  .head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:3px solid var(--leopardo-yellow); padding-bottom:8px; margin-bottom:10px;
+  }
+  .head-mark{font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--slate);}
+  .head-title{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.65rem; letter-spacing:-0.01em; margin-top:2px;}
+  .head-right{text-align:right; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; color:var(--silver); font-weight:600; text-transform:uppercase; letter-spacing:0.08em;}
+
+  .intro{font-size:0.82rem; color:var(--slate); line-height:1.42; margin-bottom:10px; max-width:100%;}
+  .intro strong{color:var(--ink);}
+
+  .reel-link{
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:12px;
+    font-family:'Libre Franklin',sans-serif; font-size:0.74rem; font-weight:700;
+    color:var(--leopardo-blue); text-decoration:none; border-bottom:1.5px solid var(--leopardo-yellow);
+    padding-bottom:2px;
+  }
+  .reel-link:hover{color:var(--kahn-copper);}
+  .reel-link .tri{color:var(--kahn-copper); font-size:0.68rem;}
+
+  /* PRINCIPLE STRIP */
+  .principle{margin-bottom:10px;}
+  .sec-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.64rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.12em; color:var(--kahn-copper); margin-bottom:5px; display:flex; align-items:center; gap:8px;
+  }
+  .sec-label .ln{flex:1; height:1px; background:var(--line);}
+  .principle-row{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .principle-cell{background:var(--white); padding:6px 9px;}
+  .principle-cell .who{font-family:'Jost',sans-serif; font-weight:700; font-size:0.78rem; color:var(--leopardo-blue);}
+  .principle-cell .need{font-size:0.72rem; color:var(--slate); margin-top:2px;}
+  .principle-note{font-size:0.72rem; color:var(--slate); margin-top:5px; font-style:italic; line-height:1.35;}
+
+  /* COMPANY TABLE */
+  .companies{margin-bottom:10px;}
+  table.co-table{width:100%; border-collapse:collapse; font-size:0.72rem;}
+  table.co-table th{
+    text-align:left; font-family:'Libre Franklin',sans-serif; font-size:0.6rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--white); background:var(--leopardo-blue);
+    padding:3px 8px;
+  }
+  table.co-table td{padding:3px 8px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top; line-height:1.25;}
+  table.co-table td.co-name{color:var(--ink); font-weight:700; font-family:'Jost',sans-serif; font-size:0.76rem; white-space:nowrap;}
+  table.co-table tr:nth-child(even) td{background:var(--paper);}
+
+  /* TWO COL LOWER */
+  .lower{display:grid; grid-template-columns:1.05fr 0.95fr; gap:22px; margin-bottom:10px;}
+
+  .days-list{list-style:none; counter-reset:day;}
+  .days-list li{
+    counter-increment:day; font-size:0.71rem; color:var(--slate); padding:3px 0 3px 24px;
+    position:relative; border-bottom:1px solid var(--line); line-height:1.25;
+  }
+  .days-list li:last-child{border-bottom:none;}
+  .days-list li::before{
+    content:counter(day); position:absolute; left:0; top:5px; width:18px; height:18px; border-radius:50%;
+    background:var(--leopardo-blue); color:var(--white); font-family:'Jost',sans-serif; font-weight:700;
+    font-size:0.62rem; display:flex; align-items:center; justify-content:center;
+  }
+  .days-list li strong{color:var(--ink);}
+
+  .asks-list{list-style:none;}
+  .asks-list li{
+    font-size:0.71rem; color:var(--slate); padding:3px 0 3px 16px; position:relative;
+    border-bottom:1px solid var(--line); line-height:1.25;
+  }
+  .asks-list li:last-child{border-bottom:none;}
+  .asks-list li::before{content:'—'; position:absolute; left:0; color:var(--kahn-copper); font-weight:700;}
+  .asks-note{font-size:0.68rem; color:var(--slate); font-style:italic; margin-top:5px; line-height:1.3;}
+
+  /* CLOSER */
+  .closer{
+    margin-top:auto; background:var(--leopardo-blue); color:var(--white);
+    padding:11px 16px; position:relative; border-radius:2px;
+  }
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer .why-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.62rem; font-weight:700; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.16em; margin-bottom:6px;
+  }
+  .closer .stack{font-family:'Jost',sans-serif; font-weight:600; font-size:0.86rem; line-height:1.4;}
+  .closer .stack em{color:var(--leopardo-yellow); font-style:italic;}
+
+  .foot{
+    display:flex; justify-content:space-between; align-items:center; margin-top:8px;
+    font-family:'Libre Franklin',sans-serif; font-size:0.62rem; color:var(--silver);
+    text-transform:uppercase; letter-spacing:0.08em; font-weight:600;
+  }
+
+  /* PRINT */
+  @page{ size: letter; margin: 0; }
+  @media print{
+    body{background:var(--white);}
+    .page{
+      width:auto; min-height:auto; margin:0; box-shadow:none;
+      padding:0.5in 0.55in;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <div class="head-mark">Alexander West Capital</div>
+      <div class="head-title">Portfolio Brand Function</div>
+    </div>
+    <div class="head-right">A 90-Day Initiative<br>For Company Presidents</div>
+  </div>
+
+  <p class="intro">
+    AWC is beginning a 90-day portfolio brand and content initiative with Brandon Cole and VDO Aigency.
+    Many of our companies grew up inside or alongside Leopardo Construction — real history, real
+    capabilities, real customers. That gave us credibility, but several companies are now at the stage
+    where they need to become <strong>more visible, more legible, and more active in the market on their
+    own.</strong> This is about helping those companies leave the nest and win more third-party customers.
+  </p>
+
+  <a class="reel-link" href="https://thevdoaigency.github.io/awc-presentation/chicago-sample-reel.html" target="_blank">
+    <span class="tri">▶</span> See the sample reel from the June 30 Chicago shoot
+  </a>
+
+  <div class="principle">
+    <div class="sec-label">The Principle<div class="ln"></div></div>
+    <div class="principle-row">
+      <div class="principle-cell"><div class="who">A Contractor</div><div class="need">needs project proof</div></div>
+      <div class="principle-cell"><div class="who">A Supplier</div><div class="need">needs product clarity</div></div>
+      <div class="principle-cell"><div class="who">A Software Company</div><div class="need">needs demos</div></div>
+      <div class="principle-cell"><div class="who">A Public-Sector Seller</div><div class="need">needs trust &amp; proof</div></div>
+    </div>
+    <p class="principle-note">One centralized function gives us consistency, production capacity, brand discipline, and speed — but the strategy changes by company. This is not a one-size-fits-all marketing program.</p>
+  </div>
+
+  <div class="companies">
+    <div class="sec-label">How Each Company Is Treated Differently<div class="ln"></div></div>
+    <table class="co-table">
+      <tr><th>Company</th><th>What the Content Focuses On</th></tr>
+      <tr><td class="co-name">Leopardo Construction</td><td>The anchor brand — trust, scale, family ownership, project execution, recruiting, owner confidence.</td></tr>
+      <tr><td class="co-name">Grand Kahn Electric</td><td>A legacy electrical contractor with a 100+ year story — field proof, project credibility, safety, craft, leadership.</td></tr>
+      <tr><td class="co-name">Leopardo Efficiency</td><td>A municipal and institutional trust sale — city-leader education, ESPC/procurement clarity, case studies, long-cycle relationships.</td></tr>
+      <tr><td class="co-name">Laystrom Hardware</td><td>A supplier and product-driven business — product education, specs, line cards, vendor spotlights, sales enablement.</td></tr>
+      <tr><td class="co-name">Enlyt Building Technologies</td><td>Smart-building &amp; systems integration — use cases, diagrams, customer stories, vertical-specific examples.</td></tr>
+      <tr><td class="co-name">DFH Connect</td><td>A software workflow product — the demo, the before/after, the time saved, the product in action.</td></tr>
+      <tr><td class="co-name">GATOR</td><td>A government procurement platform — buyer education, compliance clarity, city case studies, savings proof.</td></tr>
+    </table>
+  </div>
+
+  <div class="lower">
+    <div class="days-col">
+      <div class="sec-label">The First 90 Days<div class="ln"></div></div>
+      <ol class="days-list">
+        <li><strong>Audit</strong> every company's current brand, website, channel, and content presence.</li>
+        <li><strong>Identify</strong> the right channel strategy for each company.</li>
+        <li><strong>Activate</strong> the first priority companies with content production and publishing.</li>
+        <li><strong>Build</strong> usable sales and marketing assets from existing footage, interviews, and projects.</li>
+        <li><strong>Distinguish</strong> what each company actually needs — proof, product support, education, demos, or trust.</li>
+        <li><strong>Establish</strong> a repeatable portfolio content system that continues past day 90.</li>
+      </ol>
+    </div>
+    <div class="asks-col">
+      <div class="sec-label">What We'll Need From You<div class="ln"></div></div>
+      <ul class="asks-list">
+        <li>Access to existing project photos, videos, brochures, proposals, and sales materials</li>
+        <li>A short interview or working session</li>
+        <li>Input on priority customers, verticals, and growth targets</li>
+        <li>Examples of recent wins, recurring customer problems, or misunderstood capabilities</li>
+        <li>A point person to help gather company-specific context</li>
+      </ul>
+      <p class="asks-note">The ask will be practical and limited. This isn't busywork — it's extracting the story, proof, and value that already exist inside your company.</p>
+    </div>
+  </div>
+
+  <div class="closer">
+    <div class="why-label">Why This Matters</div>
+    <div class="stack">
+      The AWC portfolio already has the hard part: operating companies with history, customers,
+      capabilities, and proof. The gap is that much of that proof isn't visible, organized, or being used
+      consistently in the market. <em>One portfolio. Seven companies. Different strategies for each. One
+      centralized brand function making the work visible, usable, and repeatable.</em>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>Alexander West Capital · Portfolio Brand Function</div>
+    <div>Prepared by VDO Aigency · July 2026</div>
+  </div>
+
+</div>
+
+</body>
+</html>
