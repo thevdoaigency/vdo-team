@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DFH Connect — Market Strategy — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --dfh-indigo:#3B4C7A;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+  a{color:inherit;}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+    position:sticky; top:0; z-index:50;
+  }
+  .header-inner{
+    max-width:980px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+  .header-back{
+    font-family:'Libre Franklin',sans-serif; font-size:0.75rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.75); text-decoration:none;
+  }
+  .header-back:hover{color:var(--leopardo-yellow);}
+
+  .hero{padding:4.5rem 0 3rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .series-tag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--white); background:var(--dfh-indigo);
+    padding:5px 10px; margin-bottom:1.5rem;
+  }
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--dfh-indigo); margin-bottom:1.1rem;
+  }
+  .hero h1{
+    font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue);
+    font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; max-width:760px;
+  }
+  .hero .sub{margin-top:1.3rem; max-width:640px; font-size:1.05rem; color:var(--slate);}
+  .hero .source-line{margin-top:1.5rem; font-size:0.8rem; color:var(--silver);}
+  .hero .source-line a{color:var(--leopardo-blue); text-decoration:underline;}
+
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line); background:var(--white);
+  }
+  @media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat-strip .cell{padding:2rem 1.75rem; border-right:1px solid var(--line);}
+  .stat-strip .cell:last-child{border-right:none;}
+  .stat-strip .num{font-family:'Jost',sans-serif; font-weight:700; font-size:1.85rem; color:var(--leopardo-blue); line-height:1;}
+  .stat-strip .lbl{font-size:0.78rem; color:var(--slate); margin-top:.5rem;}
+
+  section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.75rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--dfh-indigo); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:680px; margin-bottom:1.3rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:680px; color:var(--slate); font-size:1rem; margin-bottom:1rem;}
+
+  .flag{
+    background:#EEF0F6; border-left:3px solid var(--dfh-indigo); padding:1.1rem 1.4rem;
+    margin-top:1.5rem; font-size:0.9rem; color:var(--ink); max-width:680px;
+  }
+  .flag strong{color:var(--dfh-indigo);}
+
+  /* CORE INSIGHT BANNER */
+  .insight{background:var(--leopardo-blue); color:var(--white); padding:3rem 2.5rem; position:relative; margin-top:2rem;}
+  .insight::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .insight-inner{max-width:900px; margin:0 auto;}
+  .insight .label{font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow); text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;}
+  .insight .text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.4;}
+
+  /* 2x2 MATRIX */
+  .matrix-wrap{margin-top:2.5rem; display:grid; grid-template-columns:auto 1fr; gap:0;}
+  .matrix-yaxis{
+    writing-mode:vertical-rl; transform:rotate(180deg); display:flex; align-items:center; justify-content:space-between;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); padding-right:.75rem;
+  }
+  .matrix{
+    position:relative; border:1px solid var(--line); aspect-ratio:1.5/1; background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:50% 50%; background-position:center; background-repeat:no-repeat;
+  }
+  .matrix::before, .matrix::after{content:''; position:absolute; background:var(--line);}
+  .matrix::before{top:0; bottom:0; left:50%; width:1px;}
+  .matrix::after{left:0; right:0; top:50%; height:1px;}
+  .matrix-xaxis{
+    display:flex; justify-content:space-between; margin-top:.6rem;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); grid-column:2;
+  }
+  .plot{position:absolute; transform:translate(-50%,-50%); text-align:center;}
+  .plot .dot{width:14px; height:14px; border-radius:50%; margin:0 auto 6px; border:2px solid var(--white); box-shadow:0 0 0 1px var(--ink);}
+  .plot .name{font-family:'Jost',sans-serif; font-weight:600; font-size:0.78rem; color:var(--ink); white-space:nowrap; background:rgba(255,255,255,0.9); padding:1px 4px;}
+  .plot.dfh .dot{background:var(--leopardo-yellow); width:20px; height:20px; box-shadow:0 0 0 2px var(--leopardo-blue);}
+  .plot.dfh .name{font-weight:700; color:var(--leopardo-blue);}
+  .plot .sub{font-size:0.65rem; color:var(--slate); background:rgba(255,255,255,0.9); padding:0 4px;}
+
+  .swot-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.swot-grid{grid-template-columns:1fr;}}
+  .swot-cell{background:var(--white); padding:1.75rem;}
+  .swot-cell h4{font-size:1rem; margin-bottom:1rem; display:flex; align-items:center; gap:8px;}
+  .swot-cell h4 .sw-dot{width:8px; height:8px; border-radius:50%;}
+  .swot-cell.strength h4 .sw-dot{background:#2C7A7B;}
+  .swot-cell.weakness h4 .sw-dot{background:var(--dfh-indigo);}
+  .swot-cell.opportunity h4 .sw-dot{background:var(--leopardo-blue);}
+  .swot-cell.threat h4 .sw-dot{background:#A33B3B;}
+  .swot-cell ul{margin-left:18px; font-size:0.88rem; color:var(--slate);}
+  .swot-cell li{margin-bottom:8px;}
+
+  .ansoff-table{width:100%; border-collapse:collapse; margin-top:2rem; font-size:0.88rem;}
+  .ansoff-table th{
+    text-align:left; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--white); background:var(--leopardo-blue);
+    padding:10px 14px;
+  }
+  .ansoff-table td{padding:12px 14px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top;}
+  .ansoff-table td.opt{color:var(--ink); font-weight:600; font-family:'Jost',sans-serif; font-size:0.92rem;}
+  .ansoff-table tr.rec td{background:rgba(255,230,0,0.08);}
+  .ansoff-table td.verdict{font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;}
+  .verdict.go{color:#2C7A7B;}
+  .verdict.hold{color:var(--slate);}
+  .verdict.no{color:#A33B3B;}
+
+  /* DELIVERABLE / OUTREACH CARDS */
+  .deliv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.deliv-grid{grid-template-columns:1fr;}}
+  .deliv-card{background:var(--white); padding:1.75rem;}
+  .deliv-card .dtag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--dfh-indigo); border:1px solid var(--dfh-indigo);
+    padding:3px 8px; margin-bottom:.9rem;
+  }
+  .deliv-card h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.6rem;}
+  .deliv-card p{font-size:0.87rem; color:var(--slate); margin-bottom:.7rem;}
+  .deliv-card .tool-used{font-size:0.75rem; color:var(--dfh-indigo); font-weight:600;}
+
+  /* TOOL STACK ROWS */
+  .tool-row{display:grid; grid-template-columns:180px 1fr; gap:1.75rem; padding:1.6rem 0; border-bottom:1px solid var(--line);}
+  @media (max-width:700px){.tool-row{grid-template-columns:1fr;}}
+  .tool-row:last-child{border-bottom:none;}
+  .tool-name{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.05rem;}
+  .tool-name .tsub{display:block; font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--slate); font-weight:400; margin-top:4px;}
+  .tool-desc{font-size:0.9rem; color:var(--slate);}
+  .tool-desc strong{color:var(--ink);}
+
+  /* ROADMAP */
+  .roadmap{margin-top:2rem;}
+  .rm-row{display:grid; grid-template-columns:140px 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid var(--line);}
+  .rm-row:last-child{border-bottom:none;}
+  .rm-phase{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .rm-phase .days{display:block; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--slate); font-weight:400; margin-top:2px;}
+  .rm-items{font-size:0.9rem; color:var(--slate);}
+  .rm-items ul{margin-left:18px;}
+  .rm-items li{margin-bottom:6px;}
+
+  .metric-row{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.metric-row{grid-template-columns:repeat(2,1fr);}}
+  .metric{background:var(--white); padding:1.5rem;}
+  .metric .m-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:var(--slate); margin-bottom:.5rem;}
+  .metric .m-target{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.1rem;}
+
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:4rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:820px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.4;}
+
+  footer{padding:3rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:980px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+    <a class="header-back" href="presentation.html">← Back to Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="series-tag">Market Strategy Series · 4 of 7</div>
+    <div class="hero-label">DFH Connect</div>
+    <h1>A four-hour problem solved in five minutes — with stock photos of door locks.</h1>
+    <p class="sub">
+      DFH Connect has the single best ROI number in the entire AWC portfolio — two to four hours of
+      manual data entry collapsed into under five minutes — and a site full of generic stock imagery
+      that has nothing to do with the product. This one also has a built-in advantage none of the other
+      six companies have: a ready-made first customer sitting inside the same portfolio.
+    </p>
+    <p class="source-line">Source: <a href="https://dfh-connect.com" target="_blank">dfh-connect.com</a> — reviewed July 2026</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="cell"><div class="num">2–4 hrs → 5 min</div><div class="lbl">Time collapsed per project by the core automation</div></div>
+  <div class="cell"><div class="num">1</div><div class="lbl">Direct competitor (TRUE) that already does this plus a full platform</div></div>
+  <div class="cell"><div class="num">0</div><div class="lbl">Named client case studies currently on the site</div></div>
+  <div class="cell"><div class="num">Laystrom</div><div class="lbl">An actual DFH distributor already inside the AWC portfolio</div></div>
+</div>
+
+<section id="market">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">The Market</span></div>
+    <h2>A narrow, findable niche — not a mass market.</h2>
+    <p class="lead">
+      DFH Connect isn't chasing a broad software category. It automates one specific, well-defined
+      workflow: taking XML output from eMullion — the dominant estimating/takeoff platform for the
+      door, frame, and hardware (DFH) industry — and syncing it automatically into QuickBooks Enterprise
+      as sales orders, purchase orders, invoices, and inventory updates. The buyer is any DFH distributor
+      or contractor running that exact combination of tools, which means the market is small but
+      genuinely identifiable — these companies are findable by name, not by demographic guesswork.
+    </p>
+    <div class="flag">
+      <strong>The advantage nobody else in this series has:</strong> Laystrom Hardware, another AWC
+      portfolio company, is a DFH distributor. If Laystrom runs eMullion and QuickBooks, it's a real
+      candidate to become DFH Connect's first documented case study — an internal pilot before a single
+      dollar of outbound spend.
+    </div>
+  </div>
+</section>
+
+<section id="competitive">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">The Competitive Landscape</span></div>
+    <h2>A point solution up against an all-in-one platform.</h2>
+    <p class="lead">
+      The most direct competitor is TRUE, a full DFH-industry platform (CRM, quotes, contracts,
+      scheduling, inventory, job costing) that already integrates natively with both eMullion and
+      QuickBooks — meaning it offers the exact sync DFH Connect provides as one feature inside a much
+      bigger suite. Broader construction estimating tools (ProEst, Sage Estimating, PlanSwift) also sync
+      to QuickBooks but aren't DFH-specific. Generic integration platforms (Zapier, Workato) could
+      technically build this connector but have no reason to specialize in it.
+    </p>
+    <div class="matrix-wrap">
+      <div class="matrix-yaxis">DFH-Industry Specific ↑</div>
+      <div>
+        <div class="matrix">
+          <div class="plot" style="top:18%; left:74%;">
+            <div class="dot" style="background:#A33B3B;"></div>
+            <div class="name">TRUE</div>
+            <div class="sub">Full platform, DFH-native, direct threat</div>
+          </div>
+          <div class="plot" style="top:70%; left:70%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">ProEst / Sage / PlanSwift</div>
+            <div class="sub">Full platform, generic construction</div>
+          </div>
+          <div class="plot" style="top:78%; left:22%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Zapier / Workato</div>
+            <div class="sub">Generic integration, no DFH focus</div>
+          </div>
+          <div class="plot dfh" style="top:20%; left:24%;">
+            <div class="dot"></div>
+            <div class="name">DFH Connect</div>
+            <div class="sub">Narrow point solution, purpose-built</div>
+          </div>
+        </div>
+        <div class="matrix-xaxis"><span>Narrow Point Solution</span><span>Full-Platform Breadth →</span></div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      The pitch that wins here isn't "we do more than TRUE" — it's "you don't have to rip out QuickBooks
+      to fix this." Any DFH shop that's happy with its existing accounting stack and just wants the
+      manual re-entry gone is a better fit for a point solution than a full platform migration.
+    </p>
+  </div>
+</section>
+
+<section id="swot">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">Where DFH Connect Stands</span></div>
+    <h2>SWOT, grounded in what's actually on the site today.</h2>
+    <div class="swot-grid">
+      <div class="swot-cell strength">
+        <h4><span class="sw-dot"></span>Strengths</h4>
+        <ul>
+          <li>The single clearest ROI story in the entire portfolio: 2–4 hours down to under 5 minutes</li>
+          <li>Senior technical credibility — CIO/CTO Michael Bodner's background spans Thomson Reuters, Infomedia, and ProQuest</li>
+          <li>Purpose-built for the exact eMullion XML structure, not a generic connector retrofitted to fit</li>
+          <li>Two product walkthrough videos already produced and embedded on the homepage</li>
+        </ul>
+      </div>
+      <div class="swot-cell weakness">
+        <h4><span class="sw-dot"></span>Weaknesses</h4>
+        <ul>
+          <li>Homepage imagery is generic stock photography (door locks, a woman using a chatbot) unrelated to the actual product</li>
+          <li>Only 3 real product screenshots exist, buried as separate "portfolio" links instead of a guided tour</li>
+          <li>Zero named client case studies or attributed testimonials — the one quote on the site is unattributed marketing copy</li>
+          <li>No visible pricing, packaging, or comparison explaining why a point solution beats an all-in-one platform</li>
+        </ul>
+      </div>
+      <div class="swot-cell opportunity">
+        <h4><span class="sw-dot"></span>Opportunities</h4>
+        <ul>
+          <li>Laystrom Hardware is a ready-made pilot customer and first case study inside the same portfolio</li>
+          <li>eMullion's own partner list (TRUE, AVAware, Specworks, TOAD) suggests a real, findable ecosystem of integration-aware DFH shops to target directly</li>
+          <li>The stated roadmap to support "other accounting/ERP platforms" beyond QuickBooks Enterprise expands the addressable market over time</li>
+          <li>Michael Bodner's enterprise pedigree is an underused credibility asset for outreach and content</li>
+        </ul>
+      </div>
+      <div class="swot-cell threat">
+        <h4><span class="sw-dot"></span>Threats</h4>
+        <ul>
+          <li>TRUE already offers this exact sync as one feature of a much larger, more established platform</li>
+          <li>The addressable market — eMullion + QuickBooks Enterprise shops specifically — is inherently small until the platform roadmap expands</li>
+          <li>Back-office and accounting buyers are risk-averse; zero public case studies makes DFH Connect a harder first purchase</li>
+          <li>A thin, generic-feeling site undercuts the credibility a five-figure back-office software decision requires</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="options">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">Strategic Options</span></div>
+    <h2>This market is narrow enough that the options narrow with it.</h2>
+    <table class="ansoff-table">
+      <tr><th>Option</th><th>What It Means Here</th><th>Verdict</th></tr>
+      <tr class="rec">
+        <td class="opt">Market Penetration</td>
+        <td>Win the identifiable population of eMullion + QuickBooks Enterprise shops directly — starting with an internal Laystrom pilot, then outward to the wider eMullion ecosystem.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr>
+        <td class="opt">Product Development</td>
+        <td>Build out the stated roadmap item — support for accounting/ERP platforms beyond QuickBooks Enterprise — to widen the addressable market over time.</td>
+        <td class="verdict go">Go — Medium Term</td>
+      </tr>
+      <tr>
+        <td class="opt">Market Development</td>
+        <td>The product is inherently tied to eMullion's specific data structure — there's no adjacent geography or buyer segment to expand into without first broadening the platform itself.</td>
+        <td class="verdict hold">Hold</td>
+      </tr>
+      <tr>
+        <td class="opt">Diversification</td>
+        <td>Competing head-on with TRUE by building a full DFH platform would require years of development this small team doesn't need to take on when the point-solution pitch is still untested.</td>
+        <td class="verdict no">Not Now</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="rolemodels">
+  <div class="wrap">
+    <div class="section-label"><span class="num">05</span><span class="tag">The Growth Trajectory</span></div>
+    <h2>What DFH Connect could grow into, once it leaves the nest.</h2>
+    <p class="lead">
+      Right now, DFH Connect is one bridge between one estimating platform and one accounting system.
+      That's not a limitation — that's how every company on this list actually started. A narrow,
+      painful, well-solved workflow is the foundation every construction software platform gets built
+      from. Here's who else started there, and where they ended up.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Growth Line</div>
+        <div class="text">DFH Connect grows from "one bridge between Emullion and QuickBooks" into the integration layer for construction back offices drowning in duplicate entry.</div>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Best Aspirational Comp</div>
+        <h4>Agave</h4>
+        <p>Started exactly where DFH Connect is now — one team, Y Combinator-backed, solving the fact that construction software doesn't talk to itself. Today it connects 35+ systems for over 70 software vendors and 2,000+ construction companies, spanning Procore, QuickBooks, Sage, Viewpoint, Foundation, and Autodesk. The pattern: narrow integration pain first, unified platform second.</p>
+        <div class="tool-used">Raised a $2.9M seed led by Accel · YC-backed</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">The Big-Platform Model</div>
+        <h4>Procore</h4>
+        <p>The long-run ceiling for this category — full construction management software connecting field and office to deliver projects on time and on budget. Not DFH Connect's near-term shape, but the proof that "connect the back office to the field" is a real, fundable, enormous category.</p>
+        <div class="tool-used">Category-defining public construction management platform</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Nearer-Term SMB Comp</div>
+        <h4>Knowify</h4>
+        <p>A better near-term shape than Procore — project and service management for trade contractors (bidding, managing, invoicing), built specifically around the "strongest QuickBooks sync in construction." Starting at $99/month, it proves a QuickBooks-native, trade-contractor-sized platform is a real, scalable business, not just a feature.</p>
+        <div class="tool-used">Positions on "the strongest QuickBooks sync in construction"</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Vertical Workflow Comp</div>
+        <h4>Kojo</h4>
+        <p>The comp for what a single workflow, done exceptionally well, can become — materials procurement for contractors, connecting field, warehouse, and vendors. Now powering 10,000+ projects across 47 states, with customers reporting up to 90% less manual entry and material waste cut by up to 90%. Kojo never stopped being "just" procurement — it just went deep instead of broad.</p>
+        <div class="tool-used">10,000+ projects powered, 47 states, materials &amp; procurement focus</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      None of these four started as a platform. Agave started as one integration problem founders kept
+      hearing about from Procore and Autodesk users. Knowify started as QuickBooks sync for trade
+      contractors. Kojo never left materials procurement — it just went deep enough to become the
+      category leader in it. DFH Connect doesn't need to decide today whether it becomes an Agave, a
+      Knowify, or a Kojo. It needs to nail the one workflow first, exactly the way all three did.
+    </p>
+  </div>
+</section>
+
+<section id="insight">
+  <div class="wrap">
+    <div class="section-label"><span class="num">06</span><span class="tag">The Recommended Strategy</span></div>
+    <h2>Prove it inside the portfolio first. Then say it loudly outside it.</h2>
+    <p class="lead">
+      DFH Connect doesn't need a bigger platform to compete with TRUE — it needs proof. And the fastest,
+      cheapest proof available is one AWC portfolio company away. The positioning underneath all of it:
+      manual entry isn't just annoying, it's margin leakage — and that's the line the content should
+      carry everywhere.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Core Insight</div>
+        <div class="text">Every other company in this series had to go find proof somewhere in the field. DFH Connect can build its first case study without leaving the portfolio — Laystrom is the ROI story sitting one Slack message away.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video-content">
+  <div class="wrap">
+    <div class="section-label"><span class="num">07</span><span class="tag">Video Content</span></div>
+    <h2>Five formats, led by the ROI number that sells itself.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Format 01</div>
+        <h4>The "5 Minutes" Screen-Capture Demo</h4>
+        <p>A real, narrated screen recording of the drag-and-drop XML flow — the three existing product screenshots turned into an actual walkthrough instead of static portfolio links. This single video does more selling than the whole current homepage.</p>
+        <div class="tool-used">Built with: Voiceover Studio narration over real screen capture</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 02</div>
+        <h4>The Laystrom Pilot Case Study</h4>
+        <p>If Laystrom becomes the first reference customer, this is the flagship proof piece — a real DFH distributor, inside the same portfolio, with real before/after numbers instead of an anonymous quote.</p>
+        <div class="tool-used">Built with: Semantic Bridge (pilot results → case study script)</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 03</div>
+        <h4>Persona Explainers</h4>
+        <p>DFH Connect already names its three buyers — accounting teams, sales &amp; inventory managers, project managers. Three short videos, one per seat, answering exactly why each one should care.</p>
+        <div class="tool-used">Built with: Voiceover Studio, one consistent narrator across all three</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 04</div>
+        <h4>The Founder Credibility Piece</h4>
+        <p>Michael Bodner's Thomson Reuters, Infomedia, and ProQuest background is real enterprise-software pedigree that's currently just a paragraph on an About page. A short on-camera piece turns that into trust.</p>
+        <div class="tool-used">Built with: On-camera interview + Cutdown tool</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 05</div>
+        <h4>Onboarding Video + ROI Calculator</h4>
+        <p>A short "first week" onboarding walkthrough for new customers, paired with a simple interactive ROI calculator (hours saved × hourly cost = dollars recovered) that turns "manual entry is margin leakage" from a tagline into a number a prospect can see for their own business.</p>
+        <div class="tool-used">Built with: Interactive web calculator + onboarding screen capture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="wrap">
+    <div class="section-label"><span class="num">08</span><span class="tag">Outreach</span></div>
+    <h2>A small market means outreach can be precise instead of broad.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Outreach 01</div>
+        <h4>Internal Pilot First</h4>
+        <p>Before any outbound spend, confirm whether Laystrom runs eMullion and QuickBooks Enterprise — if so, this is the fastest path to a real, attributed case study anywhere in the portfolio.</p>
+        <div class="tool-used">Channel: Internal AWC portfolio coordination</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 02</div>
+        <h4>eMullion Ecosystem Targeting</h4>
+        <p>eMullion's own partner list names TRUE, AVAware, Specworks, and TOAD as integration partners — a findable map of the exact software stack DFH Connect's buyers already run. LinkedIn outreach modeled on the existing municipal campaign, aimed at this specific list.</p>
+        <div class="tool-used">Model: Existing Monday.com outreach board + vetting workflow</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 03</div>
+        <h4>QuickBooks &amp; Integration Marketplace Listings</h4>
+        <p>Get DFH Connect discoverable inside the Intuit App Store and any eMullion partner/integration directory — passive outreach that puts the product in front of buyers already searching for exactly this fix.</p>
+        <div class="tool-used">Channel: Intuit App Store, eMullion partner directory</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 04</div>
+        <h4>DFH Industry Forums &amp; Communities</h4>
+        <p>Communities like idighardware.com already host active discussions among DFH estimators comparing eMullion, TRUE, and other tools — a direct, credible channel to participate in rather than advertise at.</p>
+        <div class="tool-used">Channel: Industry forums and DFH association groups</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label"><span class="num">09</span><span class="tag">The AI Production Stack</span></div>
+    <h2>Which tool does what, specifically for DFH Connect.</h2>
+    <div class="tool-row">
+      <div class="tool-name">Voiceover Studio<span class="tsub">Railway · 5 voice IDs, ElevenLabs v3</span></div>
+      <div class="tool-desc"><strong>Carries the screen-capture demo and persona explainers.</strong> This is back-office software, not a company with an on-camera sales team — a consistent AI narrator voice is the right fit for most of the library, saving real on-camera time for the Laystrom case study and the founder piece.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Semantic Bridge<span class="tsub">Railway · /board-export</span></div>
+      <div class="tool-desc"><strong>Turns pilot results and technical documentation into scripts.</strong> Once a Laystrom pilot produces real before/after numbers, Semantic Bridge converts that data directly into a structured case study script — no separate copywriting pass required.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Shot Builder<span class="tsub">Runway Gen-4.5</span></div>
+      <div class="tool-desc"><strong>Replaces the generic stock photography with real product visuals.</strong> Clean animated diagrams of the actual XML-to-QuickBooks data flow — the single highest-impact visual fix available, since none of the current homepage imagery relates to the product at all.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Cutdown Tool<span class="tsub">Railway</span></div>
+      <div class="tool-desc"><strong>Turns the 5-minute demo into a 15-second LinkedIn hook</strong> — "this used to take 4 hours" — built for the narrow, identifiable eMullion/QuickBooks audience this content is actually reaching.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">OpenClaw Agent (proposed)<span class="tsub">New — modeled on VDO/Higgins agents</span></div>
+      <div class="tool-desc"><strong>Monitors DFH industry forums and QuickBooks App Store reviews</strong> for people actively complaining about manual re-entry between estimating and accounting software — turning public pain points into a live outreach queue.</div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-label"><span class="num">10</span><span class="tag">First 90 Days</span></div>
+    <h2>What this looks like in motion.</h2>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-phase">Confirm &amp; Build<span class="days">Days 1–20</span></div>
+        <div class="rm-items"><ul>
+          <li>Confirm whether Laystrom runs eMullion + QuickBooks Enterprise and scope a pilot if so</li>
+          <li>Produce the "5 Minutes" screen-capture demo using Voiceover Studio and real product footage</li>
+          <li>Replace homepage stock photography with Shot Builder-generated data-flow visuals</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Produce &amp; Reach<span class="days">Days 21–65</span></div>
+        <div class="rm-items"><ul>
+          <li>Publish the three persona explainers and the founder credibility piece</li>
+          <li>Complete the Laystrom pilot and produce the case study video if results support it</li>
+          <li>Begin eMullion-ecosystem outreach and pursue QuickBooks/Intuit marketplace listing</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Prove<span class="days">Days 66–90</span></div>
+        <div class="rm-items"><ul>
+          <li>Track demo views, marketplace listing traffic, and outreach response rate</li>
+          <li>Package the Laystrom result into the primary sales asset for the next 90 days</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">11</span><span class="tag">Success Metrics</span></div>
+    <h2>What "working" looks like at day 90.</h2>
+    <div class="metric-row">
+      <div class="metric"><div class="m-label">Laystrom Pilot</div><div class="m-target">Scoped or complete</div></div>
+      <div class="metric"><div class="m-label">Case Studies Live</div><div class="m-target">1</div></div>
+      <div class="metric"><div class="m-label">Persona Explainers</div><div class="m-target">3 of 3</div></div>
+      <div class="metric"><div class="m-label">Marketplace Listing</div><div class="m-target">Submitted</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">The Point</div>
+    <div class="thesis-text">DFH Connect has the best ROI story in the portfolio and the thinnest proof. Fix the proof first — starting with the DFH distributor already inside the family — and the rest of this gets much easier to sell.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

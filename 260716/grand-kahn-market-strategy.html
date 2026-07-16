@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Kahn Electric — Market Strategy — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --kahn-copper:#B8854A;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+  a{color:inherit;}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+    position:sticky; top:0; z-index:50;
+  }
+  .header-inner{
+    max-width:980px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+  .header-back{
+    font-family:'Libre Franklin',sans-serif; font-size:0.75rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.75); text-decoration:none;
+  }
+  .header-back:hover{color:var(--leopardo-yellow);}
+
+  .hero{padding:4.5rem 0 3rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .series-tag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--white); background:var(--kahn-copper);
+    padding:5px 10px; margin-bottom:1.5rem;
+  }
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--kahn-copper); margin-bottom:1.1rem;
+  }
+  .hero h1{
+    font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue);
+    font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; max-width:760px;
+  }
+  .hero .sub{margin-top:1.3rem; max-width:640px; font-size:1.05rem; color:var(--slate);}
+  .hero .source-line{margin-top:1.5rem; font-size:0.8rem; color:var(--silver);}
+  .hero .source-line a{color:var(--leopardo-blue); text-decoration:underline;}
+
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line); background:var(--white);
+  }
+  @media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat-strip .cell{padding:2rem 1.75rem; border-right:1px solid var(--line);}
+  .stat-strip .cell:last-child{border-right:none;}
+  .stat-strip .num{font-family:'Jost',sans-serif; font-weight:700; font-size:2rem; color:var(--leopardo-blue); line-height:1;}
+  .stat-strip .lbl{font-size:0.78rem; color:var(--slate); margin-top:.5rem;}
+
+  section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.75rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--kahn-copper); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:680px; margin-bottom:1.3rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:680px; color:var(--slate); font-size:1rem; margin-bottom:1rem;}
+
+  .flag{
+    background:#FBF3E7; border-left:3px solid var(--kahn-copper); padding:1.1rem 1.4rem;
+    margin-top:1.5rem; font-size:0.9rem; color:var(--ink); max-width:680px;
+  }
+  .flag strong{color:var(--kahn-copper);}
+
+  .matrix-wrap{margin-top:2.5rem; display:grid; grid-template-columns:auto 1fr; gap:0;}
+  .matrix-yaxis{
+    writing-mode:vertical-rl; transform:rotate(180deg); display:flex; align-items:center; justify-content:space-between;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); padding-right:.75rem;
+  }
+  .matrix{
+    position:relative; border:1px solid var(--line); aspect-ratio:1.5/1; background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:50% 50%; background-position:center; background-repeat:no-repeat;
+  }
+  .matrix::before, .matrix::after{content:''; position:absolute; background:var(--line);}
+  .matrix::before{top:0; bottom:0; left:50%; width:1px;}
+  .matrix::after{left:0; right:0; top:50%; height:1px;}
+  .matrix-xaxis{
+    display:flex; justify-content:space-between; margin-top:.6rem;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); grid-column:2;
+  }
+  .plot{position:absolute; transform:translate(-50%,-50%); text-align:center;}
+  .plot .dot{width:14px; height:14px; border-radius:50%; margin:0 auto 6px; border:2px solid var(--white); box-shadow:0 0 0 1px var(--ink);}
+  .plot .name{font-family:'Jost',sans-serif; font-weight:600; font-size:0.78rem; color:var(--ink); white-space:nowrap; background:rgba(255,255,255,0.9); padding:1px 4px;}
+  .plot.gk .dot{background:var(--leopardo-yellow); width:20px; height:20px; box-shadow:0 0 0 2px var(--leopardo-blue);}
+  .plot.gk .name{font-weight:700; color:var(--leopardo-blue);}
+  .plot .sub{font-size:0.65rem; color:var(--slate); background:rgba(255,255,255,0.9); padding:0 4px;}
+
+  .swot-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.swot-grid{grid-template-columns:1fr;}}
+  .swot-cell{background:var(--white); padding:1.75rem;}
+  .swot-cell h4{font-size:1rem; margin-bottom:1rem; display:flex; align-items:center; gap:8px;}
+  .swot-cell h4 .sw-dot{width:8px; height:8px; border-radius:50%;}
+  .swot-cell.strength h4 .sw-dot{background:#2C7A7B;}
+  .swot-cell.weakness h4 .sw-dot{background:var(--kahn-copper);}
+  .swot-cell.opportunity h4 .sw-dot{background:var(--leopardo-blue);}
+  .swot-cell.threat h4 .sw-dot{background:#A33B3B;}
+  .swot-cell ul{margin-left:18px; font-size:0.88rem; color:var(--slate);}
+  .swot-cell li{margin-bottom:8px;}
+
+  .ansoff-table{width:100%; border-collapse:collapse; margin-top:2rem; font-size:0.88rem;}
+  .ansoff-table th{
+    text-align:left; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--white); background:var(--leopardo-blue);
+    padding:10px 14px;
+  }
+  .ansoff-table td{padding:12px 14px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top;}
+  .ansoff-table td.opt{color:var(--ink); font-weight:600; font-family:'Jost',sans-serif; font-size:0.92rem;}
+  .ansoff-table tr.rec td{background:rgba(255,230,0,0.08);}
+  .ansoff-table td.verdict{font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;}
+  .verdict.go{color:#2C7A7B;}
+  .verdict.hold{color:var(--slate);}
+  .verdict.no{color:#A33B3B;}
+
+  /* CORE INSIGHT BANNER */
+  .insight{background:var(--leopardo-blue); color:var(--white); padding:3rem 2.5rem; position:relative; margin-top:2rem;}
+  .insight::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .insight-inner{max-width:900px; margin:0 auto;}
+  .insight .label{font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow); text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;}
+  .insight .text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.4;}
+
+  /* DELIVERABLE / OUTREACH CARDS */
+  .deliv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.deliv-grid{grid-template-columns:1fr;}}
+  .deliv-card{background:var(--white); padding:1.75rem;}
+  .deliv-card .dtag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--kahn-copper); border:1px solid var(--kahn-copper);
+    padding:3px 8px; margin-bottom:.9rem;
+  }
+  .deliv-card h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.6rem;}
+  .deliv-card p{font-size:0.87rem; color:var(--slate); margin-bottom:.7rem;}
+  .deliv-card .tool-used{font-size:0.75rem; color:var(--kahn-copper); font-weight:600;}
+
+  /* TOOL STACK ROWS */
+  .tool-row{display:grid; grid-template-columns:180px 1fr; gap:1.75rem; padding:1.6rem 0; border-bottom:1px solid var(--line);}
+  @media (max-width:700px){.tool-row{grid-template-columns:1fr;}}
+  .tool-row:last-child{border-bottom:none;}
+  .tool-name{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.05rem;}
+  .tool-name .tsub{display:block; font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--slate); font-weight:400; margin-top:4px;}
+  .tool-desc{font-size:0.9rem; color:var(--slate);}
+  .tool-desc strong{color:var(--ink);}
+
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:820px){.pillars{grid-template-columns:1fr;}}
+  .pillar{background:var(--white); padding:2rem 1.75rem;}
+  .pillar .pnum{font-family:'Jost',sans-serif; font-weight:700; font-size:2.2rem; color:var(--leopardo-yellow); -webkit-text-stroke:1.5px var(--leopardo-blue); line-height:1; margin-bottom:1rem;}
+  .pillar h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.7rem;}
+  .pillar p{font-size:0.86rem; color:var(--slate);}
+
+  .roadmap{margin-top:2rem;}
+  .rm-row{display:grid; grid-template-columns:140px 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid var(--line);}
+  .rm-row:last-child{border-bottom:none;}
+  .rm-phase{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .rm-phase .days{display:block; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--slate); font-weight:400; margin-top:2px;}
+  .rm-items{font-size:0.9rem; color:var(--slate);}
+  .rm-items ul{margin-left:18px;}
+  .rm-items li{margin-bottom:6px;}
+
+  .metric-row{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.metric-row{grid-template-columns:repeat(2,1fr);}}
+  .metric{background:var(--white); padding:1.5rem;}
+  .metric .m-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:var(--slate); margin-bottom:.5rem;}
+  .metric .m-target{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.15rem;}
+
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:4rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:820px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.4;}
+
+  footer{padding:3rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:980px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+    <a class="header-back" href="presentation.html">← Back to Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="series-tag">Market Strategy Series · 2 of 7</div>
+    <div class="hero-label">Grand Kahn Electric</div>
+    <h1>The oldest name in the room, saying nothing since 2022.</h1>
+    <p class="sub">
+      Grand Kahn has the two hardest-to-fake assets in a fragmented, price-competitive market:
+      a century-plus legacy and a certified ownership story. Neither is doing any work right now,
+      and the company's own website can't agree on how old it actually is.
+    </p>
+    <p class="source-line">Source: <a href="https://grandkahn.com" target="_blank">grandkahn.com</a> — reviewed July 2026</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="cell"><div class="num">1907–28</div><div class="lbl">Founding year the site itself can't settle on — see Section 3</div></div>
+  <div class="cell"><div class="num">Woman-Owned</div><div class="lbl">CEO Jo Beth Leopardo — rare positioning in a union electrical trade</div></div>
+  <div class="cell"><div class="num">$256.6B</div><div class="lbl">2029 US electrical contractors market, up from $237.6B in 2023</div></div>
+  <div class="cell"><div class="num">Nov 2022</div><div class="lbl">Date of the most recent post in the site's News section</div></div>
+</div>
+
+<section id="market">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">The Market</span></div>
+    <h2>A mature, fragmented market — with two genuinely hot growth lanes.</h2>
+    <p class="lead">
+      The US electrical contractors market is large ($237.6B in 2023, projected to $256.6B by 2029) but
+      slow-growing and brutally fragmented — over 239,000 businesses nationally, thin margins, and a
+      worsening skilled-labor shortage driving wage inflation across the trade. Flat growth and fragmentation
+      is the market Grand Kahn competes in every day on price and availability.
+    </p>
+    <p class="lead">
+      But two sub-sectors are growing much faster than the category average: EV charging infrastructure
+      and data center / AI power demand, both requiring exactly the kind of specialized, code-current
+      electrical expertise a 117-year union shop is built for. Grand Kahn already has a foothold — a
+      dedicated EV charger quote tool live on the site — that most competitors don't.
+    </p>
+  </div>
+</section>
+
+<section id="legacy">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">A Finding Worth Fixing First</span></div>
+    <h2>The legacy story doesn't match itself.</h2>
+    <p class="lead">
+      This is a brand hygiene issue with real strategic weight. The homepage banner reads "117 Years of
+      Experience." The About page's own history timeline states S.M. Kahn Electric — "Chicago's first
+      registered electrical contractor" — was formed in 1928, which is 98 years ago, not 117. A 2022 page
+      description says "115 years," implying a founding year of roughly 1907 — which lines up with what
+      Mike Casto says on camera in the June 30 interview footage, but not with the site's own written timeline.
+    </p>
+    <div class="flag">
+      <strong>The fix:</strong> pick one founding year — 1907 (S.M. Kahn's actual formation per the
+      spoken company history) or 1928 (whatever the timeline entry is actually meant to reference) —
+      correct the "Our History" section to match, and use that single number everywhere: website,
+      LinkedIn, video, pitch decks. Right now the company's single strongest asset — being older than
+      almost anyone else in the room — is undercut by not being able to say by how much.
+    </div>
+  </div>
+</section>
+
+<section id="competitive">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">The Competitive Landscape</span></div>
+    <h2>Legacy and certification are rare. Scale is not.</h2>
+    <p class="lead">
+      Chicagoland has over 600 qualified electrical contractors in the Powering Chicago directory alone.
+      Most compete on price and availability. Few can claim both a century-plus legacy and a woman-owned
+      leadership story — and almost none can claim both while also holding landmark clients like Tesla,
+      Rush, and Radio Flyer.
+    </p>
+    <div class="matrix-wrap">
+      <div class="matrix-yaxis">Certified / Legacy Trust Story ↑</div>
+      <div>
+        <div class="matrix">
+          <div class="plot" style="top:16%; left:78%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Utility-Scale Infrastructure Players</div>
+            <div class="sub">Mega scale, low differentiated story</div>
+          </div>
+          <div class="plot" style="top:30%; left:24%;">
+            <div class="dot" style="background:#2C7A7B;"></div>
+            <div class="name">City Lights, Ltd.</div>
+            <div class="sub">MBE/WBE/DBE certified, ~30 yrs, infrastructure-focused</div>
+          </div>
+          <div class="plot" style="top:82%; left:30%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Small Independents</div>
+            <div class="sub">Spark Electric, MK World — no certification, local scale</div>
+          </div>
+          <div class="plot gk" style="top:26%; left:60%;">
+            <div class="dot"></div>
+            <div class="name">Grand Kahn Electric</div>
+            <div class="sub">117-yr legacy, woman-owned, healthcare/EV/data-center capable</div>
+          </div>
+        </div>
+        <div class="matrix-xaxis"><span>Small / Regional Scale</span><span>Mega / Infrastructure Scale →</span></div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      The open quadrant is the top-right: certified legacy trust <em>at</em> real project scale. Grand
+      Kahn is closer to that quadrant than any named competitor found in this review — but it isn't
+      claiming the quadrant publicly, and the "woman-owned" claim isn't yet backed by a visible WBENC or
+      City of Chicago MBE/WBE certification badge, which is the actual credential that unlocks
+      diverse-spend bid credit on municipal and institutional work.
+    </p>
+  </div>
+</section>
+
+<section id="swot">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">Where Grand Kahn Stands</span></div>
+    <h2>SWOT, grounded in what's actually true today.</h2>
+    <div class="swot-grid">
+      <div class="swot-cell strength">
+        <h4><span class="sw-dot"></span>Strengths</h4>
+        <ul>
+          <li>Genuine multi-generational legacy — Chicago's first registered electrical contractor</li>
+          <li>Woman-owned leadership (CEO Jo Beth Leopardo) — rare in a heavily union, male-dominated trade</li>
+          <li>Union affiliations (NECA, IBEW) plus real safety/technical certs (NFPA 70E, OSHA 30, Licensed PE)</li>
+          <li>Landmark client roster: Tesla's Melrose Park training facility, Rush cancer center, Radio Flyer's flagship, City Hope</li>
+          <li>Already positioned in EV charging with a dedicated quote tool — ahead of most local competitors</li>
+        </ul>
+      </div>
+      <div class="swot-cell weakness">
+        <h4><span class="sw-dot"></span>Weaknesses</h4>
+        <ul>
+          <li>Site's News section hasn't posted since November 2022 — over three years stale</li>
+          <li>Internal inconsistency on founding year undercuts the single strongest brand asset</li>
+          <li>Landmark projects (Tesla, Rush, Radio Flyer) aren't visibly presented as case studies</li>
+          <li>No visible formal WBE/MBE certification badge — "woman-owned" is a claim, not yet a credential</li>
+        </ul>
+      </div>
+      <div class="swot-cell opportunity">
+        <h4><span class="sw-dot"></span>Opportunities</h4>
+        <ul>
+          <li>EV charging and data center power are the two fastest-growing lanes in the category — Grand Kahn already has a head start</li>
+          <li>Formal WBENC / City of Chicago MBE-WBE certification opens diverse-spend-mandated municipal and institutional bids</li>
+          <li>AWC portfolio cross-sell: Leopardo Efficiency's municipal relationships are a warm door into public-sector electrical work</li>
+          <li>A fixed, consistent legacy number sets up the "Chicago since [year]" line already being tested on camera</li>
+        </ul>
+      </div>
+      <div class="swot-cell threat">
+        <h4><span class="sw-dot"></span>Threats</h4>
+        <ul>
+          <li>Persistent electrician shortage and wage inflation compressing margins industry-wide</li>
+          <li>600+ qualified contractors competing in the Chicagoland market, many on price alone</li>
+          <li>Certified diversity-boutique competitors (e.g., City Lights, Ltd.) directly contesting the same niche</li>
+          <li>Utility-scale infrastructure players can out-resource Grand Kahn on the biggest data-center and fleet-electrification projects</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="options">
+  <div class="wrap">
+    <div class="section-label"><span class="num">05</span><span class="tag">Strategic Options</span></div>
+    <h2>Four ways to grow. Two are worth prioritizing.</h2>
+    <table class="ansoff-table">
+      <tr><th>Option</th><th>What It Means Here</th><th>Verdict</th></tr>
+      <tr>
+        <td class="opt">Market Penetration</td>
+        <td>Win more share in existing sectors (healthcare, education, senior living) by finally showing the project proof that already exists — Tesla, Rush, Radio Flyer, City Hope.</td>
+        <td class="verdict go">Go</td>
+      </tr>
+      <tr class="rec">
+        <td class="opt">Market Development</td>
+        <td>Pursue formal WBENC / City of Chicago MBE-WBE certification to open new municipal and institutional bid pools that require diverse-spend participation — a real new buyer category, not just new geography.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr class="rec">
+        <td class="opt">Product / Service Development</td>
+        <td>Formalize the EV charging and electrification practice as a named, marketed service line, not a quiet page on the site — the fastest-growing lane in the category, and Grand Kahn already has the tool built.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr>
+        <td class="opt">Diversification</td>
+        <td>Low-voltage and systems integration work is already listed as an existing capability per the About page — this is closer to "make visible" than "diversify into." Not a new strategic bet.</td>
+        <td class="verdict hold">Already Underway</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="rolemodels">
+  <div class="wrap">
+    <div class="section-label"><span class="num">06</span><span class="tag">The Growth Trajectory</span></div>
+    <h2>What Grand Kahn could grow into, once the legacy converts to trust.</h2>
+    <p class="lead">
+      The move isn't "more electrical jobs." It's the move from old-line subcontractor to trusted power,
+      infrastructure, technology, and mission-critical execution partner — the same arc four real
+      electrical contractors have already run, at very different scales. None of them started where they
+      ended up.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Growth Line</div>
+        <div class="text">Grand Kahn grows from "historic Chicago electrical contractor" into a modern electrical infrastructure partner for complex buildings, critical systems, and institutional owners.</div>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Large-Contractor Comp</div>
+        <h4>Rosendin</h4>
+        <p>Founded 1919 by an immigrant electrician — almost the exact same origin story as Grand Kahn, just a generation earlier. Rosendin converted a family business into an employee-owned company (ESOP completed in 2000) and is now the largest employee-owned electrical contractor in the US: 12,000+ employees, roughly $5.6B in revenue. Proof that a founder-family legacy story and a modern ownership structure aren't in tension — they can be the same growth story.</p>
+        <div class="tool-used">Founded 1919 · Now 12,000+ employees, ~$5.6B revenue</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Advanced Aspiration</div>
+        <h4>M.C. Dean — "Building Intelligence"</h4>
+        <p>The more advanced version of where systems integration leads: M.C. Dean designs, builds, operates, and maintains cyber-physical solutions for mission-critical facilities, secure environments, and complex enterprise infrastructure. This is the language of a contractor that stopped describing itself by trade and started describing itself by outcome.</p>
+        <div class="tool-used">Positioning: "Building Intelligence" — systems integration for mission-critical facilities</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Public-Company Reference</div>
+        <h4>IES Holdings</h4>
+        <p>A public-market proof point (Nasdaq: IESC) for how electrical contracting expands into broader infrastructure — data centers, residential housing, commercial and industrial. Ranked #6 nationally on EC&amp;M's Top 50 Electrical Contractors list, with 10,000+ employees and a Commercial &amp; Industrial segment that grew 16% in fiscal 2025, driven partly by education and healthcare — Grand Kahn's own core sectors.</p>
+        <div class="tool-used">Nasdaq: IESC · #6 on EC&amp;M's 2024 Top 50 Electrical Contractors</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Midwest-to-National Story</div>
+        <h4>Faith Technologies (FTI)</h4>
+        <p>The most directly relevant comp geographically — founded 1972 in Menasha, Wisconsin, a genuine Midwest electrical contractor that grew into a national leader in engineering, construction, manufacturing, and clean energy, with an estimated $5B in revenue. FTI proves the exact path available to Grand Kahn: start as a regional Midwest contractor, don't move, and still become a national name.</p>
+        <div class="tool-used">Founded 1972, Menasha, WI · Now a national engineering &amp; clean energy leader</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      Rosendin and Faith Technologies both prove the same thing from different directions: a real,
+      unglamorous regional legacy — a family name, a Midwest zip code — is not a ceiling. It's the
+      foundation the largest players in this category are still standing on, decades later. Grand Kahn
+      already has the foundation. It has 117 years of it.
+    </p>
+  </div>
+</section>
+
+<section id="insight">
+  <div class="wrap">
+    <div class="section-label"><span class="num">07</span><span class="tag">The Recommended Strategy</span></div>
+    <h2>Turn two rare assets into two bid-winning credentials — on camera, not just on paper.</h2>
+    <p class="lead">
+      Grand Kahn doesn't need a new story. It needs its real story fixed, certified, and made visible —
+      and the raw material already exists. Mike Casto sat for an on-camera interview during the June 30
+      Chicago shoot and said the legacy line out loud. Here's what VDO Aigency builds from that footage,
+      how it gets distributed, and which AI tools do the work.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Core Insight</div>
+        <div class="text">"We're not the biggest electrical contractor in Chicago. We've just been here the longest." That line is already recorded. The strategy isn't to write new copy — it's to build the production and distribution system around the line Grand Kahn already said.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video-content">
+  <div class="wrap">
+    <div class="section-label"><span class="num">08</span><span class="tag">Video Content</span></div>
+    <h2>Five formats, built from footage already in hand.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Format 01</div>
+        <h4>The Legacy Film</h4>
+        <p>The flagship piece already in motion — Mike Casto's "we've just been here the longest" framing, cut against period-style visuals of the 1900s-era electricians. Once the founding year is fixed, this becomes the anchor asset for every other piece of content below.</p>
+        <div class="tool-used">Built with: Existing legacy footage + Shot Builder period visuals</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 02</div>
+        <h4>Landmark Client Case Studies</h4>
+        <p>Tesla's Melrose Park training facility, Rush's cancer center, Radio Flyer's flagship store, City Hope — four real projects Mike names on camera, none of them currently a case study anywhere on the site.</p>
+        <div class="tool-used">Built with: Semantic Bridge (interview transcript → case study script)</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 03</div>
+        <h4>"Powering Critical Buildings" Series</h4>
+        <p>A broader infrastructure-positioning series beyond EV alone — data centers, healthcare, education, and municipal facilities, framed around what it actually takes to keep a mission-critical building powered. The EV charging quote tool becomes one entry point into this larger story, not the whole story.</p>
+        <div class="tool-used">Built with: Shot Builder infrastructure diagrams + Voiceover Studio</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 04</div>
+        <h4>Field Leadership &amp; Safety Credibility</h4>
+        <p>Short pieces built around the field crews themselves — safety culture, execution discipline, the people who actually do the work. This is what converts "117 years old" from a nostalgia stat into evidence the company still executes at the highest level today.</p>
+        <div class="tool-used">Built with: On-site field footage + Cutdown tool</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 05</div>
+        <h4>Certification &amp; Recruiting Story</h4>
+        <p>Once WBENC/City of Chicago certification lands, a short announcement piece — plus recruiting-focused content addressing the industry's labor shortage head-on, using the same legacy-and-ownership story to attract talent, not just clients.</p>
+        <div class="tool-used">Built with: Cutdown tool, sourced from the legacy film master</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="wrap">
+    <div class="section-label"><span class="num">09</span><span class="tag">Outreach</span></div>
+    <h2>Getting the legacy story in front of the right bid desks.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Outreach 01</div>
+        <h4>Certified-Diverse Bid Alert Targeting</h4>
+        <p>Once formally certified, LinkedIn outreach to GCs and public agencies actively seeking WBE/MBE subcontractor participation — a defined, findable buyer list that didn't exist as a target before certification.</p>
+        <div class="tool-used">Model: Existing municipal outreach board, retargeted to procurement contacts</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 02</div>
+        <h4>AWC Portfolio Cross-Sell</h4>
+        <p>Leopardo Efficiency's municipal relationships are a warm door into public-sector electrical work — a direct, internal distribution channel for the legacy film and case studies that no outbound campaign can replicate.</p>
+        <div class="tool-used">Channel: Leopardo Efficiency's existing municipal contact base</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 03</div>
+        <h4>EV Charging Lead Follow-Up</h4>
+        <p>Every EV charging quote-tool submission becomes a trigger to send the EV explainer series directly to that prospect — reinforcing expertise at the exact moment someone's evaluating the project.</p>
+        <div class="tool-used">Model: Email/LinkedIn sequence tied to quote-tool submissions</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 04</div>
+        <h4>Trade &amp; Recruiting Channels</h4>
+        <p>Recruiting content distributed through IBEW/NECA channels and trade-school partnerships — addressing the labor shortage as a distribution opportunity, not just an HR problem.</p>
+        <div class="tool-used">Channel: Union and trade-association network</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label"><span class="num">10</span><span class="tag">The AI Production Stack</span></div>
+    <h2>Which tool does what, specifically for Grand Kahn.</h2>
+    <div class="tool-row">
+      <div class="tool-name">Semantic Bridge<span class="tsub">Railway · /board-export</span></div>
+      <div class="tool-desc"><strong>Converts the Mike Casto interview transcript directly into case study scripts.</strong> The Tesla, Rush, Radio Flyer, and City Hope stories are already on tape — Semantic Bridge turns that raw transcript into structured, publishable case study copy without a rewrite from scratch.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Shot Builder<span class="tsub">Runway Gen-4.5</span></div>
+      <div class="tool-desc"><strong>Generates the period-style "then" visuals for the legacy film</strong> — 1900s-era electricians on the beams, the exact reference Mike and Curtis discussed on camera — and separately, EV charging infrastructure diagrams for the electrification series.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Voiceover Studio<span class="tsub">Railway · 5 voice IDs, ElevenLabs v3</span></div>
+      <div class="tool-desc"><strong>Carries narration for the EV charging series and any content</strong> where a fresh on-camera shoot isn't practical, while the legacy film and case studies lean on Mike's real recorded voice as the primary asset.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Cutdown Tool<span class="tsub">Railway</span></div>
+      <div class="tool-desc"><strong>Breaks the legacy film into recruiting and LinkedIn-length cuts</strong> — the same "we've just been here the longest" master feeding a 15-second recruiting ad, a case study intro, and a certification announcement teaser.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">OpenClaw Agent (proposed)<span class="tsub">New — modeled on VDO/Higgins agents</span></div>
+      <div class="tool-desc"><strong>Monitors public-sector bid boards for WBE/MBE set-aside requirements</strong> once certification is in place, flagging live opportunities and routing them to the outreach queue — closing the loop between the certification and actual bid activity.</div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-label"><span class="num">11</span><span class="tag">First 90 Days</span></div>
+    <h2>What this looks like in motion.</h2>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-phase">Diagnose<span class="days">Days 1–15</span></div>
+        <div class="rm-items"><ul>
+          <li>Confirm the correct founding year internally and issue one consistent number across all properties</li>
+          <li>Scope the WBENC / City of Chicago MBE-WBE certification process and timeline with leadership</li>
+          <li>Run the Mike Casto interview transcript through Semantic Bridge for first-draft case study scripts</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Build<span class="days">Days 16–60</span></div>
+        <div class="rm-items"><ul>
+          <li>Finish the legacy film and publish case studies for Tesla, Rush, Radio Flyer, and City Hope</li>
+          <li>Produce the EV charging explainer series and relaunch the News section around it</li>
+          <li>Launch certified-diverse bid targeting outreach once certification status is confirmed</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Prove<span class="days">Days 61–90</span></div>
+        <div class="rm-items"><ul>
+          <li>Track inbound bid inquiries citing certification status or the EV charging service line</li>
+          <li>Report on legacy consistency and case study reach across web and LinkedIn</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">12</span><span class="tag">Success Metrics</span></div>
+    <h2>What "working" looks like at day 90.</h2>
+    <div class="metric-row">
+      <div class="metric"><div class="m-label">Legacy Year Consistency</div><div class="m-target">100% across properties</div></div>
+      <div class="metric"><div class="m-label">Certification Status</div><div class="m-target">Application submitted</div></div>
+      <div class="metric"><div class="m-label">Case Studies Published</div><div class="m-target">4</div></div>
+      <div class="metric"><div class="m-label">News Cadence Restarted</div><div class="m-target">2+ posts / month</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">The Point</div>
+    <div class="thesis-text">Grand Kahn doesn't need to invent a differentiator, and it doesn't need to invent footage either. It has both — legacy and ownership, already on tape — and it's the only company in this review not saying either one clearly.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

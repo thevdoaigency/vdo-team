@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enlyt Building Technologies — Strategy to Content — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --enlyt-cyan:#2E5F6B;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+  a{color:inherit;}
+
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+    position:sticky; top:0; z-index:50;
+  }
+  .header-inner{
+    max-width:980px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+  .header-back{
+    font-family:'Libre Franklin',sans-serif; font-size:0.75rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.75); text-decoration:none;
+  }
+  .header-back:hover{color:var(--leopardo-yellow);}
+
+  .hero{padding:4.5rem 0 3rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .series-tag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--white); background:var(--enlyt-cyan);
+    padding:5px 10px; margin-bottom:1.5rem;
+  }
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--enlyt-cyan); margin-bottom:1.1rem;
+  }
+  .hero h1{
+    font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue);
+    font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; max-width:760px;
+  }
+  .hero .sub{margin-top:1.3rem; max-width:640px; font-size:1.05rem; color:var(--slate);}
+  .hero .source-line{margin-top:1.5rem; font-size:0.8rem; color:var(--silver);}
+  .hero .source-line a{color:var(--leopardo-blue); text-decoration:underline;}
+
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line); background:var(--white);
+  }
+  @media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat-strip .cell{padding:2rem 1.75rem; border-right:1px solid var(--line);}
+  .stat-strip .cell:last-child{border-right:none;}
+  .stat-strip .num{font-family:'Jost',sans-serif; font-weight:700; font-size:2rem; color:var(--leopardo-blue); line-height:1;}
+  .stat-strip .lbl{font-size:0.78rem; color:var(--slate); margin-top:.5rem;}
+
+  section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.75rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--enlyt-cyan); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:680px; margin-bottom:1.3rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:680px; color:var(--slate); font-size:1rem; margin-bottom:1rem;}
+
+  /* CORE INSIGHT BANNER */
+  .insight{background:var(--leopardo-blue); color:var(--white); padding:3rem 2.5rem; position:relative; margin-top:2rem;}
+  .insight::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .insight-inner{max-width:900px; margin:0 auto;}
+  .insight .label{font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow); text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;}
+  .insight .text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.4;}
+
+  /* DELIVERABLE CARDS */
+  .deliv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.deliv-grid{grid-template-columns:1fr;}}
+  .deliv-card{background:var(--white); padding:1.75rem;}
+  .deliv-card .dtag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--enlyt-cyan); border:1px solid var(--enlyt-cyan);
+    padding:3px 8px; margin-bottom:.9rem;
+  }
+  .deliv-card h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.6rem;}
+  .deliv-card p{font-size:0.87rem; color:var(--slate); margin-bottom:.7rem;}
+  .deliv-card .tool-used{font-size:0.75rem; color:var(--enlyt-cyan); font-weight:600;}
+
+  /* TOOL STACK ROWS */
+  .tool-row{
+    display:grid; grid-template-columns:180px 1fr; gap:1.75rem; padding:1.6rem 0; border-bottom:1px solid var(--line);
+  }
+  @media (max-width:700px){.tool-row{grid-template-columns:1fr;}}
+  .tool-row:last-child{border-bottom:none;}
+  .tool-name{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.05rem;}
+  .tool-name .tsub{display:block; font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--slate); font-weight:400; margin-top:4px;}
+  .tool-desc{font-size:0.9rem; color:var(--slate);}
+  .tool-desc strong{color:var(--ink);}
+
+  /* ROADMAP */
+  .roadmap{margin-top:2rem;}
+  .rm-row{display:grid; grid-template-columns:140px 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid var(--line);}
+  .rm-row:last-child{border-bottom:none;}
+  .rm-phase{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .rm-phase .days{display:block; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--slate); font-weight:400; margin-top:2px;}
+  .rm-items{font-size:0.9rem; color:var(--slate);}
+  .rm-items ul{margin-left:18px;}
+  .rm-items li{margin-bottom:6px;}
+
+  .metric-row{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.metric-row{grid-template-columns:repeat(2,1fr);}}
+  .metric{background:var(--white); padding:1.5rem;}
+  .metric .m-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:var(--slate); margin-bottom:.5rem;}
+  .metric .m-target{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.1rem;}
+
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:4rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:820px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.4;}
+
+  footer{padding:3rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:980px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+    <a class="header-back" href="presentation.html">← Back to Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="series-tag">Market Strategy Series · 3 of 7 · Content &amp; AI Production Focus</div>
+    <div class="hero-label">Enlyt Building Technologies</div>
+    <h1>The product is invisible. The content can't be.</h1>
+    <p class="sub">
+      Enlyt sells the fastest-growing category in the whole AWC portfolio — smart building and low-voltage
+      systems integration — but the actual work disappears behind drywall the day it's finished. This one
+      is less about market positioning and more about what to point a camera and an AI pipeline at, given
+      that the product itself can't be seen.
+    </p>
+    <p class="source-line">Source: <a href="https://www.enlyt.io" target="_blank">enlyt.io</a> — reviewed July 2026</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="cell"><div class="num">~$175B</div><div class="lbl">2026 global smart building market — fastest-growing category in the portfolio</div></div>
+  <div class="cell"><div class="num">11–19%</div><div class="lbl">CAGR range across smart building market forecasts to 2032–2035</div></div>
+  <div class="cell"><div class="num">5</div><div class="lbl">Real case studies already written on-site, none produced as video</div></div>
+  <div class="cell"><div class="num">4</div><div class="lbl">Named buyer personas already defined by Enlyt itself</div></div>
+</div>
+
+<section id="insight">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">The Market, Briefly</span></div>
+    <h2>The category is booming. The company is invisible inside it.</h2>
+    <p class="lead">
+      Smart building technology is a $150–175B market growing 11–19% a year depending on the forecast —
+      easily the fastest-growing sector any AWC portfolio company sits in. The demand driver is real:
+      IoT-connected security, energy management, and automation are becoming standard specification, not
+      a premium add-on. Enlyt already has the right positioning — three service lines (Design + Engineering,
+      Hardware Installation, Systems Integration), eight named industries, and four defined buyer types
+      (Property Owner, Developer, General Contractor, Building Engineer).
+    </p>
+    <p class="lead">
+      The problem isn't the market or the positioning. It's that Enlyt's actual product — routed cable,
+      configured devices, a working IoT network — is invisible the moment the walls close. Unlike a
+      contractor's finished building or a supplier's physical product, there's nothing to photograph once
+      the job is done. That's the whole strategic problem, and it's a content problem before it's anything else.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Core Insight</div>
+        <div class="text">Enlyt can't sell what the buyer can see, because there's nothing left to see. It can only sell what the buyer can be shown — which makes video and motion graphics the primary sales tool, not a marketing nice-to-have.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rolemodels">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">The Growth Trajectory</span></div>
+    <h2>What Enlyt could grow into, once the category is legible.</h2>
+    <p class="lead">
+      Enlyt's problem probably isn't sophistication — the Sonder, Melia, Belgravia, and Life Fitness wins
+      prove the technical work is real. The problem is that smart-building integration is a category
+      almost nobody outside it already understands, and right now Enlyt is explaining itself in the same
+      language a general contractor would use. Here's who else started as a hands-on integrator and grew
+      into something bigger — and what each one proves is possible.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Growth Line</div>
+        <div class="text">Enlyt grows from "smart building installer/integrator" into the operating layer that makes buildings more intelligent, efficient, secure, and controllable.</div>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Middle-Market Comp</div>
+        <h4>Albireo Energy</h4>
+        <p>The most realistic near-to-mid-term path. Albireo started in 2013 as an independent building-controls integrator, grew through acquisition with PE backing (Huron Capital), and is now the largest independent BAS integrator in the US — $271.6M in revenue, 35,000+ installations, 39 offices, technology-agnostic across every major BAS manufacturer. It proves an independent integrator can scale into a category leader without ever building its own hardware platform.</p>
+        <div class="tool-used">Founded 2013 · Now largest independent BAS integrator in the US</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Category Model</div>
+        <h4>Schneider Electric — EcoStruxure Building</h4>
+        <p>The architectural blueprint for what "the platform" looks like once Enlyt's integrations mature: an open, IoT-enabled system that unifies HVAC, power, lighting, and security into one mobile-enabled view. Not Enlyt's near-term shape, but the proof that unifying disparate building systems into a single interface is a real, valuable category — not just a construction line item.</p>
+        <div class="tool-used">Open, data-centric building management system architecture</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Enterprise Scale Model</div>
+        <h4>Siemens Smart Infrastructure</h4>
+        <p>What this looks like fully matured — fully integrated automation across HVAC, lighting, shades, safety, security, and fire systems, deployed at campus and smart-city scale. Siemens' own framing is worth borrowing: "75% of buildings are not managed as efficiently as they could be" — connectivity and integration are the fix, which is exactly Enlyt's pitch at a much smaller scale today.</p>
+        <div class="tool-used">Desigo CC + Building X — campus and smart-city scale deployments</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">AI Platform Archetype</div>
+        <h4>Johnson Controls — OpenBlue</h4>
+        <p>The AI-native version of where this category is heading — a cyber-secured, AI-powered ecosystem that unifies live building data to improve energy efficiency, equipment performance, and occupant experience. Useful less as a near-term target and more as a signal of where buyer expectations are moving: from "installed system" to "intelligent, responsive operating layer."</p>
+        <div class="tool-used">AI-powered, agent-based building operations interface</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      None of these four started at their current scale. Albireo is the proof point that matters most —
+      it's the closest analog to where Enlyt stands today, and the clearest evidence that going from
+      "integrator with great case studies" to "category leader" is a matter of making the work legible
+      and repeatable, not reinventing what the work is.
+    </p>
+  </div>
+</section>
+
+<section id="deliverables">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">From Strategy to Deliverable</span></div>
+    <h2>Five video formats that solve the invisibility problem.</h2>
+    <p class="lead">
+      Enlyt already did the strategic thinking for us — it just never turned it into content. The four
+      buyer personas, the five real case studies, and the eight named industries on the site are a
+      ready-made production plan. Here's how each maps to an actual deliverable.
+    </p>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Format 01</div>
+        <h4>The "What You Can't See" Explainer Series</h4>
+        <p>Animated motion-graphics walkthroughs showing what's actually inside the walls — device layouts, network topology, sensor placement — for a 26-story hotel or a single-family retrofit. This is the single highest-leverage format: it's the only way to show the product at all.</p>
+        <div class="tool-used">Built with: AI-generated motion graphics + Voiceover Studio narration</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 02</div>
+        <h4>Case Study Video Series</h4>
+        <p>Enlyt already has five written case studies (Sonder Hotel, Melia Hotel, Life Fitness, Belgravia Group, single-family) with a Challenge / Solution / Results structure — a video script sitting in plain sight, never produced. Frame each around a single outcome: comfort, access, energy, control, or security.</p>
+        <div class="tool-used">Built with: Semantic Bridge (case study text → script) + Shot Builder</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 03</div>
+        <h4>Persona-Specific Explainers</h4>
+        <p>Four short videos — one each for the Property Owner, Developer, General Contractor, and Building Engineer — answering "why does Enlyt matter to someone in my seat." Enlyt already segments its site this way; nothing on it is filmed yet.</p>
+        <div class="tool-used">Built with: Voiceover Studio (consistent narrator across all four)</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 04</div>
+        <h4>Industry Vertical Cutdowns</h4>
+        <p>Eight named industries (aviation, athletic/fitness, corporate, healthcare, hospitality, industrial, retail, MDU) become eight 15–30 second LinkedIn cutdowns, each targeted to the GCs and developers who build in that specific vertical.</p>
+        <div class="tool-used">Built with: Cutdown tool, sourced from the explainer and case study masters</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 05</div>
+        <h4>Smart-Building Myth-Busting + Sales Deck Visuals</h4>
+        <p>Short pieces correcting the assumptions non-technical buyers make about smart building tech (cost, complexity, disruption during install), paired with clean system diagrams built for GC and developer sales decks — the same visual language as the explainer series, repurposed for the pitch room.</p>
+        <div class="tool-used">Built with: Shot Builder diagrams + Voiceover Studio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">The AI Production Stack</span></div>
+    <h2>Which tool does what, specifically for this company.</h2>
+    <p class="lead">
+      This isn't generic content advice — it's a direct map from what already exists in the VDO Aigency
+      toolkit to what Enlyt specifically needs, given a product that can't be filmed in the normal sense.
+    </p>
+    <div class="tool-row">
+      <div class="tool-name">Semantic Bridge<span class="tsub">Railway · /board-export</span></div>
+      <div class="tool-desc"><strong>Turns existing case study copy into video scripts automatically.</strong> Enlyt's five "Facts at a Glance" case studies (Industry / Client / Challenge / Solution / Results) are already structured like a script outline. Semantic Bridge can ingest that copy and output a first-pass narration script per case study — cutting script-writing time on this series to near zero.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Voiceover Studio<span class="tsub">Railway · 5 voice IDs, ElevenLabs v3</span></div>
+      <div class="tool-desc"><strong>Gives Enlyt one consistent narrator voice across every format.</strong> Since none of Enlyt's content involves an on-camera executive interview yet (unlike Grand Kahn or Leopardo Efficiency), a single branded AI narrator voice can carry the explainer series, the persona videos, and the case studies — establishing sonic consistency before a single human is ever filmed.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Shot Builder<span class="tsub">Runway Gen-4.5</span></div>
+      <div class="tool-desc"><strong>Generates the "invisible infrastructure" visuals no camera can capture.</strong> Network diagrams, device layouts inside walls, IoT topology maps — this is the format built specifically for content that has no physical footage to fall back on. This is the highest-priority tool for Enlyt of any company in the portfolio.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Cutdown Tool<span class="tsub">Railway</span></div>
+      <div class="tool-desc"><strong>Turns each long-form explainer or case study into 8 vertical-specific shorts.</strong> One case study video becomes reusable across every relevant industry page — a hospitality case study cut down for the Hospitality, Athletic/Fitness, and MDU verticals wherever the underlying system (guest automation, access control) applies.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">OpenClaw Agent (proposed)<span class="tsub">New — modeled on existing VDO/Higgins agents</span></div>
+      <div class="tool-desc"><strong>Could monitor Enlyt's own Building Upgrade Estimator submissions</strong> and route completed estimates into a content queue — every new estimate request is a signal for which industry vertical needs fresh content next, closing the loop between Enlyt's own lead-gen tool and what gets produced.</div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-label"><span class="num">05</span><span class="tag">First 90 Days</span></div>
+    <h2>What actually gets produced.</h2>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-phase">Build the Pipeline<span class="days">Days 1–20</span></div>
+        <div class="rm-items"><ul>
+          <li>Run all five existing case studies through Semantic Bridge to generate first-draft scripts</li>
+          <li>Lock a single Voiceover Studio narrator voice as Enlyt's brand voice</li>
+          <li>Prototype one "invisible infrastructure" explainer in Shot Builder as proof of concept</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Produce<span class="days">Days 21–65</span></div>
+        <div class="rm-items"><ul>
+          <li>Finish all five case study videos and the four persona explainers</li>
+          <li>Produce two "What You Can't See" explainer episodes, starting with Sonder Hotel (best existing documentation)</li>
+          <li>Cut down completed masters into industry-vertical shorts via the Cutdown tool</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Prove<span class="days">Days 66–90</span></div>
+        <div class="rm-items"><ul>
+          <li>Publish on-site alongside the existing written case studies and industry pages</li>
+          <li>Track estimator submissions against content publish dates to test the lead-gen tie-in</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">06</span><span class="tag">Success Metrics</span></div>
+    <h2>What "working" looks like at day 90.</h2>
+    <div class="metric-row">
+      <div class="metric"><div class="m-label">Case Study Videos Live</div><div class="m-target">5 of 5</div></div>
+      <div class="metric"><div class="m-label">Persona Explainers Live</div><div class="m-target">4 of 4</div></div>
+      <div class="metric"><div class="m-label">Invisible-Infrastructure Episodes</div><div class="m-target">2</div></div>
+      <div class="metric"><div class="m-label">Vertical Cutdowns Published</div><div class="m-target">8+</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">The Point</div>
+    <div class="thesis-text">Every other company in this series needs better proof of visible work. Enlyt needs to invent proof of invisible work — and that's exactly the kind of problem an AI production pipeline is built to solve.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

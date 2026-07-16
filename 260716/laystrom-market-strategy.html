@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laystrom Hardware — Market Strategy — Alexander West Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Libre+Franklin:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leopardo-blue:#1A3868;
+    --leopardo-blue-dark:#112548;
+    --leopardo-yellow:#FFE600;
+    --leopardo-graphite:#3A3A40;
+    --white:#FFFFFF;
+    --paper:#FAFAF8;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --silver:#9A9A9A;
+    --line:#E5E5E0;
+    --accent: var(--leopardo-graphite);
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white); color:var(--ink);
+    font-family:'Libre Franklin', -apple-system, sans-serif;
+    line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Jost', sans-serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 2.5rem;}
+  @media (max-width:700px){.wrap{padding:0 1.25rem;}}
+  a{color:inherit;}
+
+  /* HEADER */
+  .site-header{
+    background:var(--leopardo-blue); color:var(--white);
+    padding:1.1rem 2.5rem; border-bottom:3px solid var(--leopardo-yellow);
+    position:sticky; top:0; z-index:50;
+  }
+  .header-inner{
+    max-width:980px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .header-mark{font-family:'Jost',sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .header-mark em{font-style:italic; color:var(--leopardo-yellow);}
+  .header-back{
+    font-family:'Libre Franklin',sans-serif; font-size:0.75rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.75); text-decoration:none;
+  }
+  .header-back:hover{color:var(--leopardo-yellow);}
+
+  /* HERO */
+  .hero{padding:4.5rem 0 3rem; background:var(--paper); border-bottom:1px solid var(--line);}
+  .series-tag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--white); background:var(--leopardo-graphite);
+    padding:5px 10px; margin-bottom:1.5rem;
+  }
+  .hero-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--leopardo-graphite); margin-bottom:1.1rem;
+  }
+  .hero h1{
+    font-weight:700; letter-spacing:-0.02em; color:var(--leopardo-blue);
+    font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; max-width:760px;
+  }
+  .hero .sub{margin-top:1.3rem; max-width:640px; font-size:1.05rem; color:var(--slate);}
+  .hero .source-line{margin-top:1.5rem; font-size:0.8rem; color:var(--silver);}
+  .hero .source-line a{color:var(--leopardo-blue); text-decoration:underline;}
+
+  /* STAT STRIP */
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line); background:var(--white);
+  }
+  @media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat-strip .cell{padding:2rem 1.75rem; border-right:1px solid var(--line);}
+  .stat-strip .cell:last-child{border-right:none;}
+  .stat-strip .num{font-family:'Jost',sans-serif; font-weight:700; font-size:2rem; color:var(--leopardo-blue); line-height:1;}
+  .stat-strip .lbl{font-size:0.78rem; color:var(--slate); margin-top:.5rem;}
+
+  /* SECTION SHELL */
+  section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{display:flex; align-items:baseline; gap:12px; margin-bottom:1.75rem;}
+  .section-label .num{font-family:'DM Mono',monospace; color:var(--leopardo-graphite); font-size:0.78rem; font-weight:500;}
+  .section-label .tag{
+    font-family:'Libre Franklin',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--slate);
+  }
+  section h2{font-weight:700; color:var(--leopardo-blue); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:680px; margin-bottom:1.3rem; letter-spacing:-0.01em;}
+  section p.lead{max-width:680px; color:var(--slate); font-size:1rem; margin-bottom:1rem;}
+
+  /* 2x2 MATRIX */
+  .matrix-wrap{margin-top:2.5rem; display:grid; grid-template-columns:auto 1fr; gap:0;}
+  .matrix-yaxis{
+    writing-mode:vertical-rl; transform:rotate(180deg); display:flex; align-items:center; justify-content:space-between;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); padding-right:.75rem;
+  }
+  .matrix{
+    position:relative; border:1px solid var(--line); aspect-ratio:1.5/1; background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:50% 50%; background-position:center; background-repeat:no-repeat;
+  }
+  .matrix::before, .matrix::after{content:''; position:absolute; background:var(--line);}
+  .matrix::before{top:0; bottom:0; left:50%; width:1px;}
+  .matrix::after{left:0; right:0; top:50%; height:1px;}
+  .matrix-xaxis{
+    display:flex; justify-content:space-between; margin-top:.6rem; padding-left:0;
+    font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--slate); grid-column:2;
+  }
+  .plot{
+    position:absolute; transform:translate(-50%,-50%); text-align:center;
+  }
+  .plot .dot{width:14px; height:14px; border-radius:50%; margin:0 auto 6px; border:2px solid var(--white); box-shadow:0 0 0 1px var(--ink);}
+  .plot .name{
+    font-family:'Jost',sans-serif; font-weight:600; font-size:0.78rem; color:var(--ink);
+    white-space:nowrap; background:rgba(255,255,255,0.9); padding:1px 4px;
+  }
+  .plot.laystrom .dot{background:var(--leopardo-yellow); width:20px; height:20px; box-shadow:0 0 0 2px var(--leopardo-blue);}
+  .plot.laystrom .name{font-weight:700; color:var(--leopardo-blue);}
+  .plot .sub{font-size:0.65rem; color:var(--slate); background:rgba(255,255,255,0.9); padding:0 4px;}
+
+  /* SWOT */
+  .swot-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.swot-grid{grid-template-columns:1fr;}}
+  .swot-cell{background:var(--white); padding:1.75rem;}
+  .swot-cell h4{font-size:1rem; margin-bottom:1rem; display:flex; align-items:center; gap:8px;}
+  .swot-cell h4 .sw-dot{width:8px; height:8px; border-radius:50%;}
+  .swot-cell.strength h4 .sw-dot{background:#2C7A7B;}
+  .swot-cell.weakness h4 .sw-dot{background:var(--kahn-copper, #B8854A);}
+  .swot-cell.opportunity h4 .sw-dot{background:var(--leopardo-blue);}
+  .swot-cell.threat h4 .sw-dot{background:#A33B3B;}
+  .swot-cell ul{margin-left:18px; font-size:0.88rem; color:var(--slate);}
+  .swot-cell li{margin-bottom:8px;}
+
+  /* ANSOFF TABLE */
+  .ansoff-table{width:100%; border-collapse:collapse; margin-top:2rem; font-size:0.88rem;}
+  .ansoff-table th{
+    text-align:left; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--white); background:var(--leopardo-blue);
+    padding:10px 14px;
+  }
+  .ansoff-table td{padding:12px 14px; border-bottom:1px solid var(--line); color:var(--slate); vertical-align:top;}
+  .ansoff-table td.opt{color:var(--ink); font-weight:600; font-family:'Jost',sans-serif; font-size:0.92rem;}
+  .ansoff-table tr.rec td{background:rgba(255,230,0,0.08);}
+  .ansoff-table td.verdict{font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;}
+  .verdict.go{color:#2C7A7B;}
+  .verdict.hold{color:var(--slate);}
+  .verdict.no{color:#A33B3B;}
+
+  /* CORE INSIGHT BANNER */
+  .flag{
+    background:#EEECE6; border-left:3px solid var(--leopardo-graphite); padding:1.1rem 1.4rem;
+    margin-top:1.5rem; font-size:0.9rem; color:var(--ink); max-width:680px;
+  }
+  .flag strong{color:var(--leopardo-graphite);}
+
+  .insight{background:var(--leopardo-blue); color:var(--white); padding:3rem 2.5rem; position:relative; margin-top:2rem;}
+  .insight::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .insight-inner{max-width:900px; margin:0 auto;}
+  .insight .label{font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow); text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;}
+  .insight .text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.4;}
+
+  /* DELIVERABLE / OUTREACH CARDS */
+  .deliv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.deliv-grid{grid-template-columns:1fr;}}
+  .deliv-card{background:var(--white); padding:1.75rem;}
+  .deliv-card .dtag{
+    display:inline-block; font-family:'Libre Franklin',sans-serif; font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--leopardo-graphite); border:1px solid var(--leopardo-graphite);
+    padding:3px 8px; margin-bottom:.9rem;
+  }
+  .deliv-card h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.6rem;}
+  .deliv-card p{font-size:0.87rem; color:var(--slate); margin-bottom:.7rem;}
+  .deliv-card .tool-used{font-size:0.75rem; color:var(--leopardo-graphite); font-weight:600;}
+
+  /* TOOL STACK ROWS */
+  .tool-row{display:grid; grid-template-columns:180px 1fr; gap:1.75rem; padding:1.6rem 0; border-bottom:1px solid var(--line);}
+  @media (max-width:700px){.tool-row{grid-template-columns:1fr;}}
+  .tool-row:last-child{border-bottom:none;}
+  .tool-name{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.05rem;}
+  .tool-name .tsub{display:block; font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--slate); font-weight:400; margin-top:4px;}
+  .tool-desc{font-size:0.9rem; color:var(--slate);}
+  .tool-desc strong{color:var(--ink);}
+
+  /* PILLARS */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:820px){.pillars{grid-template-columns:1fr;}}
+  .pillar{background:var(--white); padding:2rem 1.75rem;}
+  .pillar .pnum{font-family:'Jost',sans-serif; font-weight:700; font-size:2.2rem; color:var(--leopardo-yellow); -webkit-text-stroke:1.5px var(--leopardo-blue); line-height:1; margin-bottom:1rem;}
+  .pillar h4{font-size:1.05rem; color:var(--leopardo-blue); margin-bottom:.7rem;}
+  .pillar p{font-size:0.86rem; color:var(--slate);}
+
+  /* ROADMAP */
+  .roadmap{margin-top:2rem;}
+  .rm-row{display:grid; grid-template-columns:140px 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid var(--line);}
+  .rm-row:last-child{border-bottom:none;}
+  .rm-phase{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .rm-phase .days{display:block; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--slate); font-weight:400; margin-top:2px;}
+  .rm-items{font-size:0.9rem; color:var(--slate);}
+  .rm-items ul{margin-left:18px;}
+  .rm-items li{margin-bottom:6px;}
+
+  /* METRICS */
+  .metric-row{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2rem; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){.metric-row{grid-template-columns:repeat(2,1fr);}}
+  .metric{background:var(--white); padding:1.5rem;}
+  .metric .m-label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:var(--slate); margin-bottom:.5rem;}
+  .metric .m-target{font-family:'Jost',sans-serif; font-weight:700; color:var(--leopardo-blue); font-size:1.15rem;}
+
+  /* CLOSER */
+  .closer{background:var(--leopardo-blue); color:var(--white); padding:4rem 2.5rem; position:relative;}
+  .closer::before{content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--leopardo-yellow);}
+  .closer-inner{max-width:820px; margin:0 auto;}
+  .closer .thesis-label{
+    font-family:'Libre Franklin',sans-serif; font-size:0.72rem; font-weight:600; color:var(--leopardo-yellow);
+    text-transform:uppercase; letter-spacing:0.22em; margin-bottom:1rem;
+  }
+  .closer .thesis-text{font-family:'Jost',sans-serif; font-weight:600; font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.4;}
+
+  footer{padding:3rem 2.5rem; background:var(--paper); border-top:1px solid var(--line);}
+  .footer-inner{max-width:980px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+  .footer-title{font-family:'Jost',sans-serif; font-weight:600; color:var(--leopardo-blue); font-size:0.95rem;}
+  .footer-meta{font-size:0.72rem; color:var(--silver); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-mark">Alexander West Capital <em>Portfolio Brand Function</em></div>
+    <a class="header-back" href="presentation.html">← Back to Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="series-tag">Market Strategy Series · 1 of 7</div>
+    <div class="hero-label">Laystrom Hardware</div>
+    <h1>The independent alternative to the roll-up.</h1>
+    <p class="sub">
+      Laystrom sells doors, frames, and hardware into a $9.5–14B commercial market that a private-equity
+      consolidator has already started buying up in its own backyard. The strategy isn't to out-scale
+      the roll-up. It's to be the thing the roll-up structurally can't be.
+    </p>
+    <p class="source-line">Source: <a href="https://www.laystromhardware.com" target="_blank">laystromhardware.com</a> — reviewed July 2026</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="cell"><div class="num">1951</div><div class="lbl">Founded — one of the oldest DFH distributors in the Chicago area</div></div>
+  <div class="cell"><div class="num">2023</div><div class="lbl">Acquired — new ownership, mid-transition to a modern operator</div></div>
+  <div class="cell"><div class="num">$9.5B</div><div class="lbl">2024 US commercial doors &amp; windows hardware market, 5.2% CAGR to 2033</div></div>
+  <div class="cell"><div class="num">2019</div><div class="lbl">Year the nation's largest DFH consolidator bought its way into Chicago</div></div>
+</div>
+
+<section id="market">
+  <div class="wrap">
+    <div class="section-label"><span class="num">01</span><span class="tag">The Market</span></div>
+    <h2>A steady market, growing for the right reason.</h2>
+    <p class="lead">
+      The US commercial doors-and-hardware market sits around $9.5B and is expected to grow to roughly
+      $14.2B by 2033 — a 5.2% CAGR driven by commercial construction, renovation cycles, and code-driven
+      replacement (fire rating, ADA, security). Laystrom already sells into the sectors carrying that
+      growth: education, healthcare, multi-family, municipal, hospitality, senior living, and public safety.
+      This isn't a market Laystrom needs to find. It's a market it's already standing in.
+    </p>
+    <p class="lead">
+      The risk isn't demand. It's who captures it — a fragmented distributor market with a
+      well-capitalized consolidator now buying share, sector by sector, city by city.
+    </p>
+  </div>
+</section>
+
+<section id="competitive">
+  <div class="wrap">
+    <div class="section-label"><span class="num">02</span><span class="tag">The Competitive Landscape</span></div>
+    <h2>The real competitor isn't another supplier. It's a platform.</h2>
+    <p class="lead">
+      In 2019, The Cook &amp; Boardman Group — the nation's largest commercial door, frame, and hardware
+      distributor — acquired American Building Services (ABS), a Chicago-area DFH distributor, and folded
+      it into a 20,000+ SKU e-commerce catalog with two-day shipping and centralized systems integration.
+      That consolidation wave hasn't slowed: as recently as this spring, Foundation Building Materials
+      acquired Unified Door and Hardware, a 31-location distributor, in the same play. Laystrom isn't
+      competing with a mom-and-pop shop anymore in its own market — it's competing with a national
+      roll-up that already has a foothold in Chicago.
+    </p>
+    <div class="matrix-wrap">
+      <div class="matrix-yaxis">Scale ↑ / Local Relationship ↓</div>
+      <div>
+        <div class="matrix">
+          <div class="plot" style="top:14%; left:78%;">
+            <div class="dot" style="background:#A33B3B;"></div>
+            <div class="name">Cook &amp; Boardman / ABS</div>
+            <div class="sub">National, e-commerce, PE-backed</div>
+          </div>
+          <div class="plot" style="top:20%; left:34%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Manufacturer Direct</div>
+            <div class="sub">Allegion, ASSA ABLOY key accounts</div>
+          </div>
+          <div class="plot" style="top:78%; left:20%;">
+            <div class="dot" style="background:var(--silver);"></div>
+            <div class="name">Small Local Independents</div>
+            <div class="sub">Single-branch, limited categories</div>
+          </div>
+          <div class="plot laystrom" style="top:58%; left:56%;">
+            <div class="dot"></div>
+            <div class="name">Laystrom Hardware</div>
+            <div class="sub">73-yr legacy + full-category range</div>
+          </div>
+        </div>
+        <div class="matrix-xaxis"><span>Narrow Category Range</span><span>Full-Category Range →</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="swot">
+  <div class="wrap">
+    <div class="section-label"><span class="num">03</span><span class="tag">Where Laystrom Stands</span></div>
+    <h2>SWOT, grounded in what's actually true today.</h2>
+    <div class="swot-grid">
+      <div class="swot-cell strength">
+        <h4><span class="sw-dot"></span>Strengths</h4>
+        <ul>
+          <li>73-year legacy in the Chicago market (est. 1951) — older than most of the roll-up's local brands</li>
+          <li>Genuinely full-category range: hollow metal, wood, aluminum, Division 10, acoustical, lead-lined</li>
+          <li>Estimating team with 20–30 years of experience — the credibility a spec-heavy sale runs on</li>
+          <li>New ownership since 2023 already pushing modernized software for submittals and estimates</li>
+        </ul>
+      </div>
+      <div class="swot-cell weakness">
+        <h4><span class="sw-dot"></span>Weaknesses</h4>
+        <ul>
+          <li>No visible e-commerce or online product catalog — Cook &amp; Boardman ships from 20,000+ SKUs online</li>
+          <li>Thin digital footprint: no case studies, no project proof, no visible sector-specific content</li>
+          <li>Site reads as informational, not as a selling or spec-support tool for architects and GCs</li>
+          <li>No public trust signals beyond a single testimonial quote on the site</li>
+        </ul>
+      </div>
+      <div class="swot-cell opportunity">
+        <h4><span class="sw-dot"></span>Opportunities</h4>
+        <ul>
+          <li>Position as "the independent" precisely while a consolidator is buying up the category — timing is on Laystrom's side</li>
+          <li>Municipal &amp; public safety sector overlap with Leopardo Efficiency's city relationships — a warm cross-sell path inside the AWC portfolio</li>
+          <li>Spec-support content (fire ratings, lead times, line cards) is an open SEO lane nobody local owns</li>
+          <li>Careers page shows active hiring — a growing team is a growth story worth telling publicly</li>
+        </ul>
+      </div>
+      <div class="swot-cell threat">
+        <h4><span class="sw-dot"></span>Threats</h4>
+        <ul>
+          <li>Cook &amp; Boardman/ABS already has a Chicago branch, national backing, and e-commerce scale</li>
+          <li>The DFH distribution layer is an active PE roll-up target nationally (Unified/FBM, HC Quality Doors, BryComm — all bought in the last 18 months)</li>
+          <li>Manufacturer-direct accounts for large GCs can bypass distributors entirely on big projects</li>
+          <li>Being invisible online means being invisible to architects specifying products before a GC ever calls</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="options">
+  <div class="wrap">
+    <div class="section-label"><span class="num">04</span><span class="tag">Strategic Options</span></div>
+    <h2>Four ways to grow. One of them fits.</h2>
+    <table class="ansoff-table">
+      <tr><th>Option</th><th>What It Means Here</th><th>Verdict</th></tr>
+      <tr>
+        <td class="opt">Market Penetration</td>
+        <td>Win more share in existing sectors (education, healthcare, municipal, multi-family) through better visibility, spec support, and relationship depth.</td>
+        <td class="verdict go">Go</td>
+      </tr>
+      <tr class="rec">
+        <td class="opt">Product / Service Development</td>
+        <td>Build the digital spec-support layer Laystrom is missing — line cards, spec sheets, submittal tools, project galleries — turning technical expertise into a public asset.</td>
+        <td class="verdict go">Go — Priority</td>
+      </tr>
+      <tr>
+        <td class="opt">Market Development</td>
+        <td>Expand geographically beyond Chicagoland. Laystrom already ships nationally per its own site, but chasing new geography before fixing visibility at home is premature.</td>
+        <td class="verdict hold">Hold</td>
+      </tr>
+      <tr>
+        <td class="opt">Diversification</td>
+        <td>Move into adjacent categories (access control, electronic security) the way Cook &amp; Boardman has. Requires capital and expertise Laystrom doesn't currently have — a later-stage move, not a first one.</td>
+        <td class="verdict no">Not Now</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="rolemodels">
+  <div class="wrap">
+    <div class="section-label"><span class="num">05</span><span class="tag">The Growth Trajectory</span></div>
+    <h2>What Laystrom could grow into, once it leaves the nest.</h2>
+    <p class="lead">
+      Not a thought-leadership brand in the Curtis/Leopardo Efficiency sense — a regional opening-solutions
+      authority. The company GCs, architects, facility managers, schools, and hospitals trust when a
+      commercial opening needs to be specified, sourced, installed, maintained, and upgraded. Here's who
+      already runs that playbook, at three different scales.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Growth Line</div>
+        <div class="text">Laystrom grows from "the hardware supplier Leopardo uses" into the regional authority on commercial openings, access, and hardware systems.</div>
+      </div>
+    </div>
+    <div class="flag">
+      <strong>Worth naming directly:</strong> Cook &amp; Boardman is both the biggest competitive threat in
+      Section 02 and the best aspirational model here. That's not a contradiction — it's the whole
+      strategy. Compete against their local branch on relationships and speed. Study their national
+      playbook for where "opening solutions" eventually goes.
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Best Aspirational Comp</div>
+        <h4>Cook &amp; Boardman / CBX Solutions</h4>
+        <p>The same company that bought Laystrom's Chicago competitor in 2019 is also the clearest picture of the category's ceiling — "complete opening solutions" combining doors, frames, hardware, security, network technology, specification support, project management, installation, and maintenance. This is the direction to study, not the company to copy line for line.</p>
+        <div class="tool-used">Full opening-solutions platform: doors, hardware, security, systems integration</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Nearer-Term Distributor Comp</div>
+        <h4>Banner Solutions</h4>
+        <p>A closer match to Laystrom's actual B2B reality — a PE-backed national wholesaler (High Road Capital Partners) of door hardware and electronic access control products, built on reliable logistics and specialized technical expertise, with a strict no-end-user-sales, pure-distributor model. Proof that staying a wholesale distributor and still building real category authority isn't a contradiction.</p>
+        <div class="tool-used">National wholesale distributor, door hardware + electronic access control</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Top-of-Category Reference</div>
+        <h4>Allegion</h4>
+        <p>Not a company Laystrom becomes — a picture of where the category itself is heading. Allegion frames its business as "security around the doorway and adjacent area," spanning mechanical locks to advanced electronic access control and biometric systems. It's the proof that "the opening" is a strategic building system, not just a commodity part.</p>
+        <div class="tool-used">25+ brands, global door security &amp; access control leader</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.75rem;">
+      Banner Solutions is the realistic near-term shape: stay a distributor, get sharper about logistics
+      and technical expertise. Cook &amp; Boardman is the mid-term shape: opening solutions as a full
+      category, not just supply. Allegion is the ceiling: access control and security as the real value,
+      hardware as the delivery mechanism.
+    </p>
+  </div>
+</section>
+
+<section id="insight">
+  <div class="wrap">
+    <div class="section-label"><span class="num">06</span><span class="tag">The Recommended Strategy</span></div>
+    <h2>Don't out-scale the roll-up. Out-know it, on camera.</h2>
+    <p class="lead">
+      Cook &amp; Boardman wins on catalog breadth and shipping speed. Laystrom can't beat that with a bigger
+      warehouse — it can only beat it by making the estimating team's expertise visible before a buyer
+      ever calls. That's a production and outreach problem as much as a strategy problem, so here's
+      exactly what VDO Aigency builds to make it real: the video content, the outreach motion, and the
+      AI stack behind both.
+    </p>
+    <div class="insight">
+      <div class="insight-inner">
+        <div class="label">The Core Insight</div>
+        <div class="text">A national e-commerce catalog can ship faster. It can't put 20–30 years of estimating judgment on camera. That's the one asset Laystrom has that Cook &amp; Boardman structurally can't copy — so every deliverable below exists to make it visible.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video-content">
+  <div class="wrap">
+    <div class="section-label"><span class="num">07</span><span class="tag">Video Content</span></div>
+    <h2>Five formats built from what the team already knows.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Format 01</div>
+        <h4>Spec-Support Explainer Series</h4>
+        <p>Short, direct-to-camera or narrated walkthroughs on fire ratings, lead times, and install/spec guidance — the exact questions an architect or GC would otherwise call Laystrom to ask. Publish the answer before the call.</p>
+        <div class="tool-used">Built with: Voiceover Studio + Shot Builder cutaways</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 02</div>
+        <h4>Line Card &amp; Product Spotlights</h4>
+        <p>One short video per major manufacturer line — hollow metal, wood, aluminum doors, hardware categories — turning static line cards into something a specifier actually watches instead of skims.</p>
+        <div class="tool-used">Built with: Semantic Bridge (line card text → script)</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 03</div>
+        <h4>Jobsite Problem/Solution Shorts</h4>
+        <p>Real field scenarios — a fire door replacement, a Division 10 install — framed as the problem Laystrom solved. This is the content type that actually shows expertise instead of claiming it.</p>
+        <div class="tool-used">Built with: Cutdown tool, sourced from longer estimator interviews</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 04</div>
+        <h4>The "Modern Distributor" Brand Film</h4>
+        <p>One flagship piece built around Chuck Thomas's own framing — the shift from old-school manufacturer to technically savvy distributor since the 2023 acquisition. This is the anchor case for everything else.</p>
+        <div class="tool-used">Built with: Voiceover Studio narration + on-site footage</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Format 05</div>
+        <h4>Common Mistakes + Access-Control-Ready Hardware</h4>
+        <p>A "what GCs get wrong" series (wrong fire rating, wrong hardware for the door type) paired with content on access-control-ready hardware — the first step toward the Allegion-style electronic security lane, without Laystrom needing to sell it directly yet.</p>
+        <div class="tool-used">Built with: Voiceover Studio + Shot Builder diagrams</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="wrap">
+    <div class="section-label"><span class="num">08</span><span class="tag">Outreach</span></div>
+    <h2>The content needs a distribution motion, not just a publish button.</h2>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="dtag">Outreach 01</div>
+        <h4>Architect &amp; Spec-Writer LinkedIn Campaign</h4>
+        <p>The same personalized-outreach model already running for Leopardo Efficiency's municipal campaign (Monday.com board, vetted connection notes) — retargeted at architects, spec writers, and GC estimators in Laystrom's active sectors.</p>
+        <div class="tool-used">Model: Existing Monday.com outreach board + vetting workflow</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 02</div>
+        <h4>Vendor &amp; Manufacturer Co-Marketing</h4>
+        <p>Line card spotlight videos double as content the manufacturers themselves (hinge, lock, exit device brands) will reshare — free distribution through the supplier side of the relationship, not just the buyer side.</p>
+        <div class="tool-used">Distribution: Cross-posted via manufacturer/vendor channels</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 03</div>
+        <h4>Quote-Request Follow-Up Sequences</h4>
+        <p>Every inbound quote request becomes a trigger for a short, relevant spec-support video sent directly to that prospect — turning a static PDF quote into a live touchpoint that reinforces the expertise pitch.</p>
+        <div class="tool-used">Model: Email/LinkedIn sequence tied to quote-request data</div>
+      </div>
+      <div class="deliv-card">
+        <div class="dtag">Outreach 04</div>
+        <h4>Sector-Targeted Content Drops</h4>
+        <p>Municipal and education-sector content gets routed specifically toward AWC's existing warm relationships — the Leopardo Efficiency municipal book is a real distribution channel, not just a metaphor.</p>
+        <div class="tool-used">Cross-sell: Leopardo Efficiency's municipal contact base</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label"><span class="num">09</span><span class="tag">The AI Production Stack</span></div>
+    <h2>Which tool does what, specifically for Laystrom.</h2>
+    <div class="tool-row">
+      <div class="tool-name">Semantic Bridge<span class="tsub">Railway · /board-export</span></div>
+      <div class="tool-desc"><strong>Turns line cards and spec sheets into video scripts automatically.</strong> Laystrom's product data is already structured — manufacturer, category, fire rating, finish. Semantic Bridge converts that structure into a first-draft script for each line card spotlight, cutting script time to near zero.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Voiceover Studio<span class="tsub">Railway · 5 voice IDs, ElevenLabs v3</span></div>
+      <div class="tool-desc"><strong>Gives the spec-support series a consistent, credible narrator voice</strong> across dozens of short explainer videos — without needing an estimator on camera for every single one. Reserve real on-camera time for the flagship brand film and jobsite stories.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Shot Builder<span class="tsub">Runway Gen-4.5</span></div>
+      <div class="tool-desc"><strong>Generates cutaway diagrams for product anatomy</strong> — a fire-rated door assembly, a hollow metal frame cross-section — the kind of visual that makes a spec explainer actually teach something, without needing a physical product shoot for every SKU.</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">Cutdown Tool<span class="tsub">Railway</span></div>
+      <div class="tool-desc"><strong>Turns every long-form explainer into LinkedIn-length spotlights</strong> — a 90-second line card video becomes three 15-second cuts, each targeted at a different buyer (architect, GC, facility manager).</div>
+    </div>
+    <div class="tool-row">
+      <div class="tool-name">OpenClaw Agent (proposed)<span class="tsub">New — modeled on VDO/Higgins agents</span></div>
+      <div class="tool-desc"><strong>Monitors inbound quote requests and manufacturer line updates</strong>, flagging which products are getting the most quote activity — that becomes the queue for which line card gets a video next, so content follows real demand instead of guesswork.</div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-label"><span class="num">10</span><span class="tag">First 90 Days</span></div>
+    <h2>What this looks like in motion.</h2>
+    <div class="roadmap">
+      <div class="rm-row">
+        <div class="rm-phase">Build the Pipeline<span class="days">Days 1–20</span></div>
+        <div class="rm-items"><ul>
+          <li>Run the top 3 product categories through Semantic Bridge to draft spec-explainer scripts</li>
+          <li>Lock a Voiceover Studio narrator voice for the spec-support series</li>
+          <li>Set up the LinkedIn outreach board for architects and spec writers, modeled on the existing municipal campaign</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Produce &amp; Launch<span class="days">Days 21–65</span></div>
+        <div class="rm-items"><ul>
+          <li>Publish the top 3 spec-explainer videos and first line card spotlights</li>
+          <li>Produce the flagship "Modern Distributor" brand film with Chuck Thomas</li>
+          <li>Begin architect/spec-writer outreach cadence and quote-request follow-up sequences</li>
+        </ul></div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-phase">Prove<span class="days">Days 66–90</span></div>
+        <div class="rm-items"><ul>
+          <li>Track inbound spec and quote requests sourced from new content and outreach</li>
+          <li>Package results into a case for expanding the content engine to the full product range</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-label"><span class="num">11</span><span class="tag">Success Metrics</span></div>
+    <h2>What "working" looks like at day 90.</h2>
+    <div class="metric-row">
+      <div class="metric"><div class="m-label">Spec Videos Published</div><div class="m-target">10+ pieces</div></div>
+      <div class="metric"><div class="m-label">Flagship Brand Film</div><div class="m-target">Live</div></div>
+      <div class="metric"><div class="m-label">Outreach Contacts Engaged</div><div class="m-target">Tracked baseline set</div></div>
+      <div class="metric"><div class="m-label">LinkedIn Cadence</div><div class="m-target">2–3 posts / week</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="closer">
+  <div class="closer-inner">
+    <div class="thesis-label">The Point</div>
+    <div class="thesis-text">The roll-up is betting that scale beats relationships. Laystrom's whole strategy is proving that bet wrong, on camera, one spec sheet at a time.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Alexander West Capital · Portfolio Brand Function</div>
+    <div class="footer-meta">Prepared by VDO Aigency · July 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
