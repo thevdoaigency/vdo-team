@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWC Film Crew SOP — Production Standards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4ED;
+    --paper-shade: #EFEAE0;
+    --ink: #14181C;
+    --ink-soft: #4A5058;
+    --rule: #1F252B;
+    --hi-vis: #FF5A00;
+    --blueprint: #1B3A5B;
+    --frame-bg: #0E1418;
+    --approved: #17563A;
+    --denied: #7A1A1A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  .doc-header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 24px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+
+  .doc-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .doc-title span { color: var(--hi-vis); }
+
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  .doc-meta strong { color: var(--ink); display: block; }
+
+  .doc-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    max-width: 62ch;
+    grid-column: 1 / -1;
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 56px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .section-num { color: var(--hi-vis); font-weight: 600; }
+
+  h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 14px;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 22px 0 10px;
+    color: var(--ink);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ROLE CARDS */
+  .roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 16px;
+  }
+
+  .role {
+    background: var(--paper);
+    padding: 22px 22px 24px;
+  }
+
+  .role .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--hi-vis);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .role h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    margin: 0 0 8px;
+    letter-spacing: 0.01em;
+  }
+
+  .role p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* CHECKLISTS */
+  ul.checklist {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  ul.checklist li {
+    padding: 8px 0 8px 32px;
+    position: relative;
+    border-bottom: 1px solid var(--paper-shade);
+  }
+
+  ul.checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+
+  ol.numbered {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  ol.numbered li {
+    padding: 10px 0 10px 44px;
+    position: relative;
+    counter-increment: step;
+    border-bottom: 1px solid var(--paper-shade);
+  }
+
+  ol.numbered li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hi-vis);
+    letter-spacing: 0.06em;
+  }
+
+  ul.plain {
+    list-style: none;
+    margin: 10px 0 16px;
+  }
+
+  ul.plain li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15.5px;
+  }
+
+  ul.plain li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--hi-vis);
+    font-weight: 700;
+  }
+
+  /* CALLOUT */
+  .must {
+    background: var(--hi-vis);
+    color: var(--ink);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-left: 6px solid var(--ink);
+    font-weight: 600;
+  }
+
+  .must::before {
+    content: "REQUIRED";
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* CAMERA / SOUND SPEC TABLE */
+  .specs {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: 8px;
+  }
+
+  .specs .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    padding: 6px 0;
+  }
+
+  .specs .row:last-child { border-bottom: none; }
+
+  .specs .key {
+    color: var(--hi-vis);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding-top: 3px;
+  }
+
+  /* FOLDER TREE */
+  .tree {
+    background: var(--frame-bg);
+    color: var(--paper);
+    padding: 28px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.85;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+
+  .tree .folder { color: var(--hi-vis); }
+  .tree .comment { color: rgba(255,255,255,0.45); font-style: italic; }
+  .tree .indent { color: rgba(255,255,255,0.35); }
+
+  .example {
+    background: var(--paper-shade);
+    padding: 14px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 8px 0 16px;
+    border-left: 3px solid var(--hi-vis);
+  }
+
+  .example .lbl {
+    display: inline-block;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    margin-right: 10px;
+  }
+
+  /* DELIVERY GRID */
+  .delivery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  .lane {
+    padding: 24px;
+    border: 2px solid var(--ink);
+  }
+
+  .lane.yes { background: var(--paper); }
+  .lane.no { background: var(--ink); color: var(--paper); }
+
+  .lane .lane-tag {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lane.yes .lane-tag { color: var(--approved); }
+  .lane.no .lane-tag { color: var(--hi-vis); }
+
+  .lane ul {
+    list-style: none;
+  }
+
+  .lane li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.5;
+    border-bottom: 1px dashed rgba(74,80,88,0.25);
+  }
+
+  .lane.no li {
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+  }
+
+  .lane.yes li::before {
+    content: "✓";
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    color: var(--approved);
+    font-weight: 700;
+  }
+
+  .lane.no li::before {
+    content: "✕";
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    color: var(--hi-vis);
+    font-weight: 700;
+  }
+
+  /* SEE ALSO */
+  .see-also {
+    background: var(--blueprint);
+    color: var(--paper);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .see-also .marker {
+    font-family: 'Anton', sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--hi-vis);
+  }
+
+  .see-also .body h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    color: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 4px;
+  }
+
+  .see-also .body p {
+    font-size: 14.5px;
+    color: rgba(247,244,237,0.85);
+    margin: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 4px solid var(--ink);
+    margin-top: 64px;
+    padding-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* MOBILE */
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 20px 64px; }
+    .doc-header { grid-template-columns: 1fr; }
+    .doc-meta { text-align: left; }
+    .roles { grid-template-columns: 1fr; }
+    .delivery { grid-template-columns: 1fr; }
+    .specs .row { grid-template-columns: 1fr; gap: 2px; }
+    .specs .key { padding-top: 8px; }
+    .see-also { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 6px; }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .wrap { padding: 0; max-width: 100%; }
+    section { page-break-inside: avoid; margin-bottom: 28px; }
+    .specs, .tree, .see-also, .lane.no {
+      background: white !important;
+      color: black !important;
+      border: 1px solid black;
+    }
+    .specs .key, .see-also .marker, .lane.no .lane-tag, .tree .folder {
+      color: black !important;
+    }
+    .tree .comment, .tree .indent { color: #666 !important; }
+    footer { flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div>
+      <h1 class="doc-title">Production<br>Standards<span>.</span></h1>
+    </div>
+    <div class="doc-meta">
+      <strong>AWC Film Crew SOP</strong>
+      v1.0 — 2026<br>
+      Freelance Camera<br>
+      &amp; Sound Crew<br>
+      All Portfolio Projects
+    </div>
+    <p class="doc-subtitle">This SOP applies to every freelance cinematographer, camera operator, and sound recordist contracted for an AWC portfolio project. Read it before your first shoot. The companion Jobsite Guide covers on-site conduct, safety, and shot list.</p>
+  </header>
+
+  <!-- 00 ROLES -->
+  <section>
+    <div class="section-label"><span class="section-num">00</span> / Who's Who</div>
+    <h2>Roles</h2>
+    <p>Everyone contracted to an AWC project falls into one of these roles. Small crews often stack them (one person = cinematographer + recordist). The responsibilities do not stack down.</p>
+    <div class="roles">
+      <div class="role">
+        <div class="badge">Field</div>
+        <h3>Cinematographer / DP</h3>
+        <p>Owns visual capture. Responsible for camera settings, LUT delivery, footage organization, and on-site conduct per the Jobsite Guide.</p>
+      </div>
+      <div class="role">
+        <div class="badge">Field</div>
+        <h3>Camera Operator (B / C)</h3>
+        <p>Reports to the cinematographer. Matches settings and format. Delivers footage into the correct camera folder.</p>
+      </div>
+      <div class="role">
+        <div class="badge">Field</div>
+        <h3>Sound Recordist</h3>
+        <p>Owns audio capture. Responsible for two-source recording, sound file organization, and sync references. Doubles as a plant mic rigger.</p>
+      </div>
+      <div class="role">
+        <div class="badge">Post</div>
+        <h3>Media Manager</h3>
+        <p>Receives all footage and audio on behalf of AWC. A shoot is not complete until the media manager confirms receipt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 BEFORE -->
+  <section>
+    <div class="section-label"><span class="section-num">01</span> / Before the Shoot</div>
+    <h2>Pre-Production</h2>
+    <p>Confirm all of the following in the week before your call time.</p>
+    <ul class="checklist">
+      <li>Call sheet received from production</li>
+      <li>Site address, superintendent name, and access instructions confirmed</li>
+      <li>PPE ready or confirmed provided on site</li>
+      <li>Gear list shared with production</li>
+      <li>Jobsite Guide reviewed</li>
+      <li>Media manager contact confirmed</li>
+      <li>Backup drive on hand with at least 2x the expected footage capacity</li>
+      <li>MASV or approved transfer service access ready</li>
+    </ul>
+  </section>
+
+  <!-- 02 CAMERA -->
+  <section>
+    <div class="section-label"><span class="section-num">02</span> / Image</div>
+    <h2>Camera Standards</h2>
+    <p>All footage is captured for a color pipeline. Deliverables must round-trip cleanly to the media manager without guesswork.</p>
+    <div class="specs">
+      <div class="row"><div class="key">Codec</div><div>RAW or Log/Flat. S-Log3, N-Log, C-Log, V-Log, ProRes RAW, BRAW all acceptable.</div></div>
+      <div class="row"><div class="key">Resolution</div><div>4K minimum. UHD or DCI both fine.</div></div>
+      <div class="row"><div class="key">Frame Rate</div><div>24fps standard. 60fps for motion intended for slow-motion.</div></div>
+      <div class="row"><div class="key">Color / LUT</div><div>Deliver EITHER (a) a custom LUT built to your camera and lighting for that shoot, OR (b) the manufacturer LUT name so the media manager applies the correct conversion. No LUT = incomplete delivery.</div></div>
+      <div class="row"><div class="key">White Balance</div><div>Locked. Never auto.</div></div>
+      <div class="row"><div class="key">Field Guide</div><div>Full camera settings (shutter, ISO, ND, padding) per the Jobsite Guide for Film Crew.</div></div>
+    </div>
+  </section>
+
+  <!-- 03 SOUND -->
+  <section>
+    <div class="section-label"><span class="section-num">03</span> / Sound</div>
+    <h2>Sound Standards</h2>
+    <p>Two independent sources on every recorded human. Always. If the primary fails, the secondary is what saves the interview.</p>
+
+    <h3>Primary — body-worn</h3>
+    <ul class="plain">
+      <li>DJI Mic (or DJI Mic 2)</li>
+      <li>Rode Wireless (any Pro model)</li>
+      <li>TASCAM DR-10L or DR-10L Pro</li>
+      <li>Sennheiser or Sony wireless lav pack</li>
+    </ul>
+
+    <h3>Secondary — boom, plant, or backup</h3>
+    <ul class="plain">
+      <li>Boom mic on a pole (shotgun)</li>
+      <li>Plant mic hidden in the scene</li>
+      <li>Second lav on the same subject</li>
+      <li>An iPhone with Voice Memos or the Rode app running quietly as an emergency backup — acceptable as the secondary source, never as the primary</li>
+    </ul>
+
+    <div class="must">Any interview subject or follow footage where the subject is narrating must be recorded with a body-worn mic. The secondary source is a rule, not a suggestion.</div>
+
+    <div class="specs">
+      <div class="row"><div class="key">Format</div><div>48 kHz / 24-bit WAV minimum</div></div>
+      <div class="row"><div class="key">Sync</div><div>Head slate on every clip if crew allows. Otherwise a clap or a hand-signed sync mark on camera.</div></div>
+      <div class="row"><div class="key">Levels</div><div>Peaks around -12 dB. Never let it clip.</div></div>
+    </div>
+  </section>
+
+  <!-- 04 FILES -->
+  <section>
+    <div class="section-label"><span class="section-num">04</span> / Organization</div>
+    <h2>File Naming</h2>
+    <p>Every shoot day gets its own top-level folder from each crew member. Names are locked to this format so the media manager can find anything in seconds.</p>
+
+    <h3>Cinematographer folder</h3>
+    <div class="example"><span class="lbl">Format</span>YYMMDD_Cinematographer_Name</div>
+    <div class="example"><span class="lbl">Example</span>260722_Cinematographer_JohnDoe</div>
+
+    <div class="tree">
+<span class="folder">260722_Cinematographer_JohnDoe/</span>
+<span class="indent">├──</span> <span class="folder">A_CAM/</span>   <span class="comment">// primary camera clips</span>
+<span class="indent">├──</span> <span class="folder">B_CAM/</span>   <span class="comment">// second camera clips</span>
+<span class="indent">└──</span> <span class="folder">C_CAM/</span>   <span class="comment">// third camera or drone (if used)</span>
+    </div>
+    <p style="font-size: 14.5px; color: var(--ink-soft);">Only include folders for cameras that actually rolled. Do not deliver empty folders.</p>
+
+    <h3>Sound recordist folder</h3>
+    <div class="example"><span class="lbl">Format</span>YYMMDD_Recordist_Name</div>
+    <div class="example"><span class="lbl">Example</span>260722_Recordist_JaneSmith</div>
+
+    <div class="tree">
+<span class="folder">260722_Recordist_JaneSmith/</span>
+<span class="indent">└──</span> <span class="comment">all sound files inside. Sub-folder by session if useful.</span>
+    </div>
+    <p style="font-size: 14.5px; color: var(--ink-soft);">If a cinematographer is also handling sound, sound files go inside a Recordist folder alongside the Cinematographer folder — not mixed in with camera folders.</p>
+  </section>
+
+  <!-- 05 DELIVERY -->
+  <section>
+    <div class="section-label"><span class="section-num">05</span> / Handoff</div>
+    <h2>Delivery</h2>
+    <p>Footage must land in the media manager's approved cloud inbox. Which service you use is flexible — the standard is professional, tracked, and secure.</p>
+
+    <div class="delivery">
+      <div class="lane yes">
+        <div class="lane-tag">Approved</div>
+        <ul>
+          <li>MASV — AWC account (request access from media manager)</li>
+          <li>WeTransfer Pro</li>
+          <li>Aspera</li>
+          <li>Signiant</li>
+          <li>Frame.io Transfer</li>
+          <li>Dropbox Transfer (paid tier)</li>
+          <li>Any other professional file-transfer service</li>
+        </ul>
+      </div>
+      <div class="lane no">
+        <div class="lane-tag">Not Accepted</div>
+        <ul>
+          <li>Google Drive of any kind</li>
+          <li>iCloud shared folders</li>
+          <li>Consumer free-tier services with expiring links</li>
+          <li>Physical drive hand-off with no cloud copy</li>
+          <li>Slack, email, or SMS attachments</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="must">Footage delivered via Google Drive will not be counted as delivered. This is a hard rule.</div>
+  </section>
+
+  <!-- 06 BACKUP -->
+  <section>
+    <div class="section-label"><span class="section-num">06</span> / Retention</div>
+    <h2>Backup &amp; 60-Day Hold</h2>
+    <ol class="numbered">
+      <li>Camera and sound crews hold a full backup on their own drive for <strong>60 days</strong> from the shoot date.</li>
+      <li>After day 60, the backup may be purged unless AWC has asked in writing for an extended hold.</li>
+      <li>Card originals stay untouched until the delivered copy is confirmed received by the media manager AND the local backup is verified.</li>
+      <li>If AWC needs a re-pull, the request will come before day 60. Respond within 48 hours.</li>
+    </ol>
+  </section>
+
+  <!-- 07 DELIVERED -->
+  <section>
+    <div class="section-label"><span class="section-num">07</span> / Sign-Off</div>
+    <h2>What Counts as Delivered</h2>
+    <p>A shoot is considered delivered — and the job is closed — when all five of these are true.</p>
+    <ul class="checklist">
+      <li>Footage and audio have landed in the media manager's approved cloud inbox</li>
+      <li>Folder structure matches the naming convention above</li>
+      <li>LUT (custom or manufacturer name) has been provided</li>
+      <li>60-day local backup is in place and verified</li>
+      <li>Media manager has confirmed receipt in writing</li>
+    </ul>
+    <p style="font-size: 15px; color: var(--ink-soft);">Anything less and the shoot remains open. Sign-off waits on delivery confirmation.</p>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section>
+    <div class="section-label"><span class="section-num">08</span> / Companion</div>
+    <h2>See Also</h2>
+    <div class="see-also">
+      <div class="marker">→</div>
+      <div class="body">
+        <h3>AWC Jobsite Guide for Film Crew</h3>
+        <p>On-site conduct, PPE, arrival protocol, safety rules, the eight shots, and end-of-day wrap. Every field crew member reads this before their first shoot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>AWC · Film Crew SOP · v1.0 · 2026</div>
+    <div>Prepared by The VDO Aigency</div>
+  </footer>
+
+</div>
+</body>
+</html>
