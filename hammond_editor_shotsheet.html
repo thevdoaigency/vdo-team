@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammond — 8 Reels · Editor Shot Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #e8b84b;
+  --gold-dim: rgba(232,184,75,0.12);
+  --black: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --surface3: #222222;
+  --cream: #ede9e3;
+  --muted: #6a6560;
+  --border: rgba(255,255,255,0.06);
+
+  --ready: #2a7a4b;
+  --ready-bg: rgba(42,122,75,0.12);
+  --ready-text: #5cba88;
+
+  --graphic: #7a5a1a;
+  --graphic-bg: rgba(232,184,75,0.1);
+  --graphic-text: #e8b84b;
+
+  --vo: #1a4a7a;
+  --vo-bg: rgba(80,140,220,0.1);
+  --vo-text: #7aadee;
+
+  --clone: #5a1a7a;
+  --clone-bg: rgba(160,80,220,0.1);
+  --clone-text: #bb88ee;
+
+  --scratch: #7a2a1a;
+  --scratch-bg: rgba(220,100,80,0.1);
+  --scratch-text: #ee9988;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.header-title span { color: var(--gold); }
+
+.header-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.stat-pill {
+  background: var(--surface2);
+  padding: 8px 14px;
+  flex: 1;
+  text-align: center;
+}
+
+.stat-pill .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+
+.stat-pill .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.filter-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+/* ── MAIN TABLE AREA ── */
+.main {
+  padding: 0 32px 48px;
+}
+
+/* ── WEEK BLOCK ── */
+.week-block {
+  margin-top: 32px;
+}
+
+.week-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid rgba(232,184,75,0.2);
+  margin-bottom: 2px;
+  position: sticky;
+  top: 220px;
+  background: var(--black);
+  z-index: 10;
+}
+
+.week-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.week-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.week-phase {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.week-count {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ── POST ROW ── */
+.post-row {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  min-height: 52px;
+  transition: background 0.1s;
+}
+
+.post-row:hover { background: var(--surface2); }
+.post-row.hidden { display: none; }
+
+.post-row .cell {
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  border-right: 1px solid var(--border);
+}
+
+.post-row .cell:last-child { border-right: none; }
+
+/* Column header row */
+.col-headers {
+  display: grid;
+  grid-template-columns: 48px 90px 110px 120px 90px 1fr 140px 100px;
+  gap: 0;
+  background: var(--surface2);
+  border-bottom: 2px solid rgba(232,184,75,0.2);
+  position: sticky;
+  top: 180px;
+  z-index: 9;
+}
+
+.col-header {
+  padding: 8px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+}
+
+.col-header:last-child { border-right: none; }
+
+/* Cell contents */
+.post-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.day-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+}
+
+/* Platform badges */
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.p-li-company { color: #70a0ff; border-color: rgba(112,160,255,0.25); background: rgba(112,160,255,0.07); }
+.p-li-curtis  { color: #ff9f70; border-color: rgba(255,159,112,0.25); background: rgba(255,159,112,0.07); }
+.p-li-rob     { color: #70d0ff; border-color: rgba(112,208,255,0.25); background: rgba(112,208,255,0.07); }
+.p-ig         { color: #ff70c8; border-color: rgba(255,112,200,0.25); background: rgba(255,112,200,0.07); }
+.p-yt         { color: #ff7070; border-color: rgba(255,112,112,0.25); background: rgba(255,112,112,0.07); }
+
+/* Type badges */
+.type-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.t-result    { color: #5cba88; background: rgba(42,122,75,0.15); }
+.t-mechanism { color: #7aadee; background: rgba(80,140,220,0.12); }
+.t-pov       { color: #e8b84b; background: rgba(232,184,75,0.1); }
+.t-education { color: #bb88ee; background: rgba(160,80,220,0.1); }
+.t-clip      { color: #ee9988; background: rgba(220,100,80,0.1); }
+
+/* Asset ID */
+.asset-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Post content */
+.post-content {}
+
+.post-hook {
+  font-size: 12px;
+  color: var(--cream);
+  line-height: 1.45;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.post-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Production status */
+.prod-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.s-ready    { color: var(--ready-text);  background: var(--ready-bg);  border-color: rgba(42,122,75,0.3); }
+.s-graphic  { color: var(--graphic-text); background: var(--graphic-bg); border-color: rgba(232,184,75,0.25); }
+.s-vo       { color: var(--vo-text);     background: var(--vo-bg);     border-color: rgba(80,140,220,0.25); }
+.s-clone    { color: var(--clone-text);  background: var(--clone-bg);  border-color: rgba(160,80,220,0.25); }
+.s-scratch  { color: var(--scratch-text); background: var(--scratch-bg); border-color: rgba(220,100,80,0.25); }
+
+/* Monday status */
+.monday-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center;
+  padding: 60px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  display: none;
+}
+
+/* ── MONDAY COLUMN REF ── */
+.monday-ref {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-top: 40px;
+}
+
+.monday-ref h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.monday-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.monday-col {
+  background: var(--surface2);
+  padding: 14px 16px;
+}
+
+.mcol-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.mcol-type {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+.sheet { max-width: 1180px; margin: 0 auto; padding: 0 28px 80px; }
+.legend2 { display:flex; gap:22px; flex-wrap:wrap; padding:14px 0 4px; font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.08em; }
+.legend2 span b { color:var(--cream); font-weight:400; }
+.vk { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:1px; }
+
+.reel { border:1px solid var(--border); background:var(--surface); margin-top:26px; }
+.reel.done { opacity:.62; }
+.rhead { display:flex; align-items:center; gap:14px; padding:13px 20px; background:var(--surface2); border-bottom:1px solid var(--border); border-left:3px solid var(--gold); }
+.rnum { font-family:'Playfair Display',serif; font-size:26px; color:var(--gold); line-height:1; }
+.rttl { font-size:14px; color:var(--cream); font-weight:500; }
+.rsub { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.06em; margin-top:2px; }
+.rmeta { margin-left:auto; text-align:right; font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); line-height:1.7; }
+.rmeta .ch { color:var(--cream); }
+.rmeta .rt { color:var(--gold); }
+.donetag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--ready-text); border:1px solid var(--ready); padding:2px 8px; border-radius:2px; }
+.holdtag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--scratch-text); border:1px solid rgba(220,100,80,.4); padding:2px 8px; border-radius:2px; }
+
+.timeline { display:grid; grid-template-columns:64px 96px 1fr; }
+.tl-h { display:grid; grid-template-columns:64px 96px 1fr; background:rgba(255,255,255,.02); border-bottom:1px solid var(--border); }
+.tl-h div { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding:8px 12px; }
+.beat { display:grid; grid-template-columns:64px 96px 1fr; border-bottom:1px solid var(--border); }
+.beat:last-child { border-bottom:none; }
+.beat > div { padding:11px 12px; }
+.bt { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); opacity:.85; }
+.bsrc { font-family:'DM Mono',monospace; font-size:10px; line-height:1.5; }
+.bsrc .tc { color:var(--cream); }
+.bsrc .lbl { display:inline-block; margin-top:3px; padding:1px 6px; border-radius:2px; font-size:8px; letter-spacing:.1em; }
+.l-clip { background:rgba(90,160,120,.14); color:#7ec99a; }
+.l-vo-k { background:rgba(200,140,60,.14); color:#e0a95f; }
+.l-vo-c { background:rgba(160,110,220,.14); color:#bb88ee; }
+.l-vo-r { background:rgba(80,140,220,.14); color:#7aadee; }
+.l-card { background:rgba(232,184,75,.12); color:var(--gold); }
+.bcontent { font-size:12.5px; line-height:1.55; color:var(--cream); font-weight:300; }
+.bcontent .say { color:var(--cream); }
+.bcontent .say b { color:#fff; font-weight:500; }
+.bcontent .vo { color:#e8e2d0; font-style:italic; }
+.bcontent .card { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:.04em; background:rgba(232,184,75,.06); border:1px solid rgba(232,184,75,.18); padding:8px 11px; margin-top:4px; display:block; white-space:pre-line; line-height:1.6; }
+.bcontent .dir { color:var(--muted); font-style:italic; font-size:11px; display:block; margin-top:5px; }
+
+.rfoot { padding:11px 20px; border-top:1px solid var(--border); background:rgba(0,0,0,.12); font-size:11px; color:var(--muted); line-height:1.55; }
+.rfoot b { color:var(--scratch-text); font-weight:500; font-style:normal; }
+.rfoot .ok { color:var(--ready-text); }
+
+.vobox { background:rgba(0,0,0,.16); border:1px solid var(--border); border-left:2px solid var(--clone-text); margin:0; }
+.vobox-h { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--clone-text); padding:8px 20px 0; text-transform:uppercase; }
+.vobox p { padding:4px 20px 12px; font-size:12.5px; font-style:italic; color:#e8e2d0; line-height:1.6; white-space:pre-line; }
+.vobox .voice { color:var(--cream); font-style:normal; font-family:'DM Mono',monospace; font-size:10px; }
+</style></head><body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-title">Hammond, Indiana — <span>8 Reels · Editor Shot Sheet</span></div>
+    <div class="header-meta">
+      For Jordan · Source: City of Hammond hero video (1:58)<br>
+      Components: source SOT + TC · VO (engine noted) · graphics<br>
+      Leopardo Efficiency · VDO Aigency
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-pill"><span class="num">8</span><span class="lbl">Reels</span></div>
+    <div class="stat-pill"><span class="num">2</span><span class="lbl">Edited</span></div>
+    <div class="stat-pill"><span class="num">6</span><span class="lbl">To Cut</span></div>
+    <div class="stat-pill"><span class="num">0</span><span class="lbl">Blocked</span></div>
+  </div>
+  <div class="legend2">
+    <span><span class="vk" style="background:#7ec99a"></span><b>SOT</b> = sync sound from hero video (pull at listed TC)</span>
+    <span><span class="vk" style="background:#e0a95f"></span><b>Kristin</b> = ElevenLabs corporate female (built-in)</span>
+    <span><span class="vk" style="background:#bb88ee"></span><b>Curtis clone</b></span>
+    <span><span class="vk" style="background:#7aadee"></span><b>Rob clone</b></span>
+    <span><span class="vk" style="background:var(--gold)"></span><b>GRAPHIC</b> = title / stat / end card</span>
+  </div>
+</div>
+
+<div class="sheet">
+
+<div class="reel done" id="R1">
+  <div class="rhead">
+    <div class="rnum">01</div>
+    <div>
+      <div class="rttl">The Headline <span class="donetag">EDITED</span></div>
+      <div class="rsub">HAM_R1 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~22s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:02</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">TITLE CARD</span></div>
+  <div class="bcontent"><span class="card">HAMMOND, INDIANA
+What one city did in one contract</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:02–0:21</div>
+  <div class="bsrc"><span class="tc">HERO 0:02–0:21</span><br><span class="lbl l-clip">SOT · Mayor McDermott</span></div>
+  <div class="bcontent"><span class="say"><b>Mayor Thomas McDermott:</b> "We added 76 new vehicles, converted 4,800 city-owned streetlights to LED. We replaced outdated HVAC in 13 city buildings. Cheaper. Cleaner. Nicer. You're going to save a lot of money in the city of Hammond."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">SYNC</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">STAT CARDS (over SOT, on his cadence)</span></div>
+  <div class="bcontent"><span class="card">76 VEHICLES → 4,800 STREETLIGHTS → 13 BUILDINGS</span><span class="dir">Each card lands as he names it. Final beat: full-frame "Cheaper. Cleaner. Nicer." on the close.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:21–0:22</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">END CARD</span></div>
+  <div class="bcontent"><span class="card">LEOPARDO EFFICIENCY</span></div>
+</div>
+  <div class="rfoot">DONE — no VO. Do not touch the SOT audio. <span class="ok">Complete.</span></div>
+</div>
+
+<div class="reel done" id="R2">
+  <div class="rhead">
+    <div class="rnum">02</div>
+    <div>
+      <div class="rttl">The Model <span class="donetag">EDITED</span></div>
+      <div class="rsub">HAM_R2 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~19s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:11</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">over Hammond b-roll — problem frame</span></div>
+  <div class="bcontent"><span class="vo">Hammond, Indiana had four problems and no capital.
+Aging buildings. Failing streetlights. A fleet past its life.
+They fixed all four — and the city never wrote a check.
+Here's how.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:11–0:19</div>
+  <div class="bsrc"><span class="tc">HERO 0:24–0:29</span><br><span class="lbl l-clip">SOT · Rob Vollrath</span></div>
+  <div class="bcontent"><span class="say"><b>Rob Vollrath:</b> "We specialize in guaranteed energy savings performance contracting for local government agencies."</span><span class="dir">Start Rob's SOT at "We specialize…" — skip the garbled opener (0:21–0:24) entirely.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:19–0:22</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">END CARD</span></div>
+  <div class="bcontent"><span class="card">GUARANTEED. IN WRITING.</span></div>
+</div>
+  <div class="rfoot">DONE — Kristin VO built. <span class="ok">Complete.</span> Garbled 0:21 opener resolved by cutting it, not fixing it.</div>
+</div>
+
+<div class="reel" id="R3">
+  <div class="rhead">
+    <div class="rnum">03</div>
+    <div>
+      <div class="rttl">The Four Phases </div>
+      <div class="rsub">HAM_R3 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~18s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:02</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">TITLE CARD</span></div>
+  <div class="bcontent"><span class="card">FOUR PHASES. ONE CONTRACT.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:02–0:11</div>
+  <div class="bsrc"><span class="tc">HERO 0:29–0:38</span><br><span class="lbl l-clip">SOT · Jeff Sauline</span></div>
+  <div class="bcontent"><span class="say"><b>Jeff Sauline:</b> "There's four phases of the project. We've got the building work, the street lighting, the propane upgrades, and the vehicle leasing program."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">SYNC</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">PHASE CARDS (one per phase, on his count)</span></div>
+  <div class="bcontent"><span class="card">1 · BUILDING WORK
+2 · STREET LIGHTING
+3 · PROPANE UPGRADES
+4 · VEHICLE LEASING</span><span class="dir">Cards build one at a time as Jeff names each. Hold all four stacked for the last ~3s.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:11–0:18</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">outro over phase cards held</span></div>
+  <div class="bcontent"><span class="vo">Any one loses the budget fight. Together, they fund each other.</span></div>
+</div>
+  <div class="rfoot">Pure-visual reel — cleanest of the set. Kristin outro is optional; card-only also works if the b-roll is strong.</div>
+</div>
+
+<div class="reel" id="R4">
+  <div class="rhead">
+    <div class="rnum">04</div>
+    <div>
+      <div class="rttl">The Money </div>
+      <div class="rsub">HAM_R4 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~20s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:03</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">cold open over Heather b-roll</span></div>
+  <div class="bcontent"><span class="vo">Hammond's City Controller does not get paid to be impressed.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:03–0:13</div>
+  <div class="bsrc"><span class="tc">HERO 0:38–0:48</span><br><span class="lbl l-clip">SOT · Heather Garay</span></div>
+  <div class="bcontent"><span class="say"><b>Heather Garay, City Controller:</b> "…guaranteed that we will not only be able to make back our debt payment for the improvements, but will generate an additional $16 million."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">SYNC</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">HERO NUMBER (lands on &quot;$16 million&quot;)</span></div>
+  <div class="bcontent"><span class="card">$16,000,000
+ABOVE DEBT SERVICE</span><span class="dir">Number hits full-frame exactly on her words. This is the hinge of the whole campaign — let it sit.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:13–0:20</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">clarifier over static number</span></div>
+  <div class="bcontent"><span class="vo">Not sixteen million in savings. Sixteen million on top of paying for the entire project.</span></div>
+</div>
+  <div class="rfoot">Rob has signed off on the figure. <span class="ok">Cleared to cut and publish.</span> This is the hinge of the campaign — the $16M card is the single most important graphic in the set.</div>
+</div>
+
+<div class="reel" id="R5">
+  <div class="rhead">
+    <div class="rnum">05</div>
+    <div>
+      <div class="rttl">The Buildings </div>
+      <div class="rsub">HAM_R5 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~18s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:02</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">TITLE CARD</span></div>
+  <div class="bcontent"><span class="card">BUILT TO LAST 23 YEARS</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:02–0:14</div>
+  <div class="bsrc"><span class="tc">HERO 0:48–1:04</span><br><span class="lbl l-clip">SOT · Rob Vollrath</span></div>
+  <div class="bcontent"><span class="say"><b>Rob Vollrath:</b> "HVAC in 11 of the 14 buildings… electrical and lighting in 13 of the 14. The lights we put in are going to be up there for 23 years. The ones they had previously, they were replacing every 3 to 5 years."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">SYNC</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">COMPARISON CARD (on the 23-yr line)</span></div>
+  <div class="bcontent"><span class="card">NEW: 23 YEARS   ·   OLD: 3–5 YEARS</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:14–0:17</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">END CARD</span></div>
+  <div class="bcontent"><span class="card">11 OF 14 · HVAC   |   13 OF 14 · LIGHTING</span></div>
+</div>
+  <div class="rfoot">Single-speaker Rob cut — the 1:04 building-automation line dropped, so no mid-sentence boundary to resolve. Cleanest mechanism clip in the set. Cut whenever.</div>
+</div>
+
+<div class="reel" id="R6">
+  <div class="rhead">
+    <div class="rnum">06</div>
+    <div>
+      <div class="rttl">The Fleet </div>
+      <div class="rsub">HAM_R6 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~19s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:03</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">cold open — the objection</span></div>
+  <div class="bcontent"><span class="vo">Everyone asks the same thing. What happens when the propane runs out?</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:03–0:12</div>
+  <div class="bsrc"><span class="tc">HERO 1:19–1:28</span><br><span class="lbl l-clip">SOT · Rob Vollrath</span></div>
+  <div class="bcontent"><span class="say"><b>Rob Vollrath:</b> "We identified 119 of their high-mileage vehicles that we put the alternative fuel system on to significantly reduce their fuel costs."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:12–0:19</div>
+  <div class="bsrc"><span class="tc">HERO 1:28–1:38</span><br><span class="lbl l-clip">SOT · Jeff Sauline</span></div>
+  <div class="bcontent"><span class="say"><b>Jeff Sauline:</b> "They can still run off unleaded, but now you have the option to run off propane. More efficient. Cheaper."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">SYNC</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">STAT CARDS (over fleet b-roll)</span></div>
+  <div class="bcontent"><span class="card">119 VEHICLES CONVERTED
+PROPANE + UNLEADED — ALWAYS THE CHEAPER FUEL</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:19–0:22</div>
+  <div class="bsrc"><span class="lbl l-vo-k">VO · Kristin (Corporate F)</span><br><span class="tc" style="color:var(--muted);font-size:9px">button</span></div>
+  <div class="bcontent"><span class="vo">You can't lose a bet you never had to make.</span></div>
+</div>
+  <div class="rfoot">Most visual sequence in the source — trucks, fueling, fleet yard. Two-speaker cut.</div>
+</div>
+
+<div class="reel" id="R7">
+  <div class="rhead">
+    <div class="rnum">07</div>
+    <div>
+      <div class="rttl">The Stakes </div>
+      <div class="rsub">HAM_R7 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~14s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:02</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">ID CARD (at open, nothing else)</span></div>
+  <div class="bcontent"><span class="card">CHIEF JOHN D. DOUGHTY · HAMMOND PD</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:02–0:13</div>
+  <div class="bsrc"><span class="tc">HERO 1:38–1:49</span><br><span class="lbl l-clip">SOT · Chief John D. Doughty</span></div>
+  <div class="bcontent"><span class="say"><b>Chief John D. Doughty:</b> "This is a legacy moment for the city, because we've accomplished something that's never been accomplished before. We have a whole new fleet of vehicles. It's going to save lives on the police department."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:13–0:14</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">END CARD</span></div>
+  <div class="bcontent"><span class="card">LEOPARDO EFFICIENCY</span></div>
+</div>
+  <div class="rfoot">Emotional peak of the library. <b>Let it breathe — no VO, no music swell, no over-production.</b> ID card in, Chief speaks, out. That's the whole reel.</div>
+</div>
+
+<div class="reel" id="R8">
+  <div class="rhead">
+    <div class="rnum">08</div>
+    <div>
+      <div class="rttl">The Invitation </div>
+      <div class="rsub">HAM_R8 · Source: City of Hammond hero (1:58)</div>
+    </div>
+    <div class="rmeta"><span class="ch">LI-CO</span><br><span class="rt">~28s</span></div>
+  </div>
+  <div class="tl-h"><div>TC (reel)</div><div>Source</div><div>Content / Graphic</div></div>
+  <div class="beat">
+  <div class="bt">0:00–0:09</div>
+  <div class="bsrc"><span class="tc">HERO 1:10–1:19</span><br><span class="lbl l-clip">SOT · Heather Garay</span></div>
+  <div class="bcontent"><span class="say"><b>Heather Garay:</b> "The equipment is guaranteed for 20 years for the city to use as they see fit. And I know the team — they try to be conservative with that number, and they expect those savings to be even greater."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:09–0:19</div>
+  <div class="bsrc"><span class="tc">HERO 1:49–1:58</span><br><span class="lbl l-clip">SOT · Heather Garay</span></div>
+  <div class="bcontent"><span class="say"><b>Heather Garay:</b> "This is a no-brainer for any community looking to upgrade their fleet, upgrade their buildings, and find a new revenue stream out of the mix as well."</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:19–0:28</div>
+  <div class="bsrc"><span class="lbl l-vo-c">VO · Curtis clone</span><br><span class="tc" style="color:var(--muted);font-size:9px">soft CTA over Hammond + South Euclid b-roll</span></div>
+  <div class="bcontent"><span class="vo">If that's your city — the thing standing between you and this isn't capital.
+It's that nobody's told you the neglected asset is an asset.
+Let's talk.</span></div>
+</div>
+<div class="beat">
+  <div class="bt">0:26–0:28</div>
+  <div class="bsrc"><span class="lbl l-card">GRAPHIC</span><br><span class="tc" style="color:var(--muted)">END CARD</span></div>
+  <div class="bcontent"><span class="card">LEOPARDO EFFICIENCY
+Curtis Leopardo</span></div>
+</div>
+  <div class="rfoot"><b>Campaign closer.</b> Only place the Curtis clone enters the Hammond narrative — he isn't on camera in this shoot. Tail b-roll pulls from Hammond + South Euclid. Curtis clone script needs render + approval.</div>
+</div>
+</div>
+
+</body></html>
