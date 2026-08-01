@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWC Bridge</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1A3868; --gold:#C9A227; --bg:#EEF1F5; --sheet:#FFFFFF;
+    --ink:#1A1F2B; --sub:#5B6472; --line:#DFE4EC; --chip:#F1EAD2;
+    --shadow:0 1px 3px rgba(26,56,104,.08); --radius:2px; --measure:920px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Libre Franklin',system-ui,sans-serif; font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brandline,.eyebrow,.status,.tabbtn{font-family:'Jost',sans-serif;}
+  .wrap{max-width:var(--measure); margin:0 auto; padding:0 24px;}
+  .sheet{background:var(--sheet); margin:28px auto; border-radius:var(--radius); box-shadow:var(--shadow);}
+
+  header{padding:26px 32px 20px; border-bottom:3px solid var(--gold);}
+  .brandline{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--sub); margin:0 0 6px;}
+  h1{font-size:25px; font-weight:600; color:var(--navy); margin:0;}
+  .sub{font-size:14px; color:var(--sub); margin:8px 0 0; max-width:600px;}
+
+  /* Tabs */
+  .tabs{display:flex; gap:0; border-bottom:1px solid var(--line);}
+  .tabbtn{
+    flex:1; background:none; border:none; cursor:pointer;
+    padding:16px 12px; font-size:13px; font-weight:600; letter-spacing:.04em;
+    text-transform:uppercase; color:var(--sub); border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .tabbtn:hover{color:var(--navy);}
+  .tabbtn.active{color:var(--navy); border-bottom-color:var(--gold);}
+  .tabnum{color:var(--gold); font-weight:700; margin-right:7px;}
+
+  .panel{display:none; padding:26px 32px 30px;}
+  .panel.active{display:block;}
+  .eyebrow{font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--sub); margin:0 0 8px;}
+  .lead{font-size:14px; color:var(--sub); margin:0 0 18px; max-width:620px;}
+
+  label{display:block; font-size:12px; font-weight:600; color:var(--navy); margin:0 0 6px; letter-spacing:.02em;}
+  input[type=text], textarea, select{
+    width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:var(--radius);
+    font-family:inherit; font-size:14px; color:var(--ink); background:#fff; margin-bottom:16px;
+  }
+  input[type=text]:focus, textarea:focus, select:focus{outline:none; border-color:var(--navy);}
+  textarea{resize:vertical; min-height:70px;}
+  .row{display:flex; gap:14px;}
+  .row > div{flex:1;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff;
+    border:none; border-radius:var(--radius); padding:11px 20px; font-family:'Jost',sans-serif;
+    font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; cursor:pointer;
+    transition:opacity .15s;
+  }
+  .btn:hover{opacity:.88;}
+  .btn:disabled{opacity:.45; cursor:default;}
+  .btn-gold{background:var(--gold); color:var(--navy);}
+
+  .results{margin-top:22px;}
+  .result{
+    display:flex; align-items:baseline; gap:14px; padding:12px 0; border-top:1px solid var(--line);
+  }
+  .score{font-family:'Jost',sans-serif; font-size:13px; font-weight:600; color:var(--gold); min-width:44px;}
+  .rmeta .rsubj{font-size:14px; color:var(--navy); font-weight:600;}
+  .rmeta .rclip{font-size:12px; color:var(--sub); margin-top:2px;}
+  .rtime{margin-left:auto; font-size:12px; color:var(--sub); font-variant-numeric:tabular-nums;}
+
+  .status{
+    display:inline-block; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--navy); background:var(--chip); padding:3px 9px; border-radius:var(--radius); margin-left:8px;
+  }
+  .note{font-size:12.5px; color:var(--sub); margin-top:14px; padding-top:12px; border-top:1px solid var(--line);}
+  .empty{font-size:13px; color:var(--sub); font-style:italic; padding:18px 0;}
+  .spinner{display:inline-block; width:13px; height:13px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  footer{padding:16px 32px; font-size:11.5px; color:var(--sub); border-top:1px solid var(--line);}
+
+  /* config bar */
+  .cfg{background:#f7f9fc; border:1px solid var(--line); border-radius:var(--radius); padding:10px 13px; margin-bottom:20px; font-size:12px; color:var(--sub);}
+  .cfg input{width:auto; display:inline-block; margin:0 0 0 6px; padding:4px 8px; font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sheet">
+    <header>
+      <p class="brandline">Alexander West Capital · Portfolio Media</p>
+      <h1>The Bridge</h1>
+      <p class="sub">Search the footage library by what's on screen or what's said, and assemble a cut. Everything runs on the library you've already indexed.</p>
+    </header>
+
+    <div class="cfg">
+      Connected to Bridge server at
+      <input type="text" id="baseUrl" value="https://bridge.thevdoaigency.com" spellcheck="false">
+      — change if your box is on a different address.
+    </div>
+
+    <div class="tabs">
+      <button class="tabbtn active" data-tab="search"><span class="tabnum">01</span>Find b-roll</button>
+      <button class="tabbtn" data-tab="brief"><span class="tabnum">02</span>Build a narrative</button>
+      <button class="tabbtn" data-tab="make"><span class="tabnum">03</span>Assemble</button>
+    </div>
+
+    <!-- PANEL 1 — VISUAL SEARCH -->
+    <div class="panel active" id="panel-search">
+      <p class="eyebrow">Visual search</p>
+      <p class="lead">Type what you're looking for — "fire station," "generator," "worker walkthrough." Returns the shots that match, ranked, with their place in the reel.</p>
+      <label for="q">What are you looking for?</label>
+      <div class="row">
+        <div style="flex:3"><input type="text" id="q" placeholder="e.g. generator, HVAC units, fire station exterior"></div>
+        <div style="flex:1">
+          <select id="company">
+            <option value="">All companies</option>
+            <option value="LE">Leopardo Efficiency</option>
+            <option value="GKE">Grand Kahn Electric</option>
+            <option value="LC">Leopardo Construction</option>
+            <option value="LH">Laystrom Hardware</option>
+            <option value="EBT">Enlyt</option>
+            <option value="DFH">DFH Connect</option>
+            <option value="GP">GATOR</option>
+            <option value="LCI">LCI Development</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" id="searchBtn" onclick="runSearch()">Search shots</button>
+      <div class="results" id="searchResults"></div>
+    </div>
+
+    <!-- PANEL 2 — NARRATIVE / SOUNDBITE -->
+    <div class="panel" id="panel-brief">
+      <p class="eyebrow">Narrative cut</p>
+      <p class="lead">Describe the story you want and pick the interviews to pull from. The model selects the soundbites and orders them into a cut.</p>
+      <label for="sources">Interviews to pull from (comma-separated file names)</label>
+      <textarea id="sources" placeholder="251101_LE_Speedway_BradSloan_WastewaterSuperintendant, 251101_LE_Speedway_GrantKleinhenz_TownManager"></textarea>
+      <label for="brief">What's the story?</label>
+      <textarea id="brief" placeholder="e.g. How the wastewater generator works — capturing methane and turning it into savings."></textarea>
+      <div class="row">
+        <div>
+          <label for="project">Company folder</label>
+          <select id="project">
+            <option value="LE">LE — Leopardo Efficiency</option>
+            <option value="GKE">GKE — Grand Kahn Electric</option>
+            <option value="LC">LC — Leopardo Construction</option>
+          </select>
+        </div>
+        <div>
+          <label for="mins">Target length (minutes)</label>
+          <input type="text" id="mins" value="0.5">
+        </div>
+      </div>
+      <button class="btn" id="briefBtn" onclick="runBrief()">Generate cut</button>
+      <div class="results" id="briefResults"></div>
+    </div>
+
+    <!-- PANEL 3 — ASSEMBLE / RENDER -->
+    <div class="panel" id="panel-make">
+      <p class="eyebrow">Assemble</p>
+      <p class="lead">Turn the selected picks into a finished video. The render pulls each clip from the library and stitches the cut — you get an MP4 to download.</p>
+      <div class="empty" id="makeState">Run a narrative cut or a b-roll search first — then assemble it here.</div>
+      <button class="btn btn-gold" id="makeBtn" onclick="runMake()" disabled>Make the video</button>
+      <div class="results" id="makeResults"></div>
+    </div>
+
+    <footer>VDO Aigency · AWC Bridge · prototype</footer>
+  </div>
+</div>
+
+<script>
+  const base = () => document.getElementById('baseUrl').value.replace(/\/$/,'');
+  let lastXml = null;
+
+  // Tabs
+  document.querySelectorAll('.tabbtn').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabbtn').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById('panel-'+b.dataset.tab).classList.add('active');
+    };
+  });
+
+  // PANEL 1 — visual search
+  async function runSearch(){
+    const q = document.getElementById('q').value.trim();
+    const company = document.getElementById('company').value;
+    const out = document.getElementById('searchResults');
+    const btn = document.getElementById('searchBtn');
+    if(!q){ out.innerHTML='<div class="empty">Type something to search for.</div>'; return; }
+    btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Searching';
+    out.innerHTML='';
+    try{
+      const r = await fetch(base()+'/local-bridge/search',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({query:q, company:company||undefined, top:10})
+      });
+      const data = await r.json();
+      const hits = data.results || data.hits || [];
+      if(!hits.length){ out.innerHTML='<div class="empty">No shots matched. Try broader terms.</div>'; }
+      else out.innerHTML = hits.map(h=>`
+        <div class="result">
+          <span class="score">${(h.score!=null? h.score.toFixed(2):'')}</span>
+          <div class="rmeta">
+            <div class="rsubj">${h.subject||h.clip||'shot'}</div>
+            <div class="rclip">${h.clip||''} ${h.company?'· '+h.company:''}</div>
+          </div>
+          <span class="rtime">${h.start_tc||h._shot_start_tc||''}</span>
+        </div>`).join('');
+    }catch(e){
+      out.innerHTML='<div class="empty">Couldn\'t reach the search endpoint. This panel needs the /local-bridge/search route on the box (the b-roll search isn\'t wired into the server yet — it currently runs as search.py on the command line).</div>';
+    }
+    btn.disabled=false; btn.textContent='Search shots';
+  }
+
+  // PANEL 2 — narrative cut (async job + poll)
+  async function runBrief(){
+    const sources = document.getElementById('sources').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const brief = document.getElementById('brief').value.trim();
+    const project = document.getElementById('project').value;
+    const mins = parseFloat(document.getElementById('mins').value)||0.5;
+    const out = document.getElementById('briefResults');
+    const btn = document.getElementById('briefBtn');
+    if(!brief || !sources.length){ out.innerHTML='<div class="empty">Add at least one interview and a story description.</div>'; return; }
+    btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Working';
+    out.innerHTML='<div class="empty">Reading transcripts and selecting soundbites… this takes a minute or two.</div>';
+    try{
+      const sub = await fetch(base()+'/local-bridge/query',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({project, selectedFiles:sources, brief, targetMinutes:mins})
+      });
+      const {jobId} = await sub.json();
+      if(!jobId) throw new Error('no job');
+      let done=null;
+      for(let i=0;i<120;i++){
+        await new Promise(r=>setTimeout(r,2500));
+        const st = await (await fetch(base()+'/local-bridge/query/status?id='+jobId)).json();
+        if(st.status==='done'){ done=st; break; }
+        if(st.error && st.error!=='Unknown query job id'){ throw new Error(st.error); }
+      }
+      if(!done) throw new Error('timed out');
+      const s = done.result.summary||{};
+      lastXml = done.result.xml;
+      const notes = (done.result.xml.match(/<lognote>([^<]*)<\/lognote>/g)||[])
+        .map(n=>n.replace(/<[^>]*>/g,''))
+        .filter((v,i,a)=>a.indexOf(v)===i);
+      out.innerHTML = `<div class="result"><div class="rmeta">
+          <div class="rsubj">${s.title||'Cut'} <span class="status">${s.pickCount} picks · ${Math.round(s.runtimeSeconds)}s</span></div>
+        </div></div>` + notes.map(n=>`
+        <div class="result"><span class="score">•</span><div class="rmeta"><div class="rsubj" style="font-weight:400">${n}</div></div></div>`).join('')
+        + `<div class="note">Cut ready. Go to <strong>Assemble</strong> to render the MP4.</div>`;
+      // enable assemble
+      document.getElementById('makeBtn').disabled=false;
+      document.getElementById('makeState').textContent='Narrative cut ready: '+(s.title||'')+' ('+s.pickCount+' picks, '+Math.round(s.runtimeSeconds)+'s).';
+    }catch(e){
+      out.innerHTML='<div class="empty">Couldn\'t complete: '+e.message+'. Check the interview file names match the library exactly.</div>';
+    }
+    btn.disabled=false; btn.textContent='Generate cut';
+  }
+
+  // PANEL 3 — render
+  async function runMake(){
+    const out = document.getElementById('makeResults');
+    const btn = document.getElementById('makeBtn');
+    if(!lastXml){ out.innerHTML='<div class="empty">Nothing to assemble yet.</div>'; return; }
+    btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Rendering';
+    out.innerHTML='<div class="empty">Pulling clips from the library and stitching the cut… this can take a few minutes.</div>';
+    try{
+      const r = await fetch(base()+'/local-bridge/render',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({xml:lastXml})
+      });
+      const data = await r.json();
+      if(data.jobId){
+        out.innerHTML='<div class="note">Render started (job '+data.jobId+'). The finished MP4 will be on the box — pull it down when it\'s done.</div>';
+      } else if(data.url || data.output){
+        out.innerHTML='<div class="note">Done. <a href="'+(data.url||data.output)+'">Download the video →</a></div>';
+      } else {
+        out.innerHTML='<div class="note">Render request sent. Check the box for the output file.</div>';
+      }
+    }catch(e){
+      out.innerHTML='<div class="empty">Render call failed: '+e.message+'.</div>';
+    }
+    btn.disabled=false; btn.textContent='Make the video';
+  }
+</script>
+</body>
+</html>
