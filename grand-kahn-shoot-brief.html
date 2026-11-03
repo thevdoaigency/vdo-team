@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Kahn Shoot Brief — Greg / Half-Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4ED;
+    --paper-shade: #EFEAE0;
+    --ink: #14181C;
+    --ink-soft: #4A5058;
+    --rule: #1F252B;
+    --hi-vis: #FF5A00;
+    --blueprint: #1B3A5B;
+    --frame-bg: #0E1418;
+    --frame-grid: rgba(255,255,255,0.18);
+    --frame-fig: #E8E2D2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  .doc-header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 24px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+
+  .doc-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .doc-title span { color: var(--hi-vis); }
+
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  .doc-meta strong { color: var(--ink); display: block; }
+
+  .doc-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    max-width: 62ch;
+    grid-column: 1 / -1;
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 56px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .section-num { color: var(--hi-vis); font-weight: 600; }
+
+  h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 14px;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 22px 0 10px;
+    color: var(--ink);
+  }
+
+  h4.cat {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 32px 0 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  h4.cat .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    padding: 3px 8px;
+    background: var(--hi-vis);
+    color: var(--ink);
+  }
+
+  h4.cat .tag.job {
+    background: var(--blueprint);
+    color: var(--paper);
+  }
+
+  .cat-note {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    max-width: 60ch;
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* STRATEGY MISSION */
+  .mission {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px;
+    margin: 8px 0 24px;
+  }
+
+  .mission .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--hi-vis);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .mission q {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(22px, 3.2vw, 30px);
+    line-height: 1.15;
+    text-transform: uppercase;
+    quotes: none;
+    display: block;
+  }
+
+  /* SPLIT */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 8px 0 24px;
+  }
+
+  .split .col {
+    background: var(--paper);
+    padding: 22px 22px 24px;
+  }
+
+  .split .col .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hi-vis);
+    margin-bottom: 8px;
+  }
+
+  .split .col .badge.blue { color: var(--blueprint); }
+
+  .split .col h5 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+
+  .split .col p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* CHECKLIST */
+  ul.checklist {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  ul.checklist li {
+    padding: 8px 0 8px 32px;
+    position: relative;
+    border-bottom: 1px solid var(--paper-shade);
+  }
+
+  ul.checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+
+  ol.numbered {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  ol.numbered li {
+    padding: 10px 0 10px 44px;
+    position: relative;
+    counter-increment: step;
+    border-bottom: 1px solid var(--paper-shade);
+  }
+
+  ol.numbered li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hi-vis);
+    letter-spacing: 0.06em;
+  }
+
+  /* MUST */
+  .must {
+    background: var(--hi-vis);
+    color: var(--ink);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-left: 6px solid var(--ink);
+    font-weight: 600;
+  }
+
+  .must::before {
+    content: "REQUIRED";
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* STORYBOARD */
+  .storyboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 12px;
+  }
+
+  .shot-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+
+  .shot-frame {
+    background: var(--frame-bg);
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .shot-frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .shot-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--hi-vis);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    letter-spacing: 0.1em;
+    z-index: 2;
+  }
+
+  .shot-tag.job { background: var(--blueprint); color: var(--paper); }
+
+  .shot-meta {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    z-index: 2;
+  }
+
+  .shot-body {
+    padding: 16px 18px 18px;
+  }
+
+  .shot-body h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .shot-body p {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .shot-body .tip {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* SPECS */
+  .specs {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: 8px;
+  }
+
+  .specs .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    padding: 6px 0;
+  }
+
+  .specs .row:last-child { border-bottom: none; }
+
+  .specs .key {
+    color: var(--hi-vis);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding-top: 3px;
+  }
+
+  /* INTERVIEW BLOCKS */
+  .q-block {
+    border-left: 3px solid var(--hi-vis);
+    background: var(--paper);
+    padding: 16px 20px;
+    margin: 12px 0 22px;
+  }
+
+  .q-block.evergreen {
+    border-left-color: var(--blueprint);
+  }
+
+  .q-block .q-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  .q-block .q-label .marker {
+    color: var(--hi-vis);
+    font-weight: 700;
+  }
+
+  .q-block.evergreen .q-label .marker {
+    color: var(--blueprint);
+  }
+
+  .q-block h5 {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .q-block ol {
+    list-style: none;
+    counter-reset: qq;
+  }
+
+  .q-block ol li {
+    counter-increment: qq;
+    padding: 8px 0 8px 32px;
+    position: relative;
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+
+  .q-block ol li::before {
+    content: counter(qq, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hi-vis);
+  }
+
+  .q-block.evergreen ol li::before {
+    color: var(--blueprint);
+  }
+
+  /* SEE ALSO */
+  .see-also {
+    background: var(--blueprint);
+    color: var(--paper);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .see-also .marker {
+    font-family: 'Anton', sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--hi-vis);
+  }
+
+  .see-also .body h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    color: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 4px;
+  }
+
+  .see-also .body p {
+    font-size: 14.5px;
+    color: rgba(247,244,237,0.85);
+    margin: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 4px solid var(--ink);
+    margin-top: 64px;
+    padding-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* MOBILE */
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 20px 64px; }
+    .doc-header { grid-template-columns: 1fr; }
+    .doc-meta { text-align: left; }
+    .split { grid-template-columns: 1fr; }
+    .storyboard { grid-template-columns: 1fr; }
+    .specs .row { grid-template-columns: 1fr; gap: 2px; }
+    .specs .key { padding-top: 8px; }
+    .see-also { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 6px; }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .wrap { padding: 0; max-width: 100%; }
+    section { page-break-inside: avoid; margin-bottom: 28px; }
+    .shot-card { page-break-inside: avoid; }
+    .mission, .specs, .see-also {
+      background: white !important;
+      color: black !important;
+      border: 1px solid black;
+    }
+    .mission .label, .specs .key, .see-also .marker { color: black !important; }
+    footer { flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div>
+      <h1 class="doc-title">Grand Kahn<br>Shoot Brief<span>.</span></h1>
+    </div>
+    <div class="doc-meta">
+      <strong>Cinematographer: Greg</strong>
+      Half-Day · Chicago<br>
+      24 July 2026<br>
+      Site: TBD<br>
+      (Tesla plant OR EV<br>
+      solar canopy)
+    </div>
+    <p class="doc-subtitle">Everything Greg needs for tomorrow's Grand Kahn half-day in one document. Every shot has a picture. Play the day for two things at once — the specific job we're documenting, and evergreen Grand Kahn inventory we can reuse forever.</p>
+  </header>
+
+  <div class="must">Body-worn mic on the foreman rolls the WHOLE shoot. Not just the sit-down interview. Every walk-through, every side comment, every muttered explanation is potential voiceover. Do not turn it off.</div>
+
+  <!-- 00 STRATEGY -->
+  <section>
+    <div class="section-label"><span class="section-num">00</span> / The Play</div>
+    <h2>The Modular Strategy</h2>
+    <div class="mission">
+      <div class="label">The Brief</div>
+      <q>Half the day banks this specific job. The other half gives us evergreen Grand Kahn inventory for every future video.</q>
+    </div>
+    <p>Every shot fits one of two buckets. Get some of both. If you have to choose, lean evergreen — we can always come back for job-specific pickups.</p>
+    <div class="split">
+      <div class="col">
+        <div class="badge">Modular</div>
+        <h5>Evergreen GK</h5>
+        <p>Brand marks, craft symbols, worker portraits, foreman on camera. Works in any GK video for the next two years.</p>
+      </div>
+      <div class="col">
+        <div class="badge blue">Specific</div>
+        <h5>This Job</h5>
+        <p>The install itself. Switchgear, conduit, panel interiors, the finished work. Only usable in videos about this project.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 SHOT LIST -->
+  <section>
+    <div class="section-label"><span class="section-num">01</span> / The Shot Guide</div>
+    <h2>Every Shot</h2>
+    <p>Each shot has a picture. Copy the picture. <strong style="color: var(--hi-vis);">Orange tag = modular</strong> (works in every future GK video). <strong style="color: var(--blueprint);">Blue tag = this job only</strong>. If you must choose, get the orange ones.</p>
+
+    <!-- CATEGORY F: FOUNDATION (from field guide) -->
+    <h4 class="cat">F. Foundation — Every Site <span class="tag">Modular</span></h4>
+    <p class="cat-note">The eight core frames. Get these on every jobsite. Spine of every video.</p>
+
+    <div class="storyboard">
+
+      <!-- F.1 THE WORKER -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.1 / THE WORKER</div>
+          <div class="shot-meta">35mm · EYE LEVEL</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <g fill="rgba(232,226,210,0.08)">
+              <rect x="20" y="20" width="60" height="140"/>
+              <rect x="260" y="40" width="50" height="120"/>
+            </g>
+            <g fill="#E8E2D2">
+              <ellipse cx="160" cy="58" rx="28" ry="12"/>
+              <rect x="132" y="55" width="56" height="6"/>
+              <circle cx="160" cy="72" r="14"/>
+              <path d="M 120 100 Q 120 90 135 88 L 185 88 Q 200 90 200 100 L 210 180 L 110 180 Z"/>
+              <path d="M 135 88 L 150 88 L 152 180 L 138 180 Z" fill="#FF5A00"/>
+              <path d="M 185 88 L 170 88 L 168 180 L 182 180 Z" fill="#FF5A00"/>
+            </g>
+            <circle cx="160" cy="72" r="22" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Worker</h4>
+          <p>Chest up. Focus on face or hands. Do not pose them — let them work.</p>
+          <p class="tip">Camera at their eye level. Never above.</p>
+        </div>
+      </div>
+
+      <!-- F.2 THE SCALE -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.2 / THE SCALE</div>
+          <div class="shot-meta">24mm · WIDE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <rect x="0" y="0" width="320" height="120" fill="rgba(232,226,210,0.04)"/>
+            <g fill="#E8E2D2">
+              <rect x="40" y="20" width="14" height="140"/>
+              <rect x="80" y="10" width="14" height="150"/>
+              <rect x="120" y="30" width="14" height="130"/>
+              <rect x="160" y="15" width="14" height="145"/>
+              <rect x="200" y="25" width="14" height="135"/>
+              <rect x="240" y="20" width="14" height="140"/>
+              <rect x="35" y="50" width="225" height="3"/>
+              <rect x="35" y="90" width="225" height="3"/>
+              <rect x="35" y="130" width="225" height="3"/>
+            </g>
+            <rect x="0" y="160" width="320" height="20" fill="rgba(232,226,210,0.15)"/>
+            <g fill="#FF5A00">
+              <circle cx="280" cy="150" r="2.5"/>
+              <rect x="278" y="152" width="4" height="8"/>
+              <circle cx="290" cy="151" r="2.5"/>
+              <rect x="288" y="153" width="4" height="7"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Scale</h4>
+          <p>Pull way back. Put 1-2 tiny people in frame. The building wins.</p>
+          <p class="tip">People small. Structure big.</p>
+        </div>
+      </div>
+
+      <!-- F.3 POWER ANGLE -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.3 / POWER ANGLE</div>
+          <div class="shot-meta">20mm · LOW</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <rect x="0" y="0" width="320" height="180" fill="rgba(232,226,210,0.03)"/>
+            <g fill="#E8E2D2">
+              <polygon points="60,180 80,180 140,0 130,0"/>
+              <polygon points="240,180 220,180 175,0 185,0"/>
+              <polygon points="135,8 185,8 195,30 125,30"/>
+              <rect x="155" y="0" width="4" height="20"/>
+              <rect x="148" y="20" width="18" height="6"/>
+            </g>
+            <g fill="#FF5A00">
+              <circle cx="170" cy="22" r="2"/>
+              <rect x="168" y="24" width="4" height="6"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>Power Angle</h4>
+          <p>Camera near the ground. Point up at a beam, crane, or worker on a ladder. Sky behind.</p>
+          <p class="tip">Use once or twice. Not for every shot.</p>
+        </div>
+      </div>
+
+      <!-- F.4 THE DETAIL -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.4 / THE DETAIL</div>
+          <div class="shot-meta">50mm · MACRO</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <g fill="rgba(232,226,210,0.05)">
+              <circle cx="60" cy="40" r="20"/>
+              <circle cx="260" cy="50" r="25"/>
+              <circle cx="280" cy="140" r="18"/>
+            </g>
+            <g fill="#E8E2D2">
+              <path d="M 0 110 L 130 90 L 160 100 L 160 140 L 130 130 L 0 150 Z"/>
+              <ellipse cx="155" cy="115" rx="30" ry="22" fill="#FF5A00"/>
+              <rect x="170" y="100" width="14" height="8" rx="3" fill="#FF5A00"/>
+              <rect x="170" y="112" width="14" height="8" rx="3" fill="#FF5A00"/>
+              <rect x="170" y="124" width="14" height="8" rx="3" fill="#FF5A00"/>
+            </g>
+            <g fill="#E8E2D2">
+              <rect x="185" y="100" width="120" height="6"/>
+              <rect x="185" y="118" width="120" height="6"/>
+              <circle cx="290" cy="103" r="6" fill="#E8E2D2"/>
+              <circle cx="290" cy="121" r="6" fill="#E8E2D2"/>
+            </g>
+            <rect x="170" y="100" width="40" height="38" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Detail</h4>
+          <p>Very close. Hands. Tools. Wires. Texture.</p>
+          <p class="tip">Longest lens you have. Or move in.</p>
+        </div>
+      </div>
+
+      <!-- F.5 THE LIGHT -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.5 / THE LIGHT</div>
+          <div class="shot-meta">35mm · BACKLIT</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <circle cx="240" cy="60" r="38" fill="rgba(255,180,100,0.5)"/>
+            <circle cx="240" cy="60" r="22" fill="rgba(255,210,150,0.7)"/>
+            <circle cx="240" cy="60" r="10" fill="rgba(255,240,220,0.9)"/>
+            <g fill="rgba(255,210,150,0.15)">
+              <polygon points="240,60 100,180 130,180"/>
+              <polygon points="240,60 320,140 320,170"/>
+              <polygon points="240,60 180,180 210,180"/>
+            </g>
+            <g fill="#0E1418" stroke="rgba(255,210,150,0.6)" stroke-width="0.5">
+              <ellipse cx="120" cy="92" rx="20" ry="9"/>
+              <rect x="100" y="90" width="40" height="5"/>
+              <circle cx="120" cy="103" r="10"/>
+              <path d="M 90 125 Q 90 116 102 114 L 138 114 Q 150 116 150 125 L 156 180 L 84 180 Z"/>
+            </g>
+            <g fill="#0E1418">
+              <rect x="20" y="60" width="6" height="120"/>
+              <rect x="50" y="50" width="6" height="130"/>
+              <rect x="15" y="80" width="50" height="3"/>
+            </g>
+            <g fill="rgba(255,220,180,0.4)">
+              <circle cx="180" cy="90" r="1.2"/>
+              <circle cx="195" cy="120" r="1"/>
+              <circle cx="170" cy="140" r="1.5"/>
+              <circle cx="210" cy="100" r="1"/>
+              <circle cx="160" cy="105" r="1.3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Light</h4>
+          <p>Find the sun. Silhouette workers against the light. Chase dust and sparks.</p>
+          <p class="tip">Golden hour best. Any strong light works.</p>
+        </div>
+      </div>
+
+      <!-- F.6 THE MOTION -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.6 / THE MOTION</div>
+          <div class="shot-meta">35mm · 60fps</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <g fill="#E8E2D2">
+              <rect x="80" y="100" width="100" height="50" rx="4"/>
+              <rect x="100" y="70" width="50" height="35" rx="3"/>
+              <rect x="70" y="148" width="120" height="18" rx="6"/>
+              <circle cx="85" cy="157" r="6" fill="#0E1418"/>
+              <circle cx="175" cy="157" r="6" fill="#0E1418"/>
+              <polygon points="155,95 250,40 260,50 165,105"/>
+              <polygon points="245,40 290,80 280,90 235,50"/>
+              <path d="M 280 80 L 310 90 L 305 115 L 275 105 Z"/>
+            </g>
+            <g stroke="rgba(232,226,210,0.4)" stroke-width="1" fill="none">
+              <path d="M 230 35 Q 220 45 210 60"/>
+              <path d="M 245 30 Q 235 40 225 55"/>
+              <path d="M 260 28 Q 250 38 240 53"/>
+            </g>
+            <g fill="rgba(232,226,210,0.25)">
+              <ellipse cx="290" cy="125" rx="20" ry="6"/>
+              <ellipse cx="265" cy="135" rx="15" ry="5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Motion</h4>
+          <p>Anything moving. Pan with it, or hold steady and let it move through frame.</p>
+          <p class="tip">Shoot at 60fps.</p>
+        </div>
+      </div>
+
+      <!-- F.7 THE WIDE -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.7 / THE WIDE</div>
+          <div class="shot-meta">16mm · ESTABLISHING</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <rect x="0" y="0" width="320" height="100" fill="rgba(232,226,210,0.03)"/>
+            <g fill="rgba(232,226,210,0.3)">
+              <rect x="0" y="80" width="30" height="40"/>
+              <rect x="280" y="75" width="40" height="45"/>
+              <rect x="240" y="85" width="20" height="35"/>
+            </g>
+            <g fill="#E8E2D2">
+              <rect x="155" y="20" width="4" height="90"/>
+              <polygon points="155,20 159,20 230,30 230,34"/>
+              <polygon points="155,30 159,30 90,38 90,42"/>
+              <rect x="195" y="32" width="2" height="20"/>
+            </g>
+            <g fill="#E8E2D2">
+              <rect x="100" y="60" width="120" height="60"/>
+              <rect x="100" y="60" width="3" height="60" fill="#0E1418"/>
+              <rect x="140" y="60" width="3" height="60" fill="#0E1418"/>
+              <rect x="180" y="60" width="3" height="60" fill="#0E1418"/>
+              <rect x="217" y="60" width="3" height="60" fill="#0E1418"/>
+              <rect x="100" y="80" width="120" height="3" fill="#0E1418"/>
+              <rect x="100" y="100" width="120" height="3" fill="#0E1418"/>
+            </g>
+            <rect x="0" y="120" width="320" height="60" fill="rgba(232,226,210,0.2)"/>
+            <rect x="50" y="135" width="20" height="10" fill="#E8E2D2"/>
+            <rect x="250" y="140" width="15" height="8" fill="#E8E2D2"/>
+            <circle cx="150" cy="145" r="2" fill="#FF5A00"/>
+            <circle cx="170" cy="148" r="2" fill="#FF5A00"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Wide</h4>
+          <p>The whole site in one frame. Get high — top floor, hill, parking structure. Drone if cleared.</p>
+          <p class="tip">Hold 8-10 seconds.</p>
+        </div>
+      </div>
+
+      <!-- F.8 THE SKY FRAME -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">F.8 / THE SKY FRAME</div>
+          <div class="shot-meta">35mm · NEGATIVE SPACE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <rect x="0" y="0" width="320" height="180" fill="rgba(232,226,210,0.04)"/>
+            <g fill="#E8E2D2">
+              <rect x="50" y="20" width="5" height="160"/>
+              <rect x="48" y="35" width="9" height="3"/>
+              <rect x="48" y="60" width="9" height="3"/>
+              <rect x="48" y="90" width="9" height="3"/>
+              <rect x="48" y="120" width="9" height="3"/>
+              <rect x="48" y="150" width="9" height="3"/>
+              <polygon points="55,20 55,30 220,28 220,22"/>
+              <polygon points="55,20 55,30 20,32 20,22"/>
+              <rect x="180" y="22" width="1.5" height="40" fill="#E8E2D2"/>
+              <rect x="175" y="60" width="12" height="5" fill="#E8E2D2"/>
+            </g>
+            <circle cx="53" cy="25" r="6" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Sky Frame</h4>
+          <p>Crane or building against big open sky. Subject on grid line, not center.</p>
+          <p class="tip">Titles will land in the sky. Leave space.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY A: BRAND & IDENTITY -->
+    <h4 class="cat">A. Brand &amp; Identity <span class="tag">Modular</span></h4>
+    <p class="cat-note">These are gold. They anchor every future Grand Kahn piece. Chase them hard early in the day while the crew is fresh and the trucks are still parked clean.</p>
+
+    <div class="storyboard">
+
+      <!-- FRAME A1 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">A.1 / THE MARK</div>
+          <div class="shot-meta">50mm · CLOSE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- background suggestion -->
+            <g fill="rgba(232,226,210,0.06)">
+              <rect x="0" y="130" width="320" height="50"/>
+            </g>
+            <!-- worker back with hard hat filling frame -->
+            <g fill="#E8E2D2">
+              <!-- shoulders/back -->
+              <path d="M 30 180 L 30 100 Q 30 88 45 85 L 275 85 Q 290 88 290 100 L 290 180 Z"/>
+              <!-- neck -->
+              <rect x="140" y="60" width="40" height="30"/>
+            </g>
+            <!-- hard hat with logo -->
+            <g>
+              <ellipse cx="160" cy="42" rx="52" ry="20" fill="#FF5A00"/>
+              <rect x="108" y="38" width="104" height="10" fill="#FF5A00"/>
+              <!-- logo bar -->
+              <rect x="130" y="34" width="60" height="12" fill="#14181C"/>
+              <text x="160" y="43" text-anchor="middle" fill="#E8E2D2" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700">GK</text>
+            </g>
+            <!-- vest strap -->
+            <g fill="#FF5A00">
+              <rect x="70" y="120" width="8" height="60"/>
+              <rect x="242" y="120" width="8" height="60"/>
+              <rect x="70" y="140" width="180" height="6"/>
+            </g>
+            <!-- focus circle -->
+            <circle cx="160" cy="42" r="34" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Mark</h4>
+          <p>Tight on the GK logo. Hard hat, back of vest, uniform patch, tool case sticker. Anywhere the brand sits on a working person or working thing.</p>
+          <p class="tip">Longest lens you have. Let the person do their job — they don't need to hold still.</p>
+        </div>
+      </div>
+
+      <!-- FRAME A2 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">A.2 / THE TRUCK</div>
+          <div class="shot-meta">24mm · WIDE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- ground -->
+            <rect x="0" y="150" width="320" height="30" fill="rgba(232,226,210,0.12)"/>
+            <!-- background building -->
+            <g fill="rgba(232,226,210,0.15)">
+              <rect x="0" y="60" width="320" height="90"/>
+              <rect x="30" y="85" width="20" height="30" fill="rgba(14,20,24,0.4)"/>
+              <rect x="70" y="85" width="20" height="30" fill="rgba(14,20,24,0.4)"/>
+              <rect x="240" y="85" width="20" height="30" fill="rgba(14,20,24,0.4)"/>
+              <rect x="280" y="85" width="20" height="30" fill="rgba(14,20,24,0.4)"/>
+            </g>
+            <!-- truck body -->
+            <g fill="#E8E2D2">
+              <!-- cab -->
+              <path d="M 40 145 L 40 95 Q 40 90 45 90 L 100 90 L 110 105 L 120 105 L 120 145 Z"/>
+              <!-- box -->
+              <rect x="120" y="88" width="150" height="60" rx="2"/>
+              <!-- logo area on side -->
+              <rect x="150" y="105" width="90" height="26" fill="#14181C"/>
+              <text x="195" y="123" text-anchor="middle" fill="#FF5A00" font-family="Anton, sans-serif" font-size="16" font-weight="400" letter-spacing="1">GK</text>
+              <!-- wheels -->
+              <circle cx="70" cy="150" r="12" fill="#0E1418"/>
+              <circle cx="70" cy="150" r="6" fill="#E8E2D2"/>
+              <circle cx="150" cy="150" r="12" fill="#0E1418"/>
+              <circle cx="150" cy="150" r="6" fill="#E8E2D2"/>
+              <circle cx="240" cy="150" r="12" fill="#0E1418"/>
+              <circle cx="240" cy="150" r="6" fill="#E8E2D2"/>
+              <!-- windshield -->
+              <polygon points="55,95 92,95 100,110 55,110" fill="rgba(14,20,24,0.5)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Truck</h4>
+          <p>GK truck arriving, parked, tailgate open with tools. The brand on wheels is a story beat we'll reuse in every video.</p>
+          <p class="tip">Best if you catch this at arrival, before the truck gets dusty. Try both a wide and a slow push toward the logo.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY B: THE INSTALL -->
+    <h4 class="cat">B. The Install <span class="tag job">Specific</span></h4>
+    <p class="cat-note">The finished work. Whichever site you're on, get in close on the electrical craft — this is what nobody else in the pipeline will have.</p>
+
+    <div class="storyboard">
+
+      <!-- FRAME B1 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag job">B.1 / SWITCHGEAR</div>
+          <div class="shot-meta">35mm · LOW ANGLE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- floor -->
+            <rect x="0" y="160" width="320" height="20" fill="rgba(232,226,210,0.15)"/>
+            <!-- switchgear cabinets in a row -->
+            <g fill="#E8E2D2">
+              <rect x="60" y="20" width="45" height="140"/>
+              <rect x="107" y="20" width="45" height="140"/>
+              <rect x="154" y="20" width="45" height="140"/>
+              <rect x="201" y="20" width="45" height="140"/>
+            </g>
+            <!-- panel details -->
+            <g fill="#0E1418">
+              <rect x="70" y="40" width="25" height="8"/>
+              <rect x="70" y="55" width="25" height="8"/>
+              <rect x="70" y="70" width="25" height="8"/>
+              <rect x="117" y="40" width="25" height="8"/>
+              <rect x="117" y="55" width="25" height="8"/>
+              <rect x="117" y="70" width="25" height="8"/>
+              <rect x="164" y="40" width="25" height="8"/>
+              <rect x="164" y="55" width="25" height="8"/>
+              <rect x="164" y="70" width="25" height="8"/>
+              <rect x="211" y="40" width="25" height="8"/>
+              <rect x="211" y="55" width="25" height="8"/>
+              <rect x="211" y="70" width="25" height="8"/>
+              <!-- handles/dials -->
+              <circle cx="82" cy="110" r="4"/>
+              <circle cx="129" cy="110" r="4"/>
+              <circle cx="176" cy="110" r="4"/>
+              <circle cx="223" cy="110" r="4"/>
+              <!-- gaps between -->
+              <rect x="105" y="20" width="2" height="140"/>
+              <rect x="152" y="20" width="2" height="140"/>
+              <rect x="199" y="20" width="2" height="140"/>
+            </g>
+            <!-- small human for scale -->
+            <g fill="#FF5A00">
+              <ellipse cx="280" cy="105" rx="8" ry="4"/>
+              <rect x="272" y="103" width="16" height="3"/>
+              <circle cx="280" cy="112" r="5"/>
+              <path d="M 268 130 Q 268 122 275 121 L 285 121 Q 292 122 292 130 L 294 160 L 266 160 Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Switchgear</h4>
+          <p>The big metal cabinets. Hero shot — low angle, clean composition. Put a person at the edge for scale if you can.</p>
+          <p class="tip">Ask the foreman which cabinet is the main service. That one is the money shot.</p>
+        </div>
+      </div>
+
+      <!-- FRAME B2 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag job">B.2 / CONDUIT RUN</div>
+          <div class="shot-meta">35mm · LEADING LINE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- ceiling area darker -->
+            <rect x="0" y="0" width="320" height="60" fill="rgba(14,20,24,0.3)"/>
+            <!-- parallel conduits with perspective -->
+            <g fill="#E8E2D2">
+              <!-- 6 parallel pipes going into distance -->
+              <polygon points="0,40 320,50 320,54 0,44"/>
+              <polygon points="0,55 320,62 320,66 0,59"/>
+              <polygon points="0,70 320,74 320,78 0,74"/>
+              <polygon points="0,85 320,86 320,90 0,89"/>
+              <polygon points="0,100 320,98 320,102 0,104"/>
+              <polygon points="0,115 320,110 320,114 0,119"/>
+            </g>
+            <!-- support brackets -->
+            <g fill="#FF5A00">
+              <rect x="60" y="36" width="4" height="88"/>
+              <rect x="160" y="42" width="4" height="76"/>
+              <rect x="260" y="48" width="4" height="66"/>
+            </g>
+            <!-- wall/floor -->
+            <rect x="0" y="150" width="320" height="30" fill="rgba(232,226,210,0.1)"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Conduit Run</h4>
+          <p>Parallel pipes marching away from camera. Repeating geometry = precision = craft. Find the cleanest run on the site and shoot it as a leading line.</p>
+          <p class="tip">The bends are where the skill shows. If a run has a nice 90-degree turn, get that in close too.</p>
+        </div>
+      </div>
+
+      <!-- FRAME B3 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag job">B.3 / THE CANOPY</div>
+          <div class="shot-meta">20mm · UP</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- sky glow around edges -->
+            <rect x="0" y="0" width="320" height="180" fill="rgba(232,226,210,0.04)"/>
+            <!-- solar panel grid — perspective looking up -->
+            <g fill="#1B3A5B" stroke="#E8E2D2" stroke-width="0.6">
+              <polygon points="30,20 290,20 260,90 60,90"/>
+            </g>
+            <!-- panel divisions -->
+            <g stroke="#E8E2D2" stroke-width="0.6" fill="none">
+              <line x1="95" y1="20" x2="110" y2="90"/>
+              <line x1="160" y1="20" x2="160" y2="90"/>
+              <line x1="225" y1="20" x2="210" y2="90"/>
+              <line x1="45" y1="55" x2="275" y2="55"/>
+            </g>
+            <!-- support columns -->
+            <g fill="#E8E2D2">
+              <polygon points="50,90 65,90 78,180 55,180"/>
+              <polygon points="270,90 255,90 262,180 285,180"/>
+            </g>
+            <!-- EV bus silhouette below -->
+            <g fill="#0E1418" opacity="0.6">
+              <rect x="100" y="130" width="120" height="35" rx="6"/>
+              <rect x="105" y="135" width="20" height="15" fill="rgba(232,226,210,0.2)"/>
+              <rect x="128" y="135" width="20" height="15" fill="rgba(232,226,210,0.2)"/>
+              <rect x="151" y="135" width="20" height="15" fill="rgba(232,226,210,0.2)"/>
+              <rect x="174" y="135" width="20" height="15" fill="rgba(232,226,210,0.2)"/>
+              <rect x="197" y="135" width="20" height="15" fill="rgba(232,226,210,0.2)"/>
+              <circle cx="120" cy="167" r="6" fill="#0E1418"/>
+              <circle cx="200" cy="167" r="6" fill="#0E1418"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Canopy</h4>
+          <p>Solar canopy shot from underneath. Repeating panel pattern overhead, columns dropping into frame. If there's a bus at the charger, that's the whole story in one shot.</p>
+          <p class="tip">Canopy site only. Skip if you're at the Tesla plant.</p>
+        </div>
+      </div>
+
+      <!-- FRAME B4 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag job">B.4 / PANEL OPEN</div>
+          <div class="shot-meta">50mm · CLOSE</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- panel box frame -->
+            <g fill="#E8E2D2">
+              <rect x="40" y="20" width="240" height="140"/>
+            </g>
+            <g fill="#0E1418">
+              <rect x="50" y="30" width="220" height="120"/>
+            </g>
+            <!-- door hinge (open) -->
+            <rect x="30" y="20" width="12" height="140" fill="#E8E2D2"/>
+            <!-- wire bundles inside -->
+            <g stroke="#FF5A00" stroke-width="3" fill="none">
+              <path d="M 60 40 Q 80 60 100 80 Q 120 100 140 140"/>
+              <path d="M 70 40 Q 90 65 110 85 Q 130 105 150 140"/>
+            </g>
+            <g stroke="#E8E2D2" stroke-width="3" fill="none">
+              <path d="M 90 40 Q 110 60 130 80 Q 150 100 170 140"/>
+              <path d="M 100 40 Q 120 60 140 80 Q 160 100 180 140"/>
+            </g>
+            <g stroke="#1B3A5B" stroke-width="3" fill="none">
+              <path d="M 120 40 Q 140 60 160 80 Q 180 100 200 140"/>
+              <path d="M 130 40 Q 150 60 170 80 Q 190 100 210 140"/>
+            </g>
+            <!-- terminal blocks -->
+            <g fill="#E8E2D2">
+              <rect x="200" y="45" width="60" height="10"/>
+              <rect x="200" y="60" width="60" height="10"/>
+              <rect x="200" y="75" width="60" height="10"/>
+              <rect x="200" y="90" width="60" height="10"/>
+              <rect x="200" y="105" width="60" height="10"/>
+              <rect x="200" y="120" width="60" height="10"/>
+            </g>
+            <!-- focus indicator -->
+            <rect x="195" y="40" width="70" height="95" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>Panel Open</h4>
+          <p>If the foreman will open a junction box or panel, get in close. Wire bundles, color coding, terminal blocks — this is the craft made visible.</p>
+          <p class="tip">Ask before you shoot inside anything. Some panels are live even after commissioning.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY C: WALKING WITH THE FOREMAN -->
+    <h4 class="cat">C. Walking with the Foreman <span class="tag">Modular</span></h4>
+    <p class="cat-note">The foreman narrating the job is our narration bed. Even when he's just talking to you off-camera, the body-worn mic should be rolling. Half of what he says will become voiceover.</p>
+
+    <div class="storyboard">
+
+      <!-- FRAME C1 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">C.1 / THE FOLLOW</div>
+          <div class="shot-meta">35mm · TRACKING</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- floor -->
+            <rect x="0" y="150" width="320" height="30" fill="rgba(232,226,210,0.15)"/>
+            <!-- background suggestion of site -->
+            <g fill="rgba(232,226,210,0.1)">
+              <rect x="20" y="30" width="30" height="120"/>
+              <rect x="270" y="40" width="30" height="110"/>
+              <rect x="60" y="60" width="6" height="90"/>
+              <rect x="255" y="60" width="6" height="90"/>
+            </g>
+            <!-- foreman from behind, hip-level -->
+            <g fill="#E8E2D2">
+              <!-- hard hat -->
+              <ellipse cx="160" cy="30" rx="28" ry="10" fill="#FF5A00"/>
+              <rect x="132" y="28" width="56" height="6" fill="#FF5A00"/>
+              <!-- head/neck -->
+              <rect x="150" y="38" width="20" height="14"/>
+              <!-- shoulders -->
+              <path d="M 110 80 Q 110 65 130 60 L 190 60 Q 210 65 210 80 L 215 145 L 105 145 Z"/>
+              <!-- vest lines -->
+              <rect x="130" y="60" width="8" height="85" fill="#FF5A00"/>
+              <rect x="182" y="60" width="8" height="85" fill="#FF5A00"/>
+              <!-- pants -->
+              <path d="M 115 145 L 145 145 L 145 180 L 118 180 Z"/>
+              <path d="M 205 145 L 175 145 L 175 180 L 202 180 Z"/>
+              <!-- boots -->
+              <rect x="115" y="170" width="30" height="10" fill="#0E1418"/>
+              <rect x="175" y="170" width="30" height="10" fill="#0E1418"/>
+            </g>
+            <!-- motion indicators -->
+            <g stroke="rgba(232,226,210,0.3)" stroke-width="1" fill="none">
+              <line x1="10" y1="175" x2="30" y2="175"/>
+              <line x1="290" y1="175" x2="310" y2="175"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Follow</h4>
+          <p>Foreman walking the site, camera behind him at hip height. Handheld is fine. Let the site pass around him.</p>
+          <p class="tip">Keep him talking. Even if you don't use the visual, his voice while walking is pure gold as VO.</p>
+        </div>
+      </div>
+
+      <!-- FRAME C2 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">C.2 / THE POINT</div>
+          <div class="shot-meta">50mm · OVER SHOULDER</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- background suggestion -->
+            <g fill="rgba(232,226,210,0.1)">
+              <rect x="180" y="20" width="120" height="130"/>
+            </g>
+            <!-- installed thing being pointed at -->
+            <g fill="#E8E2D2">
+              <rect x="200" y="30" width="80" height="100"/>
+              <rect x="210" y="45" width="60" height="8" fill="#0E1418"/>
+              <rect x="210" y="58" width="60" height="8" fill="#0E1418"/>
+              <rect x="210" y="71" width="60" height="8" fill="#0E1418"/>
+              <rect x="210" y="84" width="60" height="8" fill="#0E1418"/>
+            </g>
+            <!-- foreman shoulder/back in foreground -->
+            <g fill="#E8E2D2">
+              <ellipse cx="35" cy="70" rx="35" ry="15" fill="#FF5A00"/>
+              <rect x="0" y="65" width="70" height="10" fill="#FF5A00"/>
+              <path d="M 0 180 L 0 100 Q 0 90 15 88 L 90 88 Q 105 90 105 100 L 105 180 Z"/>
+              <rect x="15" y="88" width="8" height="92" fill="#FF5A00"/>
+              <!-- arm reaching out pointing -->
+              <path d="M 60 110 L 190 90 L 195 100 L 65 122 Z"/>
+              <!-- hand/finger -->
+              <ellipse cx="192" cy="94" rx="8" ry="6" fill="#E8E2D2"/>
+            </g>
+            <!-- focus circle where he points -->
+            <circle cx="220" cy="80" r="20" fill="none" stroke="#FF5A00" stroke-width="1" stroke-dasharray="2,2" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>The Point</h4>
+          <p>Foreman's hand pointing at what he built. Shoot from behind his shoulder so both his gesture and the install are in frame.</p>
+          <p class="tip">Ask him to walk you through a specific piece and pause where he'd naturally gesture. Don't direct the point — let it happen.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CATEGORY D: CRAFT SYMBOLS -->
+    <h4 class="cat">D. Craft Symbols <span class="tag">Modular</span></h4>
+    <p class="cat-note">Small, specific, timeless. Every one of these will get pulled into future edits. Shoot each of these as a close macro if you have the lens.</p>
+
+    <div class="storyboard">
+
+      <!-- FRAME D1 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">D.1 / HANDS ON TOOL</div>
+          <div class="shot-meta">50mm · MACRO</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- soft bokeh bg -->
+            <g fill="rgba(232,226,210,0.06)">
+              <circle cx="60" cy="40" r="30"/>
+              <circle cx="270" cy="60" r="25"/>
+            </g>
+            <!-- meter/tester in hand -->
+            <g fill="#E8E2D2">
+              <!-- forearm/hand -->
+              <path d="M 0 130 L 130 100 L 155 108 L 155 155 L 130 148 L 0 165 Z"/>
+              <!-- glove -->
+              <ellipse cx="150" cy="130" rx="30" ry="22" fill="#FF5A00"/>
+              <rect x="170" y="112" width="16" height="10" rx="3" fill="#FF5A00"/>
+              <rect x="170" y="126" width="16" height="10" rx="3" fill="#FF5A00"/>
+              <rect x="170" y="140" width="16" height="10" rx="3" fill="#FF5A00"/>
+            </g>
+            <!-- meter/tester -->
+            <g fill="#0E1418">
+              <rect x="180" y="70" width="90" height="65" rx="4"/>
+            </g>
+            <g fill="#E8E2D2">
+              <rect x="188" y="78" width="74" height="24"/>
+              <text x="225" y="94" text-anchor="middle" fill="#0E1418" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">120V</text>
+              <circle cx="200" cy="118" r="3"/>
+              <circle cx="215" cy="118" r="3"/>
+              <circle cx="230" cy="118" r="3"/>
+              <circle cx="245" cy="118" r="3"/>
+            </g>
+            <!-- probes -->
+            <g stroke="#FF5A00" stroke-width="2" fill="none">
+              <path d="M 220 70 L 240 30"/>
+              <path d="M 250 70 L 275 25"/>
+            </g>
+            <circle cx="240" cy="30" r="3" fill="#FF5A00"/>
+            <circle cx="275" cy="25" r="3" fill="#FF5A00"/>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>Hands on Tool</h4>
+          <p>Meter, tester, torque driver, wire strippers — whatever they're actually using. Close on the tool in the hand.</p>
+          <p class="tip">Ask them to do the action twice. First take is real, second take you shoot for the camera.</p>
+        </div>
+      </div>
+
+      <!-- FRAME D2 -->
+      <div class="shot-card">
+        <div class="shot-frame">
+          <div class="shot-tag">D.2 / BOOTS AND BELT</div>
+          <div class="shot-meta">35mm · WAIST DOWN</div>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.18)" stroke-width="0.5" fill="none">
+              <line x1="106.67" y1="0" x2="106.67" y2="180"/>
+              <line x1="213.33" y1="0" x2="213.33" y2="180"/>
+              <line x1="0" y1="60" x2="320" y2="60"/>
+              <line x1="0" y1="120" x2="320" y2="120"/>
+            </g>
+            <!-- floor -->
+            <rect x="0" y="150" width="320" height="30" fill="rgba(232,226,210,0.15)"/>
+            <!-- belt at top -->
+            <g fill="#E8E2D2">
+              <rect x="80" y="0" width="160" height="20"/>
+              <rect x="80" y="0" width="160" height="6" fill="#0E1418"/>
+              <!-- tool pouches on belt -->
+              <rect x="60" y="15" width="30" height="35" fill="#0E1418"/>
+              <rect x="95" y="18" width="20" height="30" fill="#0E1418"/>
+              <rect x="230" y="15" width="30" height="40" fill="#0E1418"/>
+              <!-- radio -->
+              <rect x="200" y="18" width="18" height="28" fill="#FF5A00"/>
+              <rect x="204" y="12" width="10" height="10" fill="#FF5A00"/>
+            </g>
+            <!-- legs/pants -->
+            <g fill="#E8E2D2">
+              <path d="M 100 20 L 155 20 L 148 155 L 108 155 Z"/>
+              <path d="M 220 20 L 165 20 L 172 155 L 212 155 Z"/>
+            </g>
+            <!-- boots -->
+            <g fill="#0E1418">
+              <path d="M 100 145 L 155 145 L 160 175 L 90 175 Z"/>
+              <path d="M 220 145 L 165 145 L 160 175 L 230 175 Z"/>
+              <!-- steel toe cap -->
+              <path d="M 90 175 L 100 165 L 108 175 Z" fill="#E8E2D2"/>
+              <path d="M 212 175 L 220 165 L 230 175 Z" fill="#E8E2D2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="shot-body">
+          <h4>Boots and Belt</h4>
+          <p>Tool belt with the radio clipped on. Boots on grating or concrete. The uniform of the trade.</p>
+          <p class="tip">Look for boots in motion — a step onto a ladder rung, or a foot planted next to conduit.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 QUESTIONS -->
+  <section>
+    <div class="section-label"><span class="section-num">02</span> / The Ask</div>
+    <h2>Interview Questions</h2>
+    <p>Blueprint-blue blocks are for this job. Orange blocks are evergreen — the answers he gives here become quotes for every Grand Kahn video for the next two years. Push those a little harder.</p>
+
+    <div class="q-block evergreen">
+      <div class="q-label"><span class="marker">A</span> · Warmup / Get Him Comfortable</div>
+      <h5>Warmup</h5>
+      <ol>
+        <li>What's your name, your role, and how long have you been at Grand Kahn?</li>
+        <li>How'd you get into electrical work?</li>
+      </ol>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label"><span class="marker">B</span> · This Job — Specific</div>
+      <h5>The Install</h5>
+      <ol>
+        <li>Where are we, and what did this facility need from Grand Kahn?</li>
+        <li>Walk me through what Grand Kahn built here.</li>
+        <li>What was the hardest part of this one?</li>
+        <li>What's something someone looking at the finished job wouldn't realize?</li>
+        <li>How long did it take, and how big was your crew?</li>
+      </ol>
+    </div>
+
+    <div class="q-block evergreen">
+      <div class="q-label"><span class="marker">C</span> · Craft — Evergreen (This is the Gold)</div>
+      <h5>The Craft</h5>
+      <ol>
+        <li>What does a great electrical install actually look like? How can you tell one from a bad one?</li>
+        <li>What separates a good electrician from a great one?</li>
+        <li>What separates Grand Kahn from other electrical contractors?</li>
+        <li>What kind of jobs does Grand Kahn get called for?</li>
+        <li>What do people misunderstand about this trade?</li>
+        <li>How do you know when a job is really finished?</li>
+      </ol>
+    </div>
+
+    <div class="q-block evergreen">
+      <div class="q-label"><span class="marker">D</span> · Culture — Evergreen (GK Brand)</div>
+      <h5>The Standard</h5>
+      <ol>
+        <li>What are you proudest of about this crew?</li>
+        <li>What's the standard at Grand Kahn?</li>
+        <li>Why does this trade matter?</li>
+      </ol>
+    </div>
+
+    <div class="q-block evergreen">
+      <div class="q-label"><span class="marker">E</span> · Close — Quote Gold</div>
+      <h5>The Close</h5>
+      <ol>
+        <li>If someone drives past this site five years from now, what's still here because of your work?</li>
+        <li>What's the best part of this job for you?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section>
+    <div class="section-label"><span class="section-num">03</span> / Companions</div>
+    <h2>For Reference</h2>
+    <div class="see-also">
+      <div class="marker">→</div>
+      <div class="body">
+        <h3>AWC Jobsite Guide for Film Crew</h3>
+        <p>On-site safety, PPE, arrival protocol. Pull up on your phone if a question comes up on the day.</p>
+      </div>
+    </div>
+    <div class="see-also">
+      <div class="marker">→</div>
+      <div class="body">
+        <h3>AWC Film Crew SOP</h3>
+        <p>Camera format, sound rules, file naming, delivery via MASV. For after the shoot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>AWC · Grand Kahn Shoot Brief · 24 July 2026</div>
+    <div>Prepared by The VDO Aigency</div>
+  </footer>
+
+</div>
+</body>
+</html>
